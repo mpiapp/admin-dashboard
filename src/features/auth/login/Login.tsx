@@ -7,7 +7,7 @@ import {
     TextField,
     Button, 
     Grid, 
-    Link,
+    Link, 
     CircularProgress 
 } from '@mui/material';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
@@ -41,8 +41,6 @@ const LoginPage = () => {
   const dispatch = useDispatch()
   const auth = useSelector((state : RootState) => state.login )
 
-  // console.log(auth, 'authh login')
-
   const {
     register,
     handleSubmit,
@@ -53,13 +51,11 @@ const LoginPage = () => {
   });
   
   const onSubmit = (data: userFormSubmit): void => {
-    const value = {
-      email : data.email,
-      password : data.password
-    }
-    dispatch(loginAction(value))
+    dispatch(loginAction(data))
   }
 
+
+  /* istanbul ignore next */
   useEffect(() => {
     if(auth.login) {
         setTimeout(() => {

@@ -1,9 +1,10 @@
 import LoginPage from './Login';
-import { render as renderRTL, screen, fireEvent } from '@testing-library/react';
+import { render as renderRTL, screen, fireEvent, } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
+import userEvent from '@testing-library/user-event'
 import { Provider } from 'react-redux'
 import { store } from '../../../app/store';
-
+import { InputState, loginAction, DataUser } from './loginSlice'
 
 const render = (component : any)  => renderRTL (
   <Provider store={store}>
@@ -28,6 +29,42 @@ describe("render element login page", () => {
         expect(screen.getByRole('button', { name : 'Sign In'})).toBeInTheDocument();
         expect(screen.getByRole('link', { name: "Forgot password?" })).toBeInTheDocument();
     })
+})
+
+
+describe("Dispatch redux", () => {
+  it('should trigger onsubmit and dispatch', async () => {
+    
+    const {getByLabelText, getByRole} = render(<LoginPage/>)
+
+    await act(async () => {
+      fireEvent.change(getByLabelText(/email address/i), {target: {value: "demo@admin.com"}})
+      fireEvent.change(getByLabelText(/password/i), {target: {value: "admin123"}})
+    })
+
+    await act(async () => {
+      const data : InputState = {
+        email : 'demo@admin.com',
+        password: 'admin123'
+      }
+
+      const respondata : DataUser = {
+        access_token : 'accesstoken',
+        id_token : 'idtoken', 
+        expires_in : 9000,
+        email : "johndoe@gmail.com",
+        fullname : "John Doe",
+        avatar : "https://image.com",
+        auth_id : "authid",
+        login: true
+      }
+
+      userEvent.click(getByRole("button"))
+      const response = await store.dispatch(loginAction(data))
+      expect(response.payload).toEqual(respondata)
+    })
+
+  })
 })
 
 

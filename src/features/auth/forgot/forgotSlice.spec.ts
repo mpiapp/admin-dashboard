@@ -1,7 +1,12 @@
 import forgotReducer, {
-    sendEmail
+    sendEmail,
+    ValueEmail,
+    postEmail
   } from './forgotSlice';
+import { store } from '../../../app/store'
   
+
+
 describe('INITAL STATE STORE FORGOTSLICE', () => {
     it('should handle initial state', () => {
       expect(forgotReducer(undefined, { type: 'unknown' })).toEqual({
@@ -11,6 +16,23 @@ describe('INITAL STATE STORE FORGOTSLICE', () => {
       });
     });
   
+});
+
+it('response success send email', async () => {
+  const value = {
+    email: "hello@email.com"
+  }
+  const res = await postEmail(value)
+  expect(res).toEqual(value)
+})
+
+
+it('dispatch forgot success action', async () => {
+  const data : ValueEmail = {
+    email : 'demo@admin.com'
+  }
+  const response = await store.dispatch(sendEmail(data))
+  expect(response.payload).toEqual(data)
 });
 
 

@@ -1,9 +1,13 @@
-import {screen, fireEvent ,render as renderRTL, } from '@testing-library/react'
+import {screen, fireEvent ,render as renderRTL } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { act } from 'react-dom/test-utils';
 import { Provider } from 'react-redux'
 import { store } from '../../../app/store';
 import Forgot from './Forgot';
-
+import {
+  sendEmail,
+  ValueEmail,
+} from './forgotSlice';
 
 const render = (component : any)  => renderRTL (
   <Provider store={store}>
@@ -11,7 +15,7 @@ const render = (component : any)  => renderRTL (
   </Provider>
 )
 
-describe("render element register page", () => {
+describe("render element forgot page", () => {
     it('should render all element in forgot page', () => {
         render(<Forgot />)
     
@@ -28,6 +32,29 @@ describe("render element register page", () => {
         expect(screen.getByRole('link', { name : "Back to Sign In" })).toBeInTheDocument();
     
     })
+
+  })
+  
+
+describe("Dispatch redux", () => {
+  it('should trigger onsubmit and dispatch', async () => {
+    
+    const {getByLabelText, getByRole} = render(<Forgot/>)
+
+    await act(async () => {
+      fireEvent.change(getByLabelText(/email address/i), {target: {value: "email@test.com"}})
+    })
+
+    await act(async () => {
+      const data : ValueEmail = {
+        email : 'email@test.com'
+      }
+      userEvent.click(getByRole("button"))
+      const response = await store.dispatch(sendEmail(data))
+      expect(response.payload).toEqual(data)
+    })
+
+  })
 })
 
 

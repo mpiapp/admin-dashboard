@@ -31,10 +31,11 @@ export interface ResponseBackend {
   id_token : string
 }
 
+
 export const getData = (value : InputState ) => {
   let data = {
     access_token : 'accesstoken',
-    id_token : 'idtoken',
+    id_token : 'idtoken', 
     expires_in : 9000,
     email : "johndoe@gmail.com",
     fullname : "John Doe",
@@ -44,7 +45,9 @@ export const getData = (value : InputState ) => {
   }
   if(value.email === "demo@admin.com" && value.password === "admin123") {
     return data;
-  } 
+  } else {
+    return null
+  }
 };
 
 export const loginAction = createAsyncThunk(
@@ -61,8 +64,18 @@ export const loginAction = createAsyncThunk(
   }
 );
 
+export const checkInitalLogin = (userCredentials : any) => {
+  let login = false
+  if(userCredentials !== null) {
+    login = userCredentials.login
+  } else {
+    login = false
+  }
+  return login;
+}
+
 const initialState: LoginState = {
-  login: userCredentials !== null ? userCredentials.login : false, 
+  login: checkInitalLogin(userCredentials), 
   data : {} as DataUser,
   loading : false,
   error : null

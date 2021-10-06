@@ -12,21 +12,19 @@ export interface ValueEmail {
   email: string;
 }
 
-export function postEmail(value : ValueEmail) {
-  return new Promise<{ data: ValueEmail }>((resolve) =>
-    setTimeout(() => resolve({ data : value }), 2000)
+
+export function postEmail (value : ValueEmail) {
+  return new Promise ((resolve) => {
+    setTimeout(() => resolve(value), 2000)
+  }
   );
 }
 
 export const sendEmail = createAsyncThunk(
   "forgot/password",
-  async(value : ValueEmail, {rejectWithValue }) => {
+  async(value : ValueEmail ) => {
     const response = await postEmail(value)
-    if(response) {
-      return response
-    } else {
-      rejectWithValue("Error Server")
-    }
+    return response
   }
 )
 
@@ -47,7 +45,7 @@ export const forgotSlice = createSlice({
     [sendEmail.fulfilled.type] : (state, action) => {
       state.loading = false
       state.forgot = true
-      swal("Success", `If the email ${action.payload.data.email} are registered in our system, we will send a link to reset your password`, "success")
+      swal("Success", `If the email ${action.payload.email} are registered in our system, we will send a link to reset your password`, "success")
     },
     [sendEmail.rejected.type] : (state, action) => {
       state.loading = false
