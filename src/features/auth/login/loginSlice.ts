@@ -43,7 +43,7 @@ export const getData = (value : InputState ) => {
     auth_id : "authid",
     login: true
   }
-  if(value.email === "demo@admin.com" && value.password === "admin123") {
+  if(value.email === "demo@admin.com" && value.password === "Admin@20212020") {
     return data;
   } else {
     return null
