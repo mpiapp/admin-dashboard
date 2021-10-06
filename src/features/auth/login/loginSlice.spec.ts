@@ -22,7 +22,7 @@ describe('REDUX ASYNTHUNK', () => {
   it('get data action success', async () => {
     const value : InputState = {
       email : 'demo@admin.com',
-      password : 'Admin@20212020'
+      password : `${process.env.REACT_APP_PASSWORD_TEST}`
     }
     const data : DataUser = {
       access_token : 'accesstoken',
@@ -49,7 +49,7 @@ describe('REDUX ASYNTHUNK', () => {
   it('dispatch login success action', async () => {
     const value : InputState = {
       email : 'demo@admin.com',
-      password : 'Admin@20212020'
+      password : `${process.env.REACT_APP_PASSWORD_TEST}`
     }
 
     const data : DataUser = {
@@ -70,7 +70,7 @@ describe('REDUX ASYNTHUNK', () => {
   it('dispatch login failed action', async () => {
     const value : InputState = {
       email : 'dem@admin.com',
-      password : 'Admin@20212020'
+      password : `${process.env.REACT_APP_PASSWORD_TEST}`
     }
  
     const response = await store.dispatch(loginAction(value))

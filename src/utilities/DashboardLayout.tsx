@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../app/store';
-import NavDashboard from '../components/NavDasboard'
+import NavDashboard from '../components/NavDashboard'
 
 interface Props {
   component : React.ElementType;

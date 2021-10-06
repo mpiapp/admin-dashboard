@@ -39,13 +39,13 @@ describe("Dispatch redux", () => {
 
     await act(async () => {
       fireEvent.change(getByLabelText(/email address/i), {target: {value: "demo@admin.com"}})
-      fireEvent.change(getByLabelText(/password/i), {target: {value: "Admin@20212020"}})
+      fireEvent.change(getByLabelText(/password/i), {target: {value: `${process.env.REACT_APP_PASSWORD_TEST}`}})
     })
 
     await act(async () => {
       const data : InputState = {
         email : 'demo@admin.com',
-        password: 'Admin@20212020'
+        password: `${process.env.REACT_APP_PASSWORD_TEST}`
       }
 
       const respondata : DataUser = {

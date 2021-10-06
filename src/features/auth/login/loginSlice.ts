@@ -43,7 +43,7 @@ export const getData = (value : InputState ) => {
     auth_id : "authid",
     login: true
   }
-  if(value.email === "demo@admin.com" && value.password === "Admin@20212020") {
+  if(value.email === "demo@admin.com" && value.password === process.env.REACT_APP_PASSWORD_TEST) {
     return data;
   } else {
     return null
