@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../app/store';
-import NavbarDashboard from '../components/NavDasboard'
+import NavDashboard from '../components/NavDasboard'
 
 interface Props {
   component : React.ElementType;
@@ -35,7 +35,7 @@ const  DashboardLayout : React.FC<Props> = ({ component : Component, ...rest }) 
             if(isAuthenticated()){
                 return (
                   <Box sx={{ display: 'flex' }}>
-                    <NavbarDashboard />
+                    <NavDashboard />
                     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                       <Toolbar />
                       <Component {...props} />

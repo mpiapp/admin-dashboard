@@ -30,7 +30,7 @@ interface Props {
     window?: () => Window;
   }
 
-const NavbarDashboard = (props: Props) => {
+const NavDashboard = (props: Props) => {
         
     const history = useHistory()
     const { window } = props
@@ -214,4 +214,4 @@ const NavbarDashboard = (props: Props) => {
     )
 }
 
-export default NavbarDashboard;
+export default NavDashboard;

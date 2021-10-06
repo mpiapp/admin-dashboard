@@ -23,8 +23,7 @@ export function postEmail (value : ValueEmail) {
 export const sendEmail = createAsyncThunk(
   "forgot/password",
   async(value : ValueEmail ) => {
-    const response = await postEmail(value)
-    return response
+    return postEmail(value)
   }
 )
 

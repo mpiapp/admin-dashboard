@@ -37,7 +37,7 @@ const validationSchema = yup
   .required();
 
 
-const LoginPage = () => {
+const Login = () => {
   const dispatch = useDispatch()
   const auth = useSelector((state : RootState) => state.login )
 
@@ -143,4 +143,4 @@ const LoginPage = () => {
     )
 }
 
-export default LoginPage;
+export default Login;

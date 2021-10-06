@@ -64,13 +64,11 @@ export const loginAction = createAsyncThunk(
   }
 );
 
-export const checkInitalLogin = (userCredentials : any) => {
+export const checkInitalLogin = (user : any) => {
   let login = false
-  if(userCredentials !== null) {
-    login = userCredentials.login
-  } else {
-    login = false
-  }
+  if(user !== null) {
+    login = user.login
+  } 
   return login;
 }
 
