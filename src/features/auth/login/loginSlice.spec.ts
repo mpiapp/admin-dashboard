@@ -38,9 +38,10 @@ describe('REDUX ASYNTHUNK', () => {
   });
 
   it('get data action failed', async () => {
+    const pass = "123abscs"
     const value : InputState = {
       email : 'hello@gmail.com',
-      password : 'passrod'
+      password : pass
     }
     expect(await getData(value)).toStrictEqual(null)
   });
