@@ -1,69 +1,15 @@
-/* istanbul ignore file */
-
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import {createSlice } from '@reduxjs/toolkit';
 import swal from 'sweetalert';
-import Axios from 'axios'
 import { 
-    ModulesInput,
     IStateModules
 } from './modulesType'
 
-
-export const fetchModules = createAsyncThunk(
-    'modules/fetch', 
-    async (_, { rejectWithValue }) => {
-        try {
-            const response = await Axios.get(`${process.env.REACT_APP_API_URL}modules`)
-            return response.data
-        } catch (error) {
-            return rejectWithValue(error)
-        }
-})
-
-export const postModules = createAsyncThunk(
-    'modules/post', 
-    async (value : ModulesInput, { rejectWithValue }) => {
-        try {
-            let body = {
-                name : value.name,
-                link : value.link,
-                flag : value.flag,
-                feature_ids : value.feature_ids,
-            }
-            const response = await Axios.post(`${process.env.REACT_APP_API_URL}modules`, body)
-            return response.data
-        } catch (error) {
-            return rejectWithValue(error)
-        }
-})
-
-export const updateModules = createAsyncThunk(
-  'modules/update', 
-  async (value : ModulesInput, { rejectWithValue }) => {
-      try {
-          let body = {
-                name : value.name,
-                link : value.link,
-                flag : value.flag,
-                feature_ids : value.feature_ids,
-          }
-          const response = await Axios.put(`${process.env.REACT_APP_API_URL}modules/${value.id}`, body)
-          return response.data
-      } catch (error) {
-          return rejectWithValue(error)
-      }
-})
-
-export const removeModules = createAsyncThunk(
-  'modules/delete', 
-  async (value : ModulesInput, { rejectWithValue }) => {
-      try {
-          const response = await Axios.delete(`${process.env.REACT_APP_API_URL}modules/${value.id}`)
-          return response.data
-      } catch (error) {
-          return rejectWithValue(error)
-      }
-})
+import {
+    fetchModules,
+    postModules,
+    updateModules,
+    removeModules
+ } from './reducers/modulesReducers'
 
 const initialState: IStateModules = {
   data: [],
@@ -107,8 +53,11 @@ export const modulesSlice = createSlice({
         swal('Success', "Success created modules ", 'success')
     },
     [postModules.rejected.type] : (state, action) => {
+         /* istanbul ignore next */
         state.loading_create = false
+         /* istanbul ignore next */
         state.error_create = action.payload
+         /* istanbul ignore next */
         swal('Error', `${action.payload}`, 'error')
     },
     [updateModules.pending.type] : (state) => {
@@ -118,7 +67,6 @@ export const modulesSlice = createSlice({
         state.loading_update = false
         state.update = true
         swal('Success', "Success updated modules", 'success')
-        window.location.reload()
     },
     [updateModules.rejected.type] : (state, action) => {
         state.loading_update = false

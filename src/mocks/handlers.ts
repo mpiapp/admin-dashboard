@@ -47,6 +47,38 @@ export const handlers = [
             "id": "asdfadfa13asdsfa"
           },))
     }),
+    rest.post(`${process.env.REACT_APP_API_URL}modules`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "name": "Manage PR",
+          "link": "/manage-pr",
+          "flag": "BUYER",
+          "feature_ids": [
+              "id1",
+              "id2"
+          ],
+          "id": "aoLxXdv"
+      })
+      )
+    }),
+    rest.put(`${process.env.REACT_APP_API_URL}modules/1`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "feature_ids": ["id1", "id2"], 
+          "flag": "VENDOR", 
+          "id": "asdfadfa13asdsfa", 
+          "link": "/manage-pr", 
+          "name": "Manage PR"
+      })
+      )
+    }),
+    rest.delete(`${process.env.REACT_APP_API_URL}modules/1`, (req, res, ctx) => {
+      return res(
+        ctx.json({})
+      )
+    }),
+
+
 
     // mock roles crud
     rest.get(`${process.env.REACT_APP_API_URL}roles`, (req, res, ctx) => {

@@ -5,8 +5,8 @@
       "link": "/manage-pr",
       "flag": "VENDOR",
       "feature_ids": [
-        "1",
-        "2"
+        "id1",
+        "id2"
       ],
       "id": "asdfadfa13asdsfa"
     },
@@ -38,6 +38,20 @@
         "CDqan2G"
       ],
       "id": "mCP8ZZF"
+    },
+    {
+      "name": "delete",
+      "id": "eOESDzS"
+    },
+    {
+      "name": "Manage PR",
+      "link": "/manage-pr",
+      "flag": "BUYER",
+      "feature_ids": [
+        "id1",
+        "id2"
+      ],
+      "id": "aoLxXdv"
     }
   ],
   "roles": [
@@ -162,22 +176,6 @@
         "_byDibm"
       ],
       "id": "oiGpj5l"
-    },
-    {
-      "name": "tambah",
-      "flag": "VENDOR",
-      "capabilities": [
-        "YiliWMj"
-      ],
-      "id": "4BYvk47"
-    },
-    {
-      "name": "delete",
-      "id": "SBLmW3P"
-    },
-    {
-      "name": "delete",
-      "id": "p8Bgoym"
     }
   ],
   "status": [

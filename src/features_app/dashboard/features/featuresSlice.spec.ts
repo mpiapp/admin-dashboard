@@ -5,10 +5,10 @@ import {
   removeFeatures, 
   updateFeatures,
 } from "./reducers/featuresReducers";
+import featuresSlice from './featuresSlice';
 
 import { ObjectFeatures, IStateFeatures} from './featuresTypes'
 import { store, RootState } from '../../../app/store'
-import featuresSlice from './featuresSlice';
 
 const appState = store.getState();
 

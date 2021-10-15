@@ -2,11 +2,11 @@ import { store } from "../../../../app/store";
 import { onGetFeatures, onCreateFeatures, onRemoveFeatures, onUpdateFeatures } from './featuresAction'
 
 test('getFeatures test', async () => {
-  let state = store.getState().capabilities;
+  let state = store.getState().features;
   expect(state.data).toHaveLength(0);
 
   await onGetFeatures()
-  state = await store.getState().capabilities;
+  state = await store.getState().features;
   expect(state.data).toHaveLength(0);
 });
 

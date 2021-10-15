@@ -14,13 +14,13 @@ import Select from 'react-select'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../app/store';
 import { fetchRoles, postRoles, removeRoles, updateRoles } from './rolesSlice';
-import { fetchModules } from '../modules/modulesSlice';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { RolesInput, DataRow } from './rolesTypes'
 import { ISelectOption } from '../globalTypes'
 import { fetchFlag } from '../flag/flagSlice';
+import { onGetModules } from '../modules/action/modulesAction';
 
 const validationSchema = yup    
     .object({
@@ -177,7 +177,7 @@ function MasterRoles() {
     useEffect(() => {
         handleClose()
         dispatch(fetchRoles())
-        dispatch(fetchModules())
+        onGetModules()
         dispatch(fetchFlag())
         // eslint-disable-next-line
     },  [state.create, state.update, state.remove]);

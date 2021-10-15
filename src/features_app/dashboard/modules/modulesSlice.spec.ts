@@ -1,12 +1,20 @@
-import navigationReducer, {
-    fetchModules
-} from './modulesSlice';
-import { store } from '../../../app/store'
-import { ObjectModules } from './modulesType'
+import modulesReducer from './modulesSlice';
+import { 
+  fetchModules,
+  postModules, 
+  removeModules, 
+  updateModules,
+} from "./reducers/modulesReducers";
+import modulesSlice from './modulesSlice';
+
+import { ObjectModules, IStateModules } from './modulesType'
+import { store, RootState } from '../../../app/store'
+
+const appState = store.getState();
 
 describe('INITIAL STATE STORE NAVIGATION SLICE', () => {
     it('should handle initial state', () => {
-      expect(navigationReducer(undefined, { type: 'unknown' })).toEqual({
+      expect(modulesReducer(undefined, { type: 'unknown' })).toEqual({
         data: [] as ObjectModules[],
         loading : false,
         error : null,
@@ -23,185 +31,244 @@ describe('INITIAL STATE STORE NAVIGATION SLICE', () => {
     });
 })
 
+
+
 describe('TEST REDUX SLICE', () => {
-  it('fetchModules action success', async () => {
-    const data  = [{
-      "__v": 0, 
-    }]
+  const initialState : IStateModules = {
+    data: [] as ObjectModules[],
+    loading : false,
+    error : null,
+    loading_create : false,
+    error_create: null,
+    create : false,
+    loading_update : false,
+    error_update: null,
+    update : false,
+    loading_remove : false,
+    error_remove: null,
+    remove : false
+  }
+  it("should update state when API call is pending", async () => {
+    const action = {type: fetchModules.pending};
+    const stateReducer = modulesReducer(initialState, action);
+    expect(stateReducer).toEqual(
+      {
+        data: [] as ObjectModules[],
+        loading : true,
+        error : null,
+        loading_create : false,
+        error_create: null,
+        create : false,
+        loading_update : false,
+        error_update: null,
+        update : false,
+        loading_remove : false,
+        error_remove: null,
+        remove : false
+      }
+    )
 
-    // const response = await store.dispatch(fetchModules())
-    // // console.log(response,' repos')
-    // expect(response.payload).toMatch(/__v/i)
   });
-  // it('fetchModules action failed', async () => {
-  //   expect(await fetchModules()).toHaveLength(0)
-  // });
-})
+
+  it("should update state when API call is successful", async () => {
+    // Arrange
+    const response = {
+      "feature_ids": ["1", "2"], 
+      "flag": "VENDOR", 
+      "id": "asdfadfa13asdsfa", 
+      "link": "/manage-pr", 
+      "name": "Manage PR"
+    }
+  
+    const res = await store.dispatch(fetchModules())
+    expect(res.payload).toEqual(
+      expect.objectContaining(response)
+    );
+
+  });
+
+  it("should update state when API call is rejected", async () => {
+   
+    const state = {
+      data: [] as ObjectModules[],
+      loading : true,
+      error : null,
+      loading_create : false,
+      error_create: null,
+      create : false,
+      loading_update : false,
+      error_update: null,
+      update : false,
+      loading_remove : false,
+      error_remove: null,
+      remove : false
+    }
+    const nextState: IStateModules = await modulesSlice(
+      state,
+      fetchModules.rejected
+    );
+    // Assert
+    const rootState: RootState = { ...appState, capabilities: nextState };
+   
+    expect(rootState.capabilities.error).toEqual(undefined)
 
 
-// describe('REDUX ASYNTHUNK', () => {
-//   it('get data action success', async () => {
-//     const value : InputState = {
-//       email : 'demo@admin.com',
-//       password : `${process.env.REACT_APP_PASSWORD_TEST}`
-//     }
-//     const data : DataUser = {
-//       access_token : 'accesstoken',
-//       id_token : 'idtoken', 
-//       expires_in : 9000,
-//       email : "johndoe@gmail.com",
-//       fullname : "John Doe",
-//       avatar : "https://image.com",
-//       auth_id : "authid",
-//       login: true
-//     }
-//     expect(await getData(value)).toStrictEqual(data)
-//   });
-
-//   it('get data action failed', async () => {
-//     const pass = "123abscs"
-//     const value : InputState = {
-//       email : 'hello@gmail.com',
-//       password : pass
-//     }
-//     expect(await getData(value)).toStrictEqual(null)
-//   });
+  });
 
 
-//   it('dispatch login success action', async () => {
-//     const value : InputState = {
-//       email : 'demo@admin.com',
-//       password : `${process.env.REACT_APP_PASSWORD_TEST}`
-//     }
+  it("should update state when post is successful", async () => {
+    // Arrange
+    const response = {
+      "name" : "Manage PR",
+      "link" : "/manage-pr",
+      "flag" : "BUYER",
+      "feature_ids" : ["id1", "id2"] 
+    }
 
-//     const data : DataUser = {
-//       access_token : 'accesstoken',
-//       id_token : 'idtoken', 
-//       expires_in : 9000,
-//       email : "johndoe@gmail.com",
-//       fullname : "John Doe",
-//       avatar : "https://image.com",
-//       auth_id : "authid",
-//       login: true
-//     }
-
-//     const response = await store.dispatch(loginAction(value))
-//     expect(response.payload).toEqual(data)
-//   });
-
-//   it('dispatch login failed action', async () => {
-//     const value : InputState = {
-//       email : 'dem@admin.com',
-//       password : `${process.env.REACT_APP_PASSWORD_TEST}`
-//     }
- 
-//     const response = await store.dispatch(loginAction(value))
-//     expect(response.payload).toBe("Wrong email or password!")
-//   });
-
-//   it('check initial login true', async () => {
-//     let data = {
-//       access_token : 'accesstoken',
-//       id_token : 'idtoken', 
-//       expires_in : 9000,
-//       email : "johndoe@gmail.com",
-//       fullname : "John Doe",
-//       avatar : "https://image.com",
-//       auth_id : "authid",
-//       login: true
-//     }
- 
-//     expect(await checkInitalLogin(data)).toBe(true)
-//   });
-
-//   it('check initial login false', async () => {
-//     let data = null
- 
-//     expect(await checkInitalLogin(data)).toBe(false)
-//   });
-
-// })
-
-// describe('LOGIN SLICE TESTS', () => {
-//   it('should set loading true while action is pending', () => {
-//       const action = {type: loginAction.pending};
-//       const initialState = navigationReducer(
-//       { 
-//         login: false,
-//         data : {} as DataUser,
-//         loading : false,
-//         error : null
-//       }, action);
-//       expect(initialState).toEqual(
-//         {
-//           login: false,
-//           data : {} as DataUser,
-//           loading : true,
-//           error : null
-//         }
-//       )
-//     })
-
-//   it('should set data object when action is fulfilled', () => {
-//       const action = {
-//           type: loginAction.fulfilled, 
-//           payload:{ 
-//             access_token : 'accesstoken',
-//             id_token : 'idtoken',
-//             expires_in : 9000,
-//             email : "johndoe@gmail.com",
-//             fullname : "John Doe",
-//             avatar : "https://image.com",
-//             auth_id : "authid",
-//             login: true
-//           }
-//       };
-//       const initialState = navigationReducer(
-//         { 
-//           login: false,
-//           data : {} as DataUser,
-//           loading : false,
-//           error : null
-//         }, action);
-//         expect(initialState).toEqual(
-//           {
-//             login: true,
-//             data : {
-//               access_token : 'accesstoken',
-//               id_token : 'idtoken',
-//               expires_in : 9000,
-//               email : "johndoe@gmail.com",
-//               fullname : "John Doe",
-//               avatar : "https://image.com",
-//               auth_id : "authid",
-//               login: true
-//             },
-//             loading : false,
-//             error : null
-//           }
-//         )
-//   })
-
-//   it('should set error when action is rejected', () => {
-//       const action = {
-//         type: loginAction.rejected,
-//         payload : "Wrong email or password!"
-//       };
-//       const initialState = navigationReducer(
-//         { 
-//           login: false,
-//           data : {} as DataUser,
-//           loading : false,
-//           error : null
-//         }, action);
-//         expect(initialState).toEqual(
-//           {
-//             login: false,
-//             data : {} as DataUser,
-//             loading : false,
-//             error : "Wrong email or password!"
-//           }
-//         )
-//     })
-// })
+    const data = {
+        "name" : "Manage PR",
+        "link" : "/manage-pr",
+        "flag" : "BUYER",
+        "feature_ids" : ["id1", "id2"] 
+      }
     
+  
+    const res = await store.dispatch(postModules(data))
+    expect(res.payload).toEqual(
+      expect.objectContaining(response)
+    );
+
+  });
+
+  it("should update state when API post is rejected", async () => {
+    const state = {
+      data: [] as ObjectModules[],
+      loading : true,
+      error : null,
+      loading_create : false,
+      error_create: null,
+      create : false,
+      loading_update : false,
+      error_update: null,
+      update : false,
+      loading_remove : false,
+      error_remove: null,
+      remove : false
+    }
+    const nextState: IStateModules = await modulesSlice(
+      state,
+      postModules.rejected
+    );
+    // Assert
+    const rootState: RootState = { ...appState, capabilities: nextState };
+  
+    expect(rootState.capabilities.loading_create).toBe(false)
+    expect(rootState.capabilities.error_create).toEqual(undefined)
+
+
+  });
+
+
+
+  it("should update state when update is successful", async () => {
+    // Arrange
+    const response = {
+      "feature_ids": ["id1", "id2"], 
+      "flag": "VENDOR", 
+      "id": "asdfadfa13asdsfa", 
+      "link": "/manage-pr", 
+      "name": "Manage PR"
+    }
+
+    const data = {
+      "name" : "Manage PR",
+      "link" : "/manage-pr",
+      "flag" : "VENDOR",
+      "feature_ids" : ["id1", "id2"],
+      "id": "1", 
+
+    }
+  
+    const res = await store.dispatch(updateModules(data))
+    expect(res.payload).toEqual(
+      expect.objectContaining(response)
+    );
+
+  });
+
+  it("should update state when API post is rejected", async () => {
+   
+    const state = {
+      data: [] as ObjectModules[],
+      loading : true,
+      error : null,
+      loading_create : false,
+      error_create: null,
+      create : false,
+      loading_update : false,
+      error_update: null,
+      update : false,
+      loading_remove : false,
+      error_remove: null,
+      remove : false
+    }
+    const nextState: IStateModules = await modulesSlice(
+      state,
+      updateModules.rejected
+    );
+    // Assert
+    const rootState: RootState = { ...appState, capabilities: nextState };
+   
+    expect(rootState.capabilities.loading_update).toBe(false)
+    expect(rootState.capabilities.error_update).toEqual(undefined)
+
+
+  });
+
+  it("should update state when remove is successful", async () => {
+    // Arrange
+    const response = {}
+    const data = {
+      "name" : "Manage PR",
+      "link" : "/manage-pr",
+      "flag" : "VENDOR",
+      "feature_ids" : ["id1", "id2"],
+      "id": "1", 
+  }
+  
+    const res = await store.dispatch(removeModules(data))
+    expect(res.payload).toEqual(
+      expect.objectContaining(response)
+    );
+
+  });
+
+  it("should update state when API remove is rejected", async () => {
+   
+    const state = {
+      data: [] as ObjectModules[],
+      loading : true,
+      error : null,
+      loading_create : false,
+      error_create: null,
+      create : false,
+      loading_update : false,
+      error_update: null,
+      update : false,
+      loading_remove : false,
+      error_remove: null,
+      remove : false
+    }
+    const nextState: IStateModules = await modulesSlice(
+      state,
+      removeModules.rejected
+    );
+    // Assert
+    const rootState: RootState = { ...appState, capabilities: nextState };
+   
+    expect(rootState.capabilities.loading_remove).toBe(false)
+    expect(rootState.capabilities.error_remove).toEqual(undefined)
+
+
+  });
+})

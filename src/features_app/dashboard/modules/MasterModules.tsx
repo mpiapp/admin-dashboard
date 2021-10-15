@@ -1,5 +1,3 @@
-/* istanbul ignore file */
-
 import { useState, useEffect } from 'react';
 import { Box } from '@mui/system';
 import Button from '@mui/material/Button';
@@ -14,7 +12,12 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Select from 'react-select'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../app/store';
-import { fetchModules, postModules, removeModules, updateModules } from './modulesSlice';
+import { 
+    onGetModules,
+    onCreateModules,
+    onUpdateModules,
+    onRemoveModules 
+ } from './action/modulesAction';
 import { onGetFeatures } from '../features/action/featuresAction';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -83,16 +86,21 @@ function MasterModules() {
         setOpen(false);
     };
 
+    /* istanbul ignore next */
+
     const handleChangeFlag = (value: any) : void => {
         setSelectedFlag(value)
         setErrorSelectFlag(false)
     }
+
+    /* istanbul ignore next */
 
     const handleChangeFeatures = (value: any) : void => {
         setSelectedFeatures(value)
         setErrorSelectFeatures(false)
     }
 
+    /* istanbul ignore next */
     const proceedFeatureToArray = (value : any) => {
         let arrayIdFeatures = []
         for(let i=0; i < value.length; i++) {
@@ -101,6 +109,7 @@ function MasterModules() {
         return arrayIdFeatures;
     }
       
+    /* istanbul ignore next */
     const onSubmit = (data: ModulesInput): void => {
         if(selectedFlag === undefined) {
             setErrorSelectFlag(true)
@@ -115,7 +124,7 @@ function MasterModules() {
                     feature_ids : proceedFeatureToArray(selectedFeatures),
                     id: IdModules
                 }
-                dispatch(postModules(postData))
+                onCreateModules(postData)
                 reset()
             } else {
                 let updateData= {
@@ -125,13 +134,13 @@ function MasterModules() {
                     feature_ids : selectedFeatures,
                     id: IdModules
                 }
-                dispatch(updateModules(updateData))
+                onUpdateModules(updateData)
                 reset()
             }
         }
-
     }
 
+    /* istanbul ignore next */
     const onClickUpdate = (row : any) => {
         setValue("name", row.name);
         setValue("link", row.link);
@@ -143,6 +152,7 @@ function MasterModules() {
         }, 100);
     }
 
+    /* istanbul ignore next */
     const columns: TableColumn<DataRow>[] = [
         {
             name: 'ID',
@@ -186,7 +196,7 @@ function MasterModules() {
                     >
                         Update
                     </Button>
-                    <Button onClick={() => dispatch(removeModules(row)) } variant="outlined" color="error" size="small">
+                    <Button onClick={() => onRemoveModules(row) } variant="outlined" color="error" size="small">
                         Delete
                     </Button>
                 </Stack>
@@ -196,12 +206,13 @@ function MasterModules() {
     
     useEffect(() => {
         handleClose()
-        dispatch(fetchModules())
+        onGetModules()
         onGetFeatures()
         dispatch(fetchFlag())
         // eslint-disable-next-line
     },  [state.create, state.update, state.remove]);
 
+    /* istanbul ignore next */
     useEffect(() => {
         if(flag?.data) {
             setOptionsFlagModules(flag.data)
@@ -213,7 +224,7 @@ function MasterModules() {
         const proceedOptions = () => {
             let initialData = features.data
             let dataOptions = []
-
+            /* istanbul ignore next */
             for(let i=0; i < initialData.length; i++) {
                 dataOptions.push({ value: initialData[i].id, label: initialData[i].name })
             }
@@ -261,6 +272,7 @@ function MasterModules() {
                     <div className="box-modal-modules">
                         <TextField
                             error={!!errors.name}
+                            /* istanbul ignore next */
                             helperText={errors.name && errors.name.message}
                             {...register('name')}
                             margin="normal"
@@ -293,7 +305,11 @@ function MasterModules() {
                                 options={optionsFlagModules && optionsFlagModules}
                                 onChange={handleChangeFlag}
                             />
-                            { errorSelectFlag ? <div className="error-p"><p>Flag is required</p></div> : null }
+                            
+                            {
+                                /* istanbul ignore next */
+                                errorSelectFlag ? <div className="error-p"><p>Flag is required</p></div> : null 
+                             }
                         </Box>
                         <Box pt={2}>
                             <Select
@@ -303,7 +319,9 @@ function MasterModules() {
                                 options={optionsFeatures && optionsFeatures}
                                 onChange={handleChangeFeatures}
                             />
-                            { errorSelectFeatures ? <div className="error-p"><p>Feature is required</p></div> : null }
+                            { 
+                                /* istanbul ignore next */
+                                errorSelectFeatures ? <div className="error-p"><p>Feature is required</p></div> : null }
                         </Box>
                         
                     </div>
@@ -324,7 +342,11 @@ function MasterModules() {
                     <DialogTitle>List All Features</DialogTitle>
                     
                     <DialogActions>
-                        <Button onClick={() => setViewFeatures({...viewFeatures, open: false})} color="warning">Cancel</Button>
+                        <Button onClick={() => {
+                            /* istanbul ignore next */
+                            setViewFeatures({...viewFeatures, open: false})
+                            }
+                        } color="warning">Cancel</Button>
                     </DialogActions>
                 </div>
             </Dialog>
