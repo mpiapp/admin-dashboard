@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 import { useState, useEffect } from 'react';
 import { Box } from '@mui/system';
 import Button from '@mui/material/Button';
@@ -13,7 +12,12 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Select from 'react-select'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../app/store';
-import { fetchRoles, postRoles, removeRoles, updateRoles } from './rolesSlice';
+import { 
+    onGetRoles,
+    onCreateRoles,
+    onUpdateRoles,
+    onRemoveRoles 
+ } from './action/rolesAction';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -48,7 +52,6 @@ function MasterRoles() {
         resolver: yupResolver(validationSchema)
     });
 
-    // console.log(state, 'state')
     const [selectedFlagRoles, setSelectedFlagRoles] = useState<ISelectOption>();
     
     const [selectedModules, setSelectedModules] = useState<ISelectOption[]>([]);
@@ -76,16 +79,19 @@ function MasterRoles() {
         setOpen(false);
     };
       
+     /* istanbul ignore next */
     const handleChangeFlagRoles = (value: any) : void => {
         setSelectedFlagRoles(value)
         setErrorSelectFlagRoles(false)
     }
 
+     /* istanbul ignore next */
     const handleChangeModules = (value: any) : void => {
         setSelectedModules(value)
         setErrorSelectModules(false)
     }
 
+     /* istanbul ignore next */
     const proceedModuleToArray = (value : any) => {
         let arrayIdModules = []
         for(let i=0; i < value.length; i++) {
@@ -94,6 +100,7 @@ function MasterRoles() {
         return arrayIdModules;
     }
 
+     /* istanbul ignore next */
     const onSubmit = (data: RolesInput): void => {
         if(selectedFlagRoles === undefined) {
             setErrorSelectFlagRoles(true)
@@ -106,7 +113,7 @@ function MasterRoles() {
                     flag : selectedFlagRoles.value,
                     module_ids : proceedModuleToArray(selectedModules),
                 }
-                dispatch(postRoles(postDataRoles))
+                onCreateRoles(postDataRoles)
                 reset()
             } else {
                 let updateData= {
@@ -115,12 +122,13 @@ function MasterRoles() {
                     module_ids : proceedModuleToArray(selectedModules),
                     id: IdRoles
                 }
-                dispatch(updateRoles(updateData))
+                onUpdateRoles(updateData)
                 reset()
             }
         }
     }
 
+     /* istanbul ignore next */
     const columns: TableColumn<DataRow>[] = [
         {
             name: 'ID',
@@ -166,7 +174,7 @@ function MasterRoles() {
                     >
                         Update
                     </Button>
-                    <Button onClick={() => dispatch(removeRoles(row)) } variant="outlined" color="error" size="small">
+                    <Button onClick={() => onRemoveRoles(row) } variant="outlined" color="error" size="small">
                         Delete
                     </Button>
                 </Stack>
@@ -176,12 +184,13 @@ function MasterRoles() {
     
     useEffect(() => {
         handleClose()
-        dispatch(fetchRoles())
+        onGetRoles()
         onGetModules()
         dispatch(fetchFlag())
         // eslint-disable-next-line
     },  [state.create, state.update, state.remove]);
 
+     /* istanbul ignore next */
     useEffect(() => {
         if(flag?.data) {
             setOptionsFlagRoles(flag.data)
@@ -193,7 +202,7 @@ function MasterRoles() {
         const proceedOptions = () => {
             let initialData = modules.data
             let dataOptions = []
-
+            /* istanbul ignore next */
             for(let i=0; i < initialData.length; i++) {
                 dataOptions.push({ value: initialData[i].id, label: initialData[i].name })
             }
@@ -291,7 +300,10 @@ function MasterRoles() {
                     <DialogTitle>List All Modules</DialogTitle>
                     
                     <DialogActions>
-                        <Button onClick={() => setViewModules({...viewModules, open: false})} color="warning">Cancel</Button>
+                        <Button onClick={() => {
+                             /* istanbul ignore next */
+                             setViewModules({...viewModules, open: false})
+                        }} color="warning">Cancel</Button>
                     </DialogActions>
                 </div>
             </Dialog>

@@ -89,6 +89,15 @@
         "asdfadfa13asdsfa"
       ],
       "id": "NTvsv2I"
+    },
+    {
+      "name": "SuperAdmin",
+      "id": "UJ7-asdf",
+      "flag": "VENDOR",
+      "module_ids": [
+        "mid1",
+        "mid2"
+      ]
     }
   ],
   "capabilities": [

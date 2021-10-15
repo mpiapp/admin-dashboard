@@ -1,63 +1,14 @@
-/* istanbul ignore file */
-
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import swal from 'sweetalert';
-import Axios from 'axios'
-import { IStateRoles, RolesInput } from './rolesTypes'
+import { IStateRoles } from './rolesTypes'
 
-export const fetchRoles = createAsyncThunk(
-    'roles/fetch', 
-    async (_, { rejectWithValue }) => {
-        try {
-            const response = await Axios.get(`${process.env.REACT_APP_API_URL}roles`)
-            return response.data
-        } catch (error) {
-            return rejectWithValue(error)
-        }
-})
+import { 
+    fetchRoles,
+    postRoles,
+    updateRoles,
+    removeRoles
+} from './reducers/rolesReducers'
 
-export const postRoles = createAsyncThunk(
-    'roles/post', 
-    async (value : RolesInput, { rejectWithValue }) => {
-        try {
-            let body = {
-                name : value.name,
-                flag : value.flag,
-                module_ids : value.module_ids
-            }
-            const response = await Axios.post(`${process.env.REACT_APP_API_URL}roles`, body)
-            return response.data
-        } catch (error) {
-            return rejectWithValue(error)
-        }
-})
-
-export const updateRoles = createAsyncThunk(
-  'roles/update', 
-  async (value : RolesInput, { rejectWithValue }) => {
-      try {
-          let body = {
-              name : value.name,
-              flag : value.flag,
-              module_ids : value.module_ids
-          }
-          const response = await Axios.put(`${process.env.REACT_APP_API_URL}roles/${value.id}`, body)
-          return response.data
-      } catch (error) {
-          return rejectWithValue(error)
-      }
-})
-
-export const removeRoles = createAsyncThunk(
-  'roles/delete', 
-  async (value : RolesInput, { rejectWithValue }) => {
-      try {
-          const response = await Axios.delete(`${process.env.REACT_APP_API_URL}roles/${value.id}`)
-          return response.data
-      } catch (error) {
-          return rejectWithValue(error)
-      }
-})
 
 const initialState: IStateRoles = {
   data: [],
@@ -102,8 +53,11 @@ export const rolesSlice = createSlice({
         swal('Success', "Success created Roles menu", 'success')
     },
     [postRoles.rejected.type] : (state, action) => {
+         /* istanbul ignore next */
         state.loading_create = false
+         /* istanbul ignore next */
         state.error_create = action.payload
+         /* istanbul ignore next */
         swal('Error', `${action.payload}`, 'error')
     },
     [updateRoles.pending.type] : (state) => {
@@ -113,7 +67,6 @@ export const rolesSlice = createSlice({
         state.loading_update = false
         state.update = true
         swal('Success', "Success updated Role", 'success')
-        window.location.reload()
     },
     [updateRoles.rejected.type] : (state, action) => {
         state.loading_update = false

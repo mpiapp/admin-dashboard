@@ -92,6 +92,37 @@ export const handlers = [
             ]
           }))
     }),
+    rest.post(`${process.env.REACT_APP_API_URL}roles`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "id": "asdfah123sda",
+          "name": "Admin",
+          "flag": "VENDOR",
+          "module_ids": [
+            "mid1",
+            "mid2"
+          ]
+      })
+      )
+    }),
+    rest.put(`${process.env.REACT_APP_API_URL}roles/1`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "id": "asdfah123sda",
+          "name": "Admin",
+          "flag": "VENDOR",
+          "module_ids": [
+            "mid1",
+            "mid2"
+          ]
+      })
+      )
+    }),
+    rest.delete(`${process.env.REACT_APP_API_URL}roles/1`, (req, res, ctx) => {
+      return res(
+        ctx.json({})
+      )
+    }),
 
     // mock features crud
     rest.get(`${process.env.REACT_APP_API_URL}features`, (req, res, ctx) => {

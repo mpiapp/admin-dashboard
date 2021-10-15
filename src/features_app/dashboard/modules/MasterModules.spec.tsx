@@ -20,7 +20,7 @@ describe("render element dashboard Modules page", () => {
 
   })
 
-  it('should render all element in dashboard Modules page', () => {
+  it('should open modal create modules', () => {
     render(<MasterModules />)
     const butonCreateNew = screen.getByRole("button",{ name : /Create New Modules/i })
 
@@ -29,6 +29,6 @@ describe("render element dashboard Modules page", () => {
     expect(screen.getByText(/Add New Modules/i)).toBeInTheDocument()
     
 
-})
+  })
 })
 
