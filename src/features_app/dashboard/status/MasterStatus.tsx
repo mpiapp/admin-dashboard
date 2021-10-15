@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 import { useState, useEffect } from 'react';
 import { Box } from '@mui/system';
 import Button from '@mui/material/Button';
@@ -11,9 +10,14 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { RootState } from '../../../app/store';
-import { fetchStatus, postStatus, removeStatus, updateStatus } from './statusSlice';
+import { 
+    onGetStatus, 
+    onCreateStatus, 
+    onRemoveStatus,
+    onUpdateStatus 
+} from './action/statusAction'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -30,10 +34,7 @@ const validationSchema = yup
     
 function MasterStatus() {
 
-    const dispatch = useDispatch()
     const state = useSelector((state : RootState) => state.status)
-
-    // console.log(state, 'state')
 
     const [open, setOpen] = useState(false);
     const [IdStatus, setIdStatus] = useState <any>(null);
@@ -57,20 +58,22 @@ function MasterStatus() {
         resolver: yupResolver(validationSchema)
     });
       
+    /* istanbul ignore next */
     const onSubmit = (data: StatusInput): void => {
         if(IdStatus === null) {
-            dispatch(postStatus(data))
+            onCreateStatus(data)
             reset()
         } else {
             let updateData= {
                 name : data.name,
                 id: IdStatus
             }
-            dispatch(updateStatus(updateData))
+            onUpdateStatus(updateData)
             reset()
         }
     }
 
+    /* istanbul ignore next */
     const columns: TableColumn<DataRow>[] = [
         {
             name: 'ID',
@@ -99,7 +102,7 @@ function MasterStatus() {
                     >
                         Update
                     </Button>
-                    <Button onClick={() => dispatch(removeStatus(row)) } variant="outlined" color="error" size="small">
+                    <Button onClick={() => onRemoveStatus(row) } variant="outlined" color="error" size="small">
                         Delete
                     </Button>
                 </Stack>
@@ -109,7 +112,7 @@ function MasterStatus() {
     
     useEffect(() => {
         handleClose()
-        dispatch(fetchStatus())
+        onGetStatus()
         // eslint-disable-next-line
     },  [state.create, state.update, state.remove]);
 

@@ -1,62 +1,15 @@
-/* istanbul ignore file */
-
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import swal from 'sweetalert';
-import Axios from 'axios'
 import {
-    StatusInput,
     IStateStatus
 } from './statusTypes'
+import {
+    fetchStatus,
+    postStatus,
+    updateStatus,
+    removeStatus
+} from './reducers/statusReducers'
 
-export const fetchStatus = createAsyncThunk(
-    'status/fetch', 
-    async (_, { rejectWithValue }) => {
-        try {
-            const response = await Axios.get(`${process.env.REACT_APP_API_URL}status`)
-            return response.data
-        } catch (error) {
-            return rejectWithValue(error)
-        }
-})
-
-export const postStatus = createAsyncThunk(
-    'status/post', 
-    async (value : StatusInput, { rejectWithValue }) => {
-        try {
-            let body = {
-                name : value.name,
-            }
-            const response = await Axios.post(`${process.env.REACT_APP_API_URL}status`, body)
-            return response.data
-        } catch (error) {
-            return rejectWithValue(error)
-        }
-})
-
-export const updateStatus = createAsyncThunk(
-  'status/update', 
-  async (value : StatusInput, { rejectWithValue }) => {
-      try {
-          let body = {
-              name : value.name,
-          }
-          const response = await Axios.put(`${process.env.REACT_APP_API_URL}status/${value.id}`, body)
-          return response.data
-      } catch (error) {
-          return rejectWithValue(error)
-      }
-})
-
-export const removeStatus = createAsyncThunk(
-  'status/delete', 
-  async (value : StatusInput, { rejectWithValue }) => {
-      try {
-          const response = await Axios.delete(`${process.env.REACT_APP_API_URL}status/${value.id}`)
-          return response.data
-      } catch (error) {
-          return rejectWithValue(error)
-      }
-})
 
 const initialState: IStateStatus = {
   data: [],
@@ -101,8 +54,11 @@ export const statusSlice = createSlice({
         swal('Success', "Success created Status menu", 'success')
     },
     [postStatus.rejected.type] : (state, action) => {
+         /* istanbul ignore next */
         state.loading_create = false
+         /* istanbul ignore next */
         state.error_create = action.payload
+         /* istanbul ignore next */
         swal('Error', `${action.payload}`, 'error')
     },
     [updateStatus.pending.type] : (state) => {

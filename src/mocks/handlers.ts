@@ -167,12 +167,38 @@ export const handlers = [
       )
     }),
 
+    
     // mock status crud
     rest.get(`${process.env.REACT_APP_API_URL}status`, (req, res, ctx) => {
         return res(ctx.json({
             "name": "Open",
             "id": "YiliWMj"
           }))
+    }),
+
+    rest.post(`${process.env.REACT_APP_API_URL}status`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "name": "Status",
+          "id": "ozavvbx"
+      })
+      )
+    }),
+    rest.put(`${process.env.REACT_APP_API_URL}status/1`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "name": "Status",
+          "id": "ozavvbx"
+      })
+      )
+    }),
+    rest.delete(`${process.env.REACT_APP_API_URL}status/1`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "name": "Status",
+          "id": "ozavvbx"
+      })
+      )
     }),
 
      // mock configstatus crud

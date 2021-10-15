@@ -14,7 +14,6 @@ import Select from 'react-select'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../app/store';
 import { fetchConfigStatus, postConfigStatus, removeConfigStatus, updateConfigStatus } from './configStatusSlice';
-import { fetchStatus } from '../status/statusSlice';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -26,6 +25,7 @@ import {
 import { 
     ISelectOption,
 } from '../globalTypes'
+import { onGetStatus } from '../status/action/statusAction';
 
 const validationSchema = yup    
     .object({
@@ -187,7 +187,7 @@ function ConfigStatus() {
     useEffect(() => {
         handleClose()
         dispatch(fetchConfigStatus())
-        dispatch(fetchStatus())
+        onGetStatus()
         // eslint-disable-next-line
     },  [state.create, state.update, state.remove]);
 
