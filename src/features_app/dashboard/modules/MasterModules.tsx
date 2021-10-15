@@ -15,7 +15,7 @@ import Select from 'react-select'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../app/store';
 import { fetchModules, postModules, removeModules, updateModules } from './modulesSlice';
-import { fetchFeatures } from '../features/featuresSlice';
+import { onGetFeatures } from '../features/action/featuresAction';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -197,7 +197,7 @@ function MasterModules() {
     useEffect(() => {
         handleClose()
         dispatch(fetchModules())
-        dispatch(fetchFeatures())
+        onGetFeatures()
         dispatch(fetchFlag())
         // eslint-disable-next-line
     },  [state.create, state.update, state.remove]);

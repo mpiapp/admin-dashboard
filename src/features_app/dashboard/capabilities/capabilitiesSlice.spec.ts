@@ -5,7 +5,7 @@ import {
   postCapability, 
   removeCapability, 
   updateCapability,
-} from "./reducers/reducersCapability";
+} from "./reducers/capabilityReducers";
 
 import {
   ObjectCapability,

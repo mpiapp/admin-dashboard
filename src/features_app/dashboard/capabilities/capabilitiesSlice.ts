@@ -9,7 +9,7 @@ import {
     postCapability,
     updateCapability,
     removeCapability 
-} from './reducers/reducersCapability'
+} from './reducers/capabilityReducers'
 
 /* istanbul ignore file */
 

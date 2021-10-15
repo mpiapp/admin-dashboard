@@ -1,5 +1,5 @@
 import { store } from "../../../../app/store";
-import { fetchCapability, postCapability, removeCapability, updateCapability } from "../reducers/reducersCapability";
+import { fetchCapability, postCapability, removeCapability, updateCapability } from "../reducers/capabilityReducers";
 
 export const onGetCapability = (): void => {
     store.dispatch(fetchCapability());

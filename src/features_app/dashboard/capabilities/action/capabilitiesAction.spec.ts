@@ -1,6 +1,5 @@
 import { store } from "../../../../app/store";
-// import { fetchCapability, postCapability, removeCapability, updateCapability } from "../reducers/reducersCapability";
-import { onGetCapability, onCreateCapability, onRemoveCapability, onUpdateCapability } from './dispatchAction'
+import { onGetCapability, onCreateCapability, onRemoveCapability, onUpdateCapability } from './capabilitiesAction'
 
 test('getCapability test', async () => {
   let state = store.getState().capabilities;

@@ -1,12 +1,20 @@
-import rolesReducer, {
-    fetchFeatures
-} from './featuresSlice';
-import {ObjectFeatures} from './featuresTypes'
-import { store } from '../../../app/store'
+import featuresReducer from './featuresSlice';
+import { 
+  fetchFeatures,
+  postFeatures, 
+  removeFeatures, 
+  updateFeatures,
+} from "./reducers/featuresReducers";
+
+import { ObjectFeatures, IStateFeatures} from './featuresTypes'
+import { store, RootState } from '../../../app/store'
+import featuresSlice from './featuresSlice';
+
+const appState = store.getState();
 
 describe('INITIAL STATE STORE Roles SLICE', () => {
     it('should handle initial state', () => {
-      expect(rolesReducer(undefined, { type: 'unknown' })).toEqual({
+      expect(featuresReducer(undefined, { type: 'unknown' })).toEqual({
         data: [] as ObjectFeatures[],
         loading : false,
         error : null,
@@ -23,185 +31,260 @@ describe('INITIAL STATE STORE Roles SLICE', () => {
     });
 })
 
+
+
 describe('TEST REDUX SLICE', () => {
-  it('fetchFeatures action success', async () => {
-    // const data  = [{
-    //   "__v": 0, 
-    // }]
+  const initialState : IStateFeatures = {
+    data: [] as ObjectFeatures[],
+    loading : false,
+    error : null,
+    loading_create : false,
+    error_create: null,
+    create : false,
+    loading_update : false,
+    error_update: null,
+    update : false,
+    loading_remove : false,
+    error_remove: null,
+    remove : false
+  }
+  it("should update state when API call is pending", async () => {
+    const action = {type: fetchFeatures.pending};
+    const stateReducer = featuresReducer(initialState, action);
+    expect(stateReducer).toEqual(
+      {
+        data: [] as ObjectFeatures[],
+        loading : true,
+        error : null,
+        loading_create : false,
+        error_create: null,
+        create : false,
+        loading_update : false,
+        error_update: null,
+        update : false,
+        loading_remove : false,
+        error_remove: null,
+        remove : false
+      }
+    )
 
-    // const response = await store.dispatch(fetchFeatures())
-    // // console.log(response,' repos')
-    // expect(response.payload).toMatch(/__v/i)
   });
-  // it('fetchFeatures action failed', async () => {
-  //   expect(await fetchFeatures()).toHaveLength(0)
-  // });
+
+  it("should update state when API call is successful", async () => {
+    // Arrange
+    const response = {
+      "name": "asdfadfa",
+      "flag": "VENDOR",
+      "capabilities": [
+        "YiliWMj"
+      ],
+      "id": "QCVJk0a"
+    }
+  
+    const res = await store.dispatch(fetchFeatures())
+    expect(res.payload).toEqual(
+      expect.objectContaining(response)
+    );
+
+  });
+
+  it("should update state when API call is rejected", async () => {
+   
+    const state = {
+      data: [] as ObjectFeatures[],
+      loading : true,
+      error : null,
+      loading_create : false,
+      error_create: null,
+      create : false,
+      loading_update : false,
+      error_update: null,
+      update : false,
+      loading_remove : false,
+      error_remove: null,
+      remove : false
+    }
+    const nextState: IStateFeatures = await featuresSlice(
+      state,
+      fetchFeatures.rejected
+    );
+    // Assert
+    const rootState: RootState = { ...appState, capabilities: nextState };
+   
+    expect(rootState.capabilities.error).toEqual(undefined)
+
+
+  });
+
+
+  it("should update state when post is successful", async () => {
+    // Arrange
+    const response = {
+      "name": "Purchase Order",
+      "flag": "BUYER",
+      "capability_ids": [
+          "id1",
+          "id2"
+      ],
+      "id": "Yxdgpia"
+    }
+    const data = {
+      "name": "delete"
+    }
+  
+    const res = await store.dispatch(postFeatures(data))
+    expect(res.payload).toEqual(
+      expect.objectContaining(response)
+    );
+
+  });
+
+  it("should update state when API post is rejected", async () => {
+    const state = {
+      data: [] as ObjectFeatures[],
+      loading : true,
+      error : null,
+      loading_create : false,
+      error_create: null,
+      create : false,
+      loading_update : false,
+      error_update: null,
+      update : false,
+      loading_remove : false,
+      error_remove: null,
+      remove : false
+    }
+    const nextState: IStateFeatures = await featuresSlice(
+      state,
+      postFeatures.rejected
+    );
+    // Assert
+    const rootState: RootState = { ...appState, capabilities: nextState };
+  
+    expect(rootState.capabilities.loading_create).toBe(false)
+    expect(rootState.capabilities.error_create).toEqual(undefined)
+
+
+  });
+
+
+  it("should update state when post feature is successful", async () => {
+    // Arrange
+    const response = {
+      "name": "Purchase Order",
+      "flag": "BUYER",
+      "capability_ids": [
+          "id1",
+          "id2"
+      ],
+      "id": "Yxdgpia"
+    }
+    const data = {
+      "name" : "test",
+      "id": "1"
+  }
+  
+    const res = await store.dispatch(updateFeatures(data))
+    expect(res.payload).toEqual(
+      expect.objectContaining(response)
+    );
+
+  });
+
+
+  it("should update state when update is successful", async () => {
+    // Arrange
+    const response = {
+      "name": "Purchase Order",
+      "flag": "BUYER",
+      "capability_ids": [
+          "id1",
+          "id2"
+      ],
+      "id": "Yxdgpia"
+    }
+    const data = {
+      "name" : "test",
+      "id": "1"
+  }
+  
+    const res = await store.dispatch(updateFeatures(data))
+    expect(res.payload).toEqual(
+      expect.objectContaining(response)
+    );
+
+  });
+
+  it("should update state when API post is rejected", async () => {
+   
+    const state = {
+      data: [] as ObjectFeatures[],
+      loading : true,
+      error : null,
+      loading_create : false,
+      error_create: null,
+      create : false,
+      loading_update : false,
+      error_update: null,
+      update : false,
+      loading_remove : false,
+      error_remove: null,
+      remove : false
+    }
+    const nextState: IStateFeatures = await featuresSlice(
+      state,
+      updateFeatures.rejected
+    );
+    // Assert
+    const rootState: RootState = { ...appState, capabilities: nextState };
+   
+    expect(rootState.capabilities.loading_update).toBe(false)
+    expect(rootState.capabilities.error_update).toEqual(undefined)
+
+
+  });
+
+  it("should update state when remove is successful", async () => {
+    // Arrange
+    const response = {}
+    const data = {
+      "name" : "test",
+      "id": "1"
+  }
+  
+    const res = await store.dispatch(removeFeatures(data))
+    expect(res.payload).toEqual(
+      expect.objectContaining(response)
+    );
+
+  });
+
+  it("should update state when API remove is rejected", async () => {
+   
+    const state = {
+      data: [] as ObjectFeatures[],
+      loading : true,
+      error : null,
+      loading_create : false,
+      error_create: null,
+      create : false,
+      loading_update : false,
+      error_update: null,
+      update : false,
+      loading_remove : false,
+      error_remove: null,
+      remove : false
+    }
+    const nextState: IStateFeatures = await featuresSlice(
+      state,
+      removeFeatures.rejected
+    );
+    // Assert
+    const rootState: RootState = { ...appState, capabilities: nextState };
+   
+    expect(rootState.capabilities.loading_remove).toBe(false)
+    expect(rootState.capabilities.error_remove).toEqual(undefined)
+
+
+  });
 })
-
-
-// describe('REDUX ASYNTHUNK', () => {
-//   it('get data action success', async () => {
-//     const value : InputState = {
-//       email : 'demo@admin.com',
-//       password : `${process.env.REACT_APP_PASSWORD_TEST}`
-//     }
-//     const data : DataUser = {
-//       access_token : 'accesstoken',
-//       id_token : 'idtoken', 
-//       expires_in : 9000,
-//       email : "johndoe@gmail.com",
-//       fullname : "John Doe",
-//       avatar : "https://image.com",
-//       auth_id : "authid",
-//       login: true
-//     }
-//     expect(await getData(value)).toStrictEqual(data)
-//   });
-
-//   it('get data action failed', async () => {
-//     const pass = "123abscs"
-//     const value : InputState = {
-//       email : 'hello@gmail.com',
-//       password : pass
-//     }
-//     expect(await getData(value)).toStrictEqual(null)
-//   });
-
-
-//   it('dispatch login success action', async () => {
-//     const value : InputState = {
-//       email : 'demo@admin.com',
-//       password : `${process.env.REACT_APP_PASSWORD_TEST}`
-//     }
-
-//     const data : DataUser = {
-//       access_token : 'accesstoken',
-//       id_token : 'idtoken', 
-//       expires_in : 9000,
-//       email : "johndoe@gmail.com",
-//       fullname : "John Doe",
-//       avatar : "https://image.com",
-//       auth_id : "authid",
-//       login: true
-//     }
-
-//     const response = await store.dispatch(loginAction(value))
-//     expect(response.payload).toEqual(data)
-//   });
-
-//   it('dispatch login failed action', async () => {
-//     const value : InputState = {
-//       email : 'dem@admin.com',
-//       password : `${process.env.REACT_APP_PASSWORD_TEST}`
-//     }
- 
-//     const response = await store.dispatch(loginAction(value))
-//     expect(response.payload).toBe("Wrong email or password!")
-//   });
-
-//   it('check initial login true', async () => {
-//     let data = {
-//       access_token : 'accesstoken',
-//       id_token : 'idtoken', 
-//       expires_in : 9000,
-//       email : "johndoe@gmail.com",
-//       fullname : "John Doe",
-//       avatar : "https://image.com",
-//       auth_id : "authid",
-//       login: true
-//     }
- 
-//     expect(await checkInitalLogin(data)).toBe(true)
-//   });
-
-//   it('check initial login false', async () => {
-//     let data = null
- 
-//     expect(await checkInitalLogin(data)).toBe(false)
-//   });
-
-// })
-
-// describe('LOGIN SLICE TESTS', () => {
-//   it('should set loading true while action is pending', () => {
-//       const action = {type: loginAction.pending};
-//       const initialState = RolesReducer(
-//       { 
-//         login: false,
-//         data : {} as DataUser,
-//         loading : false,
-//         error : null
-//       }, action);
-//       expect(initialState).toEqual(
-//         {
-//           login: false,
-//           data : {} as DataUser,
-//           loading : true,
-//           error : null
-//         }
-//       )
-//     })
-
-//   it('should set data object when action is fulfilled', () => {
-//       const action = {
-//           type: loginAction.fulfilled, 
-//           payload:{ 
-//             access_token : 'accesstoken',
-//             id_token : 'idtoken',
-//             expires_in : 9000,
-//             email : "johndoe@gmail.com",
-//             fullname : "John Doe",
-//             avatar : "https://image.com",
-//             auth_id : "authid",
-//             login: true
-//           }
-//       };
-//       const initialState = RolesReducer(
-//         { 
-//           login: false,
-//           data : {} as DataUser,
-//           loading : false,
-//           error : null
-//         }, action);
-//         expect(initialState).toEqual(
-//           {
-//             login: true,
-//             data : {
-//               access_token : 'accesstoken',
-//               id_token : 'idtoken',
-//               expires_in : 9000,
-//               email : "johndoe@gmail.com",
-//               fullname : "John Doe",
-//               avatar : "https://image.com",
-//               auth_id : "authid",
-//               login: true
-//             },
-//             loading : false,
-//             error : null
-//           }
-//         )
-//   })
-
-//   it('should set error when action is rejected', () => {
-//       const action = {
-//         type: loginAction.rejected,
-//         payload : "Wrong email or password!"
-//       };
-//       const initialState = RolesReducer(
-//         { 
-//           login: false,
-//           data : {} as DataUser,
-//           loading : false,
-//           error : null
-//         }, action);
-//         expect(initialState).toEqual(
-//           {
-//             login: false,
-//             data : {} as DataUser,
-//             loading : false,
-//             error : "Wrong email or password!"
-//           }
-//         )
-//     })
-// })
-    

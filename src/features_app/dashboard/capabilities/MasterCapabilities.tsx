@@ -17,7 +17,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { DataRow, CapabilityInput } from './capabilitiesTypes'
-import { onGetCapability, onCreateCapability, onRemoveCapability, onUpdateCapability } from './action/dispatchAction';
+import { onGetCapability, onCreateCapability, onRemoveCapability, onUpdateCapability } from './action/capabilitiesAction';
 
 const validationSchema = yup    
     .object({

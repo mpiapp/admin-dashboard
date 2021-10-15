@@ -13,8 +13,13 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Select from 'react-select'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../app/store';
-import { fetchFeatures, postFeatures, removeFeatures, updateFeatures } from './featuresSlice';
-import { onGetCapability } from '../capabilities/action/dispatchAction';
+import { 
+    onGetFeatures,  
+    onCreateFeatures,
+    onUpdateFeatures,
+    onRemoveFeatures 
+} from './action/featuresAction'
+import { onGetCapability } from '../capabilities/action/capabilitiesAction';
 import { fetchFlag } from '../flag/flagSlice';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -103,7 +108,7 @@ function MasterFeatures() {
                     flag : selectedFlagFeatures.value,
                     capabilities: proceedToArray(selectedOption),
                 }
-                dispatch(postFeatures(postData))
+                onCreateFeatures(postData)
                 reset()
             } else {
                 let updateData= {
@@ -112,7 +117,7 @@ function MasterFeatures() {
                     capabilities: proceedToArray(selectedOption),
                     id: IdCapability
                 }
-                dispatch(updateFeatures(updateData)) 
+                onUpdateFeatures(updateData)
                 reset()
             }
         }
@@ -162,7 +167,7 @@ function MasterFeatures() {
                     >
                         Update
                     </Button>
-                    <Button onClick={() => dispatch(removeFeatures(row)) } variant="outlined" color="error" size="small">
+                    <Button onClick={() => onRemoveFeatures(row) } variant="outlined" color="error" size="small">
                         Delete
                     </Button>
                 </Stack>
@@ -172,7 +177,7 @@ function MasterFeatures() {
     
     useEffect(() => {
         handleClose()
-        dispatch(fetchFeatures())
+        onGetFeatures()
         onGetCapability()
         dispatch(fetchFlag())
         // eslint-disable-next-line

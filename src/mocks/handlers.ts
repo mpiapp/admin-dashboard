@@ -72,6 +72,37 @@ export const handlers = [
             "id": "QCVJk0a"
           }))
     }),
+    rest.post(`${process.env.REACT_APP_API_URL}features`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "name": "Purchase Order",
+          "flag": "BUYER",
+          "capability_ids": [
+              "id1",
+              "id2"
+          ],
+          "id": "Yxdgpia"
+      })
+      )
+    }),
+    rest.put(`${process.env.REACT_APP_API_URL}features/1`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "name": "Purchase Order",
+          "flag": "BUYER",
+          "capability_ids": [
+              "id1",
+              "id2"
+          ],
+          "id": "Yxdgpia"
+      })
+      )
+    }),
+    rest.delete(`${process.env.REACT_APP_API_URL}features/1`, (req, res, ctx) => {
+      return res(
+        ctx.json({})
+      )
+    }),
 
     // mock status crud
     rest.get(`${process.env.REACT_APP_API_URL}status`, (req, res, ctx) => {
