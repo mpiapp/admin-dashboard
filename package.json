@@ -50,7 +50,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "coverage": "react-scripts test --coverage --watchAll=true",
+    "coverage": "react-scripts test --coverage --watchAll",
     "tests": "react-scripts test",
     "json": "json-server --watch db.json --port 4000",
     "eject": "react-scripts eject"

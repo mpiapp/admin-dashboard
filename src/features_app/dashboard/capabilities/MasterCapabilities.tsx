@@ -1,5 +1,3 @@
-
-/* istanbul ignore file */
 import { useState, useEffect } from 'react';
 import { Box } from '@mui/system';
 import Button from '@mui/material/Button';
@@ -12,7 +10,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { RootState } from '../../../app/store';
 import {  } from './capabilitiesSlice';
 import { useForm } from "react-hook-form";
@@ -32,10 +30,7 @@ const validationSchema = yup
     
 function MasterCapabilities() {
 
-    const dispatch = useDispatch()
     const state = useSelector((state : RootState) => state.capabilities)
-
-    // console.log(state, 'state')
 
     const [open, setOpen] = useState(false);
     const [IDRow, setIDRow] = useState <any>(null);
@@ -59,6 +54,7 @@ function MasterCapabilities() {
         resolver: yupResolver(validationSchema)
     });
       
+    /* istanbul ignore next */
     const onSubmit = (data: CapabilityInput): void => {
         if(IDRow === null) {
             onCreateCapability(data)
@@ -73,6 +69,7 @@ function MasterCapabilities() {
         }
     }
 
+    /* istanbul ignore next */
     const columns: TableColumn<DataRow>[] = [
         {
             name: 'ID',
