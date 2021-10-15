@@ -1,0 +1,233 @@
+{
+  "modules": [
+    {
+      "name": "Manage PR",
+      "link": "/manage-pr",
+      "flag": "VENDOR",
+      "feature_ids": [
+        "1",
+        "2"
+      ],
+      "id": "asdfadfa13asdsfa"
+    },
+    {
+      "name": "Manage PO",
+      "link": "/manage-po",
+      "flag": "BUYER",
+      "feature_ids": [
+        "1",
+        "2"
+      ],
+      "id": "dgasfadfa13asdsfa"
+    },
+    {
+      "name": "Profile",
+      "link": "/profile",
+      "flag": "BUYER",
+      "feature_ids": [
+        "1",
+        "2"
+      ],
+      "id": "gchMWP8"
+    },
+    {
+      "name": "apaa",
+      "link": "/jasdfa",
+      "flag": "VENDOR",
+      "feature_ids": [
+        "CDqan2G"
+      ],
+      "id": "mCP8ZZF"
+    }
+  ],
+  "roles": [
+    {
+      "id": "asdfah123sda",
+      "name": "Admin",
+      "flag": "VENDOR",
+      "module_ids": [
+        "mid1",
+        "mid2"
+      ]
+    },
+    {
+      "name": "Superuser",
+      "id": "UJ7-SLj",
+      "flag": "VENDOR",
+      "module_ids": [
+        "mid1",
+        "mid2"
+      ]
+    },
+    {
+      "name": "Owner",
+      "id": "6rL3Fa2",
+      "flag": "VENDOR",
+      "module_ids": [
+        "mid1",
+        "mid2"
+      ]
+    },
+    {
+      "name": "Picker",
+      "flag": "VENDOR",
+      "module_ids": [
+        "asdfadfa13asdsfa"
+      ],
+      "id": "NTvsv2I"
+    }
+  ],
+  "capabilities": [
+    {
+      "name": "test2",
+      "id": "YiliWMj"
+    },
+    {
+      "name": "read",
+      "id": "_byDibm"
+    },
+    {
+      "name": "update",
+      "id": "DmIB2n0"
+    },
+    {
+      "name": "create",
+      "id": "QCVJu0a"
+    },
+    {
+      "name": "apalah",
+      "id": "LtUmlB0"
+    }
+  ],
+  "features": [
+    {
+      "name": "asdfadfa",
+      "flag": "VENDOR",
+      "capabilities": [
+        "YiliWMj"
+      ],
+      "id": "QCVJk0a"
+    },
+    {
+      "name": "Purchase Order",
+      "flag": "BUYER",
+      "capabilities": [
+        "YiliWMj",
+        "DmIB2n0",
+        "QCVJu0a",
+        "_byDibm"
+      ],
+      "id": "CDqan2G"
+    },
+    {
+      "name": "Orders",
+      "flag": "BUYER",
+      "capabilities": [
+        "YiliWMj",
+        "DmIB2n0",
+        "QCVJu0a",
+        "_byDibm"
+      ],
+      "id": "7PR87Dk"
+    },
+    {
+      "name": "Tremplate PR",
+      "flag": "BUYER",
+      "capabilities": [
+        "YiliWMj",
+        "DmIB2n0",
+        "QCVJu0a",
+        "_byDibm"
+      ],
+      "id": "YAjzLh2"
+    },
+    {
+      "name": "Profile",
+      "flag": "BUYER",
+      "capabilities": [
+        "YiliWMj",
+        "DmIB2n0",
+        "QCVJu0a",
+        "_byDibm"
+      ],
+      "id": "T-mY8Z3"
+    },
+    {
+      "name": "Setting",
+      "flag": "BUYER",
+      "capabilities": [
+        "YiliWMj",
+        "DmIB2n0",
+        "QCVJu0a",
+        "_byDibm"
+      ],
+      "id": "oiGpj5l"
+    },
+    {
+      "name": "tambah",
+      "flag": "VENDOR",
+      "capabilities": [
+        "YiliWMj"
+      ],
+      "id": "4BYvk47"
+    }
+  ],
+  "status": [
+    {
+      "name": "Open",
+      "id": "YiliWMj"
+    },
+    {
+      "name": "Submit",
+      "id": "_byDibm"
+    },
+    {
+      "name": "Approve",
+      "id": "DmIB2n0"
+    },
+    {
+      "name": "Reject",
+      "id": "QCVJu0a"
+    },
+    {
+      "name": "Pick & Pack",
+      "id": "lxyA7Xo"
+    },
+    {
+      "name": "RTS",
+      "id": "MVeSK7W"
+    },
+    {
+      "name": "aaaa",
+      "id": "3FznFLF"
+    }
+  ],
+  "configstatus": [
+    {
+      "name": "Open to Submit",
+      "current": "Open",
+      "next": [
+        {
+          "id": "_byDibm",
+          "name": "Submit"
+        }
+      ],
+      "id": "D-6CDDf"
+    },
+    {
+      "name": "Submit to Approve, Reject",
+      "current": "Submit",
+      "next": [
+        {
+          "id": "DmIB2n0",
+          "name": "Approve"
+        },
+        {
+          "id": "QCVJu0a",
+          "name": "Reject"
+        }
+      ],
+      "id": "C2aetOd"
+    }
+  ]
+}

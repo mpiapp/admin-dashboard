@@ -1,5 +1,4 @@
-/* istanbul ignore file */
-
+    /* istanbul ignore file */
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -10,18 +9,13 @@ import IconButton from '@mui/material/IconButton';
 import Popover from '@mui/material/Popover';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import SettingsIcon from '@mui/icons-material/Settings';
-import ViewListIcon from '@mui/icons-material/ViewList';
-import CalendarViewDayIcon from '@mui/icons-material/CalendarViewDay';
-import LocationCityIcon from '@mui/icons-material/LocationCity';
-import GroupIcon from '@mui/icons-material/Group';
 import { useHistory } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
 
 const drawerWidth = 240;
@@ -43,78 +37,106 @@ const NavDashboard = (props: Props) => {
 
     // dropdown menu 
     const [anchorEl, setAnchorEl] = React.useState(null);
+
     const handleClick = (event : any) => {
         setAnchorEl(event.currentTarget);
     };
 
+    /* istanbul ignore next */
     const handleClose = () => {
         setAnchorEl(null);
     };
     
     const open = Boolean(anchorEl);
+    /* istanbul ignore next */
     const id = 2 ? 'simple-popover' : undefined;
 
+    /* istanbul ignore next */
     const onClickSignOut = () : void => {
         localStorage.clear()
         history.go(0)
     }
 
   const drawer = (
-    <div>
+    <div>   
       <Toolbar>
         <div className="logo-mpi">
-            <a href="/">
+            <a href="/dashboard">
                 <img 
-                    alt="logo mpi" 
+                    alt="logo mpi dashboard" 
                     src="https://www.wilsonfamilychiropracticcenter.net/wp-content/uploads/2018/12/placeholder-logo-2.png"
                 />
             </a>
         </div>
       </Toolbar>
       <Divider />
-      <List>
-        <ListItem button >
-            <ListItemIcon>
-                <ViewListIcon />
-            </ListItemIcon>
-            <ListItemText primary="Manage Orders" />
-        </ListItem>
-        <ListItem button >
-            <ListItemIcon>
-                <CalendarViewDayIcon />
-            </ListItemIcon>
-            <ListItemText primary="Manage Products" />
-        </ListItem>
-      </List>
-      <Divider />
-      <List>
-        <ListItem button >
-            <ListItemIcon>
-                <LocationCityIcon />
-            </ListItemIcon>
-            <ListItemText primary="Company Profile" />
-        </ListItem>
-        <ListItem button >
-            <ListItemIcon>
-                <GroupIcon />
-            </ListItemIcon>
-            <ListItemText primary="User Management" />
-        </ListItem>
-      </List>
-      <Divider />
-      <List>
-        <ListItem button >
-            <ListItemIcon>
-                <SettingsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Setting" />
-        </ListItem>
-      </List>
-      
+
+        <div className="sidebar-navbar">
+            <NavLink exact to="/dashboard" activeClassName="active-link">
+                <ul>
+                    <li className="navbar-list">
+                        <span>Dashboard</span>
+                    </li>
+                </ul>
+            </NavLink>
+            <NavLink exact to="/dashboard/capabilities" activeClassName="active-link">
+                <ul>
+                    <li className="navbar-list">
+                        <span>Master Capabilities</span>
+                    </li>
+                </ul>
+            </NavLink>
+            
+            <NavLink exact to="/dashboard/features" activeClassName="active-link">
+                <ul>
+                    <li className="navbar-list">
+                        <span>Master Features</span>
+                    </li>
+                </ul>
+            </NavLink>
+            <NavLink exact to="/dashboard/modules" activeClassName="active-link">
+                <ul>
+                    <li className="navbar-list">
+                        <span>Master Modules</span>
+                    </li>
+                </ul>
+            </NavLink>
+            <NavLink exact to="/dashboard/roles" activeClassName="active-link">
+                <ul>
+                    <li className="navbar-list">
+                        <span>Master Roles</span>
+                    </li>
+                </ul>
+            </NavLink>
+            <NavLink exact to="/dashboard/status" activeClassName="active-link">
+                <ul>
+                    <li className="navbar-list">
+                        <span>Master Status</span>
+                    </li>
+                </ul>
+            </NavLink>
+            <NavLink exact to="/dashboard/status-config" activeClassName="active-link">
+                <ul>
+                    <li className="navbar-list">
+                        <span>Master Config Status</span>
+                    </li>
+                </ul>
+            </NavLink>
+            <Divider />
+            <NavLink exact to="/dashboard/setting" activeClassName="active-link">
+                <ul>
+                    <li className="navbar-list">
+                        <span>Setting</span>
+                    </li>
+                </ul>
+            </NavLink>
+
+        </div>
+
     </div>
   );
 
-
+    /* istanbul ignore next */
   const container = window !== undefined ? () => window().document.body : undefined;
 
     return (
@@ -130,6 +152,7 @@ const NavDashboard = (props: Props) => {
             >
                 <Toolbar>
                     <IconButton
+                        data-testid="menuButton"
                         aria-label="open drawer"
                         edge="start"
                         onClick={handleDrawerToggle}
@@ -139,13 +162,18 @@ const NavDashboard = (props: Props) => {
                     </IconButton> 
                     <div style={{flexGrow: 1}} />
                     <Box>
-                        <div className="right-navbar" onClick={handleClick}>
+                        <div 
+                            className="right-navbar"  
+                            data-testid="dropdownButton"
+                            onClick={handleClick}
+                        >
                             <Box> <AccountCircleIcon/>  </Box>
                             <Box pl={1}> John Doe</Box>
                             <Box pl={1}> <ArrowDropDownIcon/></Box>
                         </div>
                         {/* Dropdown Menu */}
                         <Popover
+                        data-testid="dropdown"
                         id={id}
                         open={open}
                         anchorEl={anchorEl}
@@ -169,7 +197,12 @@ const NavDashboard = (props: Props) => {
                                 <ListItem button >
                                     <ListItemText className="btn-navlist" primary="Setting" />
                                 </ListItem>
-                                <ListItem button onClick={() => onClickSignOut()}>
+                                <ListItem 
+                                    button 
+                                    onClick={() => {
+                                        /* istanbul ignore next */
+                                        onClickSignOut()
+                                    }}>
                                     <ListItemText className="btn-navlist" primary="Sign Out" />
                                 </ListItem>
                             </List>
@@ -185,6 +218,7 @@ const NavDashboard = (props: Props) => {
                 aria-label="mailbox folders"
             >
                 <Drawer
+                    data-testid="drawer"
                     container={container}
                     variant="temporary"
                     open={mobileOpen}
