@@ -104,7 +104,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateRoles = await statusSlice(
+    const nextState: IStateStatus = await statusSlice(
       state,
       fetchStatus.rejected
     );
@@ -151,7 +151,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateRoles = await statusSlice(
+    const nextState: IStateStatus = await statusSlice(
       state,
       postStatus.rejected
     );
@@ -202,7 +202,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateRoles = await statusSlice(
+    const nextState: IStateStatus = await statusSlice(
       state,
       updateStatus.rejected
     );
@@ -246,7 +246,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateRoles = await statusSlice(
+    const nextState: IStateStatus = await statusSlice(
       state,
       removeStatus.rejected
     );

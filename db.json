@@ -247,6 +247,17 @@
         }
       ],
       "id": "C2aetOd"
+    },
+    {
+      "name": "Open to Status",
+      "current": "Open",
+      "next": [
+        {
+          "id": "_byDibm",
+          "name": "Submit"
+        }
+      ],
+      "id": "sIkSRjK"
     }
   ]
 }

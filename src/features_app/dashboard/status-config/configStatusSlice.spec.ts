@@ -1,12 +1,24 @@
-import rolesReducer, {
-    fetchConfigStatus
-} from './configStatusSlice';
-import {ObjectConfigStatus} from './configStatusTypes'
-import { store } from '../../../app/store'
 
-describe('INITIAL STATE STORE Roles SLICE', () => {
+import configStatusReduer from './configStatusSlice';
+import configStatuslice from './configStatusSlice';
+import { 
+  fetchConfigStatus,
+  postConfigStatus, 
+  removeConfigStatus, 
+  updateConfigStatus,
+} from './reducers/configStatusReducers'
+
+import {
+  ObjectConfigStatus,
+  IStateConfigStatus,
+} from './configStatusTypes';
+import { store, RootState } from '../../../app/store'
+
+const appState = store.getState();
+
+describe('INITIAL STATE STORE CONFIG STATUS SLICE', () => {
     it('should handle initial state', () => {
-      expect(rolesReducer(undefined, { type: 'unknown' })).toEqual({
+      expect(configStatusReduer(undefined, { type: 'unknown' })).toEqual({
         data: [] as ObjectConfigStatus[],
         loading : false,
         error : null,
@@ -23,183 +35,270 @@ describe('INITIAL STATE STORE Roles SLICE', () => {
     });
 })
 
+
+
 describe('TEST REDUX SLICE', () => {
-  it('fetchConfigStatus action success', async () => {
-    
+  const initialState : IStateConfigStatus = {
+    data: [] as ObjectConfigStatus[],
+    loading : false,
+    error : null,
+    loading_create : false,
+    error_create: null,
+    create : false,
+    loading_update : false,
+    error_update: null,
+    update : false,
+    loading_remove : false,
+    error_remove: null,
+    remove : false
+  }
+  it("should update state when API call is pending", async () => {
+    const action = {type: fetchConfigStatus.pending};
+    const stateReducer = configStatusReduer(initialState, action);
+    expect(stateReducer).toEqual(
+      {
+        data: [] as ObjectConfigStatus[],
+        loading : true,
+        error : null,
+        loading_create : false,
+        error_create: null,
+        create : false,
+        loading_update : false,
+        error_update: null,
+        update : false,
+        loading_remove : false,
+        error_remove: null,
+        remove : false
+      }
+    )
 
-    // const response = await store.dispatch(fetchConfigStatus())
-    // // console.log(response,' repos')
-    // expect(response.payload).toMatch(/__v/i)
   });
-  // it('fetchConfigStatus action failed', async () => {
-  //   expect(await fetchConfigStatus()).toHaveLength(0)
-  // });
-})
+
+  it("should update state when API call is successful", async () => {
+    // Arrange
+    const response = {
+      "name": "Open to Submit",
+      "current": "Open",
+      "next": [
+        {
+          "id": "_byDibm",
+          "name": "Submit"
+        }
+      ],
+      "id": "D-6CDDf"
+    }
+  
+    const res = await store.dispatch(fetchConfigStatus())
+    expect(res.payload).toEqual(
+      expect.objectContaining(response)
+    );
+
+  });
+
+  it("should update state when API call is rejected", async () => {
+   
+    const state = {
+      data: [] as ObjectConfigStatus[],
+      loading : true,
+      error : null,
+      loading_create : false,
+      error_create: null,
+      create : false,
+      loading_update : false,
+      error_update: null,
+      update : false,
+      loading_remove : false,
+      error_remove: null,
+      remove : false
+    }
+    const nextState: IStateConfigStatus = await configStatuslice(
+      state,
+      fetchConfigStatus.rejected
+    );
+    // Assert
+    const rootState: RootState = { ...appState, capabilities: nextState };
+   
+    expect(rootState.capabilities.error).toEqual(undefined)
 
 
-// describe('REDUX ASYNTHUNK', () => {
-//   it('get data action success', async () => {
-//     const value : InputState = {
-//       email : 'demo@admin.com',
-//       password : `${process.env.REACT_APP_PASSWORD_TEST}`
-//     }
-//     const data : DataUser = {
-//       access_token : 'accesstoken',
-//       id_token : 'idtoken', 
-//       expires_in : 9000,
-//       email : "johndoe@gmail.com",
-//       fullname : "John Doe",
-//       avatar : "https://image.com",
-//       auth_id : "authid",
-//       login: true
-//     }
-//     expect(await getData(value)).toStrictEqual(data)
-//   });
-
-//   it('get data action failed', async () => {
-//     const pass = "123abscs"
-//     const value : InputState = {
-//       email : 'hello@gmail.com',
-//       password : pass
-//     }
-//     expect(await getData(value)).toStrictEqual(null)
-//   });
+  });
 
 
-//   it('dispatch login success action', async () => {
-//     const value : InputState = {
-//       email : 'demo@admin.com',
-//       password : `${process.env.REACT_APP_PASSWORD_TEST}`
-//     }
+  it("should update state when post is successful", async () => {
+    // Arrange
+    const response = {
+      "name": "Open to Status",
+      "current": "Open",
+      "next": [
+          {
+              "id": "_byDibm",
+              "name": "Submit"
+          }
+      ],
+      "id": "sIkSRjK"
+    }
 
-//     const data : DataUser = {
-//       access_token : 'accesstoken',
-//       id_token : 'idtoken', 
-//       expires_in : 9000,
-//       email : "johndoe@gmail.com",
-//       fullname : "John Doe",
-//       avatar : "https://image.com",
-//       auth_id : "authid",
-//       login: true
-//     }
-
-//     const response = await store.dispatch(loginAction(value))
-//     expect(response.payload).toEqual(data)
-//   });
-
-//   it('dispatch login failed action', async () => {
-//     const value : InputState = {
-//       email : 'dem@admin.com',
-//       password : `${process.env.REACT_APP_PASSWORD_TEST}`
-//     }
- 
-//     const response = await store.dispatch(loginAction(value))
-//     expect(response.payload).toBe("Wrong email or password!")
-//   });
-
-//   it('check initial login true', async () => {
-//     let data = {
-//       access_token : 'accesstoken',
-//       id_token : 'idtoken', 
-//       expires_in : 9000,
-//       email : "johndoe@gmail.com",
-//       fullname : "John Doe",
-//       avatar : "https://image.com",
-//       auth_id : "authid",
-//       login: true
-//     }
- 
-//     expect(await checkInitalLogin(data)).toBe(true)
-//   });
-
-//   it('check initial login false', async () => {
-//     let data = null
- 
-//     expect(await checkInitalLogin(data)).toBe(false)
-//   });
-
-// })
-
-// describe('LOGIN SLICE TESTS', () => {
-//   it('should set loading true while action is pending', () => {
-//       const action = {type: loginAction.pending};
-//       const initialState = RolesReducer(
-//       { 
-//         login: false,
-//         data : {} as DataUser,
-//         loading : false,
-//         error : null
-//       }, action);
-//       expect(initialState).toEqual(
-//         {
-//           login: false,
-//           data : {} as DataUser,
-//           loading : true,
-//           error : null
-//         }
-//       )
-//     })
-
-//   it('should set data object when action is fulfilled', () => {
-//       const action = {
-//           type: loginAction.fulfilled, 
-//           payload:{ 
-//             access_token : 'accesstoken',
-//             id_token : 'idtoken',
-//             expires_in : 9000,
-//             email : "johndoe@gmail.com",
-//             fullname : "John Doe",
-//             avatar : "https://image.com",
-//             auth_id : "authid",
-//             login: true
-//           }
-//       };
-//       const initialState = RolesReducer(
-//         { 
-//           login: false,
-//           data : {} as DataUser,
-//           loading : false,
-//           error : null
-//         }, action);
-//         expect(initialState).toEqual(
-//           {
-//             login: true,
-//             data : {
-//               access_token : 'accesstoken',
-//               id_token : 'idtoken',
-//               expires_in : 9000,
-//               email : "johndoe@gmail.com",
-//               fullname : "John Doe",
-//               avatar : "https://image.com",
-//               auth_id : "authid",
-//               login: true
-//             },
-//             loading : false,
-//             error : null
-//           }
-//         )
-//   })
-
-//   it('should set error when action is rejected', () => {
-//       const action = {
-//         type: loginAction.rejected,
-//         payload : "Wrong email or password!"
-//       };
-//       const initialState = RolesReducer(
-//         { 
-//           login: false,
-//           data : {} as DataUser,
-//           loading : false,
-//           error : null
-//         }, action);
-//         expect(initialState).toEqual(
-//           {
-//             login: false,
-//             data : {} as DataUser,
-//             loading : false,
-//             error : "Wrong email or password!"
-//           }
-//         )
-//     })
-// })
+    const data = {
+      "name": "Open to Status",
+      "current": "Open",
+      "next": [
+          {
+              "id": "_byDibm",
+              "name": "Submit"
+          }
+      ],
+      "id": "1"
+    }
     
+  
+    const res = await store.dispatch(postConfigStatus(data))
+    expect(res.payload).toEqual(
+      expect.objectContaining(response)
+    );
+
+  });
+
+  it("should update state when API post is rejected", async () => {
+    const state = {
+      data: [] as ObjectConfigStatus[],
+      loading : true,
+      error : null,
+      loading_create : false,
+      error_create: null,
+      create : false,
+      loading_update : false,
+      error_update: null,
+      update : false,
+      loading_remove : false,
+      error_remove: null,
+      remove : false
+    }
+    const nextState: IStateConfigStatus = await configStatuslice(
+      state,
+      postConfigStatus.rejected
+    );
+    // Assert
+    const rootState: RootState = { ...appState, capabilities: nextState };
+  
+    expect(rootState.capabilities.loading_create).toBe(false)
+    expect(rootState.capabilities.error_create).toEqual(undefined)
+
+
+  });
+
+
+
+  it("should update state when update is successful", async () => {
+    // Arrange
+    const response = {
+      "name": "Open to Status",
+      "current": "Open",
+      "next": [
+          {
+              "id": "_byDibm",
+              "name": "Submit"
+          }
+      ],
+      "id": "sIkSRjK"
+    }
+
+    const data = {
+      "name": "Open to Status",
+      "current": "Open",
+      "next": [
+          {
+              "id": "_byDibm",
+              "name": "Submit"
+          }
+      ],
+      "id": "1"
+
+    }
+  
+    const res = await store.dispatch(updateConfigStatus(data))
+    expect(res.payload).toEqual(
+      expect.objectContaining(response)
+    );
+
+  });
+
+  it("should update state when API post is rejected", async () => {
+   
+    const state = {
+      data: [] as ObjectConfigStatus[],
+      loading : true,
+      error : null,
+      loading_create : false,
+      error_create: null,
+      create : false,
+      loading_update : false,
+      error_update: null,
+      update : false,
+      loading_remove : false,
+      error_remove: null,
+      remove : false
+    }
+    const nextState: IStateConfigStatus = await configStatuslice(
+      state,
+      updateConfigStatus.rejected
+    );
+    // Assert
+    const rootState: RootState = { ...appState, capabilities: nextState };
+   
+    expect(rootState.capabilities.loading_update).toBe(false)
+    expect(rootState.capabilities.error_update).toEqual(undefined)
+
+
+  });
+
+  it("should update state when remove is successful", async () => {
+    // Arrange
+    const response = {}
+    const data = {
+      "name": "Open to Status",
+      "current": "Open",
+      "next": [
+          {
+              "id": "_byDibm",
+              "name": "Submit"
+          }
+      ],
+      "id": "1"
+  }
+  
+    const res = await store.dispatch(removeConfigStatus(data))
+    expect(res.payload).toEqual(
+      expect.objectContaining(response)
+    );
+
+  });
+
+  it("should update state when API remove is rejected", async () => {
+   
+    const state = {
+      data: [] as ObjectConfigStatus[],
+      loading : true,
+      error : null,
+      loading_create : false,
+      error_create: null,
+      create : false,
+      loading_update : false,
+      error_update: null,
+      update : false,
+      loading_remove : false,
+      error_remove: null,
+      remove : false
+    }
+    const nextState: IStateConfigStatus = await configStatuslice(
+      state,
+      removeConfigStatus.rejected
+    );
+    // Assert
+    const rootState: RootState = { ...appState, capabilities: nextState };
+   
+    expect(rootState.capabilities.loading_remove).toBe(false)
+    expect(rootState.capabilities.error_remove).toEqual(undefined)
+
+
+  });
+})

@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 import { useState, useEffect } from 'react';
 import { Box } from '@mui/system';
 import Button from '@mui/material/Button';
@@ -11,10 +10,10 @@ import TextField from '@mui/material/TextField';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import Select from 'react-select'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { RootState } from '../../../app/store';
-import { fetchConfigStatus, postConfigStatus, removeConfigStatus, updateConfigStatus } from './configStatusSlice';
 import { useForm } from "react-hook-form";
+
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { 
@@ -26,6 +25,12 @@ import {
     ISelectOption,
 } from '../globalTypes'
 import { onGetStatus } from '../status/action/statusAction';
+import { 
+    onGetConfigStatus, 
+    onCreateConfigStatus, 
+    onRemoveConfigStatus,
+    onUpdateConfigStatus
+ } from './action/configStatusAction';
 
 const validationSchema = yup    
     .object({
@@ -37,7 +42,6 @@ const validationSchema = yup
 
 function ConfigStatus() {
       
-    const dispatch = useDispatch()
     const state = useSelector((state : RootState) => state.statusConfig)
     const status = useSelector((state : RootState) => state.status)
     
@@ -63,11 +67,13 @@ function ConfigStatus() {
     const [errorSelectedStatus, setErrorSelectedStatus] = useState<boolean>(false);
     const [errorSelectNext, setErrorSelectNext] = useState<boolean>(false);
 
+    /* istanbul ignore next */
     const handleChangeNext = (value: any) : void => {
         setSelectedNext(value)
         setErrorSelectNext(false)
     }
 
+    /* istanbul ignore next */
     const handleChangeStatus = (value: any) : void => {
         setSelectedStatus(value)
         setErrorSelectedStatus(false)
@@ -81,6 +87,7 @@ function ConfigStatus() {
         setOpen(false);
     };
 
+     /* istanbul ignore next */
     const proceedToArray = (value : any) => {
         let arrayCapabilities = []
         for(let i=0; i < value.length; i++) {
@@ -89,6 +96,7 @@ function ConfigStatus() {
         return arrayCapabilities;
     }
       
+     /* istanbul ignore next */
     const onSubmit = (data: ConfigStatusInput): void => {
         if(selectedStatus === undefined) {
             setErrorSelectedStatus(true)
@@ -101,7 +109,7 @@ function ConfigStatus() {
                     current : selectedStatus.label,
                     next: proceedToArray(selectedNext),
                 }
-                dispatch(postConfigStatus(postData))
+                onCreateConfigStatus(postData)
             } else {
                 let updateData= {
                     name : data.name,
@@ -109,7 +117,7 @@ function ConfigStatus() {
                     next: proceedToArray(selectedNext),
                     id: IdConfigStatus
                 }
-                dispatch(updateConfigStatus(updateData)) 
+                onUpdateConfigStatus(updateData)
             }
             reset()
             setSelectedNext([])
@@ -117,6 +125,7 @@ function ConfigStatus() {
         }
     }
 
+     /* istanbul ignore next */
     const proceedNextToArray = (data:any) => {
         let dataArray = []
         for(let i=0; i < data.length; i++) {
@@ -125,6 +134,7 @@ function ConfigStatus() {
         return dataArray;
     }
 
+     /* istanbul ignore next */
     const clickUpdateConfigStatus = (row : any) => {
         let status = {
             label: row.current,
@@ -139,6 +149,7 @@ function ConfigStatus() {
         }, 100);
     }
 
+     /* istanbul ignore next */
     const columns: TableColumn<DataRow>[] = [
         {
             name: 'ID',
@@ -176,7 +187,7 @@ function ConfigStatus() {
                     >
                         Update
                     </Button>
-                    <Button onClick={() => dispatch(removeConfigStatus(row)) } variant="outlined" color="error" size="small">
+                    <Button onClick={() => onRemoveConfigStatus(row) } variant="outlined" color="error" size="small">
                         Delete
                     </Button>
                 </Stack>
@@ -186,7 +197,7 @@ function ConfigStatus() {
     
     useEffect(() => {
         handleClose()
-        dispatch(fetchConfigStatus())
+        onGetConfigStatus()
         onGetStatus()
         // eslint-disable-next-line
     },  [state.create, state.update, state.remove]);
@@ -195,6 +206,7 @@ function ConfigStatus() {
         const proceedOptions = () => {
             let initialData = status.data
             let dataOptions = []
+            /* istanbul ignore next */
             for(let i=0; i < initialData.length; i++) {
                 dataOptions.push({ value: initialData[i].id, label: initialData[i].name })
             }
@@ -239,6 +251,7 @@ function ConfigStatus() {
                     <DialogTitle>Add New Config</DialogTitle>
                     <div className="box-modal-create">
                         <TextField
+                        /* istanbul ignore next */
                             error={!!errors.name}
                             helperText={errors.name && errors.name.message}
                             {...register('name')}
@@ -259,7 +272,9 @@ function ConfigStatus() {
                                 options={optionsStatus && optionsStatus}
                                 onChange={handleChangeStatus}
                             />
-                            { errorSelectedStatus ? <div className="error-p"><p>Status is required</p></div> : null }
+                            { 
+                            /* istanbul ignore next */
+                            errorSelectedStatus ? <div className="error-p"><p>Status is required</p></div> : null }
                         </Box>
                         <Box pt={2}>
                             <Select
@@ -269,7 +284,9 @@ function ConfigStatus() {
                                 options={optionsStatus && optionsStatus}
                                 onChange={handleChangeNext}
                             />
-                            { errorSelectNext ? <div className="error-p"><p>Status Next is required</p></div> : null }
+                            { 
+                            /* istanbul ignore next */
+                            errorSelectNext ? <div className="error-p"><p>Status Next is required</p></div> : null }
                         </Box>
                     </div>
                     <DialogActions>

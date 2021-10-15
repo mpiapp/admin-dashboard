@@ -1,67 +1,15 @@
-/* istanbul ignore file */
-
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import swal from 'sweetalert';
-import Axios from 'axios'
 import { 
-    ConfigStatusInput,
     IStateConfigStatus 
 } from './configStatusTypes'
 
-
-export const fetchConfigStatus = createAsyncThunk(
-    'configStatus/fetch', 
-    async (_, { rejectWithValue }) => {
-        try {
-            const response = await Axios.get(`${process.env.REACT_APP_API_URL}configStatus`)
-            return response.data
-        } catch (error) {
-            return rejectWithValue(error)
-        }
-})
-
-export const postConfigStatus = createAsyncThunk(
-    'configStatus/post', 
-    async (value : ConfigStatusInput, { rejectWithValue }) => {
-        try {
-            let body = {
-                name : value.name,
-                current : value.current,
-                next : value.next,
-            }
-            const response = await Axios.post(`${process.env.REACT_APP_API_URL}configStatus`, body)
-            return response.data
-        } catch (error) {
-            return rejectWithValue(error)
-        }
-})
-
-export const updateConfigStatus = createAsyncThunk(
-  'configStatus/update', 
-  async (value : ConfigStatusInput, { rejectWithValue }) => {
-      try {
-          let body = {
-                name : value.name,
-                current : value.current,
-                next : value.next,
-          }
-          const response = await Axios.put(`${process.env.REACT_APP_API_URL}configStatus/${value.id}`, body)
-          return response.data
-      } catch (error) {
-          return rejectWithValue(error)
-      }
-})
-
-export const removeConfigStatus = createAsyncThunk(
-  'configStatus/delete', 
-  async (value : ConfigStatusInput, { rejectWithValue }) => {
-      try {
-          const response = await Axios.delete(`${process.env.REACT_APP_API_URL}configStatus/${value.id}`)
-          return response.data
-      } catch (error) {
-          return rejectWithValue(error)
-      }
-})
+import {
+    fetchConfigStatus,
+    postConfigStatus,
+    updateConfigStatus,
+    removeConfigStatus
+} from './reducers/configStatusReducers'
 
 const initialState: IStateConfigStatus = {
   data: [],
@@ -106,8 +54,11 @@ export const configStatusSlice = createSlice({
         swal('Success', "Success created ConfigStatus", 'success')
     },
     [postConfigStatus.rejected.type] : (state, action) => {
+         /* istanbul ignore next */
         state.loading_create = false
+         /* istanbul ignore next */
         state.error_create = action.payload
+         /* istanbul ignore next */
         swal('Error', `${action.payload}`, 'error')
     },
     [updateConfigStatus.pending.type] : (state) => {
@@ -117,7 +68,6 @@ export const configStatusSlice = createSlice({
         state.loading_update = false
         state.update = true
         swal('Success', "Success updated ConfigStatus", 'success')
-        window.location.reload()
     },
     [updateConfigStatus.rejected.type] : (state, action) => {
         state.loading_update = false

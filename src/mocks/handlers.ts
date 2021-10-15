@@ -201,6 +201,7 @@ export const handlers = [
       )
     }),
 
+    
      // mock configstatus crud
      rest.get(`${process.env.REACT_APP_API_URL}configstatus`, (req, res, ctx) => {
         return res(ctx.json({
@@ -214,6 +215,51 @@ export const handlers = [
             ],
             "id": "D-6CDDf"
           }))
+    }),
+    rest.post(`${process.env.REACT_APP_API_URL}configstatus`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "name": "Open to Status",
+          "current": "Open",
+          "next": [
+              {
+                  "id": "_byDibm",
+                  "name": "Submit"
+              }
+          ],
+          "id": "sIkSRjK"
+      })
+      )
+    }),
+    rest.put(`${process.env.REACT_APP_API_URL}configstatus/1`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "name": "Open to Status",
+          "current": "Open",
+          "next": [
+              {
+                  "id": "_byDibm",
+                  "name": "Submit"
+              }
+          ],
+          "id": "sIkSRjK"
+      })
+      )
+    }),
+    rest.delete(`${process.env.REACT_APP_API_URL}configstatus/1`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "name": "Open to Status",
+          "current": "Open",
+          "next": [
+              {
+                  "id": "_byDibm",
+                  "name": "Submit"
+              }
+          ],
+          "id": "sIkSRjK"
+      })
+      )
     }),
 
 ]
