@@ -103,8 +103,8 @@ function MasterModules() {
     /* istanbul ignore next */
     const proceedFeatureToArray = (value : any) => {
         let arrayIdFeatures = []
-        for(let i=0; i < value.length; i++) {
-            arrayIdFeatures.push(value[i].value)
+        for(let element of value) {
+            arrayIdFeatures.push(element.value)
         }
         return arrayIdFeatures;
     }
@@ -225,8 +225,8 @@ function MasterModules() {
             let initialData = features.data
             let dataOptions = []
             /* istanbul ignore next */
-            for(let i=0; i < initialData.length; i++) {
-                dataOptions.push({ value: initialData[i].id, label: initialData[i].name })
+            for(let value of initialData) {
+                dataOptions.push({ value: value.id, label: value.name })
             }
             setOptionsFeatures(dataOptions)
         }

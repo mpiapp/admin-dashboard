@@ -75,7 +75,7 @@ describe('TEST REDUX SLICE', () => {
   it("should update state when API call is successful", async () => {
     // Arrange
     const response = {
-      "id": "asdfah123sda",
+      "id": "asdfah123s",
       "name": "Admin",
       "flag": "VENDOR",
       "module_ids": [
@@ -241,7 +241,9 @@ describe('TEST REDUX SLICE', () => {
 
   it("should update state when remove is successful", async () => {
     // Arrange
-    const response = {}
+    const response = {
+      "id" : "delroles"
+    }
     const data = {
       "id": "1",
       "name": "Admin",

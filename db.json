@@ -203,6 +203,14 @@
         "_byDibm"
       ],
       "id": "oiGpj5l"
+    },
+    {
+      "name": "tes geatre",
+      "flag": "VENDOR",
+      "capabilities": [
+        "C2aetOd"
+      ],
+      "id": "_JfjS7a"
     }
   ],
   "status": [
@@ -241,6 +249,10 @@
     {
       "name": "testsss",
       "id": "G1ln_ac"
+    },
+    {
+      "name": "baruuu ",
+      "id": "ZMqhSox"
     }
   ],
   "configstatus": [
@@ -282,15 +294,15 @@
       "id": "sIkSRjK"
     },
     {
-      "name": "testtt",
-      "current": "Open",
+      "name": "Status A",
+      "current": "Approve",
       "next": [
         {
-          "id": "YiliWMj",
-          "name": "Open"
+          "id": "DmIB2n0",
+          "name": "Approve"
         }
       ],
-      "id": "Xw26J_Y"
+      "id": "gajmep4"
     }
   ]
 }

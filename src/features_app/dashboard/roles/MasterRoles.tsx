@@ -94,8 +94,8 @@ function MasterRoles() {
      /* istanbul ignore next */
     const proceedModuleToArray = (value : any) => {
         let arrayIdModules = []
-        for(let i=0; i < value.length; i++) {
-            arrayIdModules.push(value[i].value)
+        for(let element of value) {
+            arrayIdModules.push(element.value)
         }
         return arrayIdModules;
     }
@@ -203,8 +203,8 @@ function MasterRoles() {
             let initialData = modules.data
             let dataOptions = []
             /* istanbul ignore next */
-            for(let i=0; i < initialData.length; i++) {
-                dataOptions.push({ value: initialData[i].id, label: initialData[i].name })
+            for(let value of initialData) {
+                dataOptions.push({ value: value.id, label: value.name })
             }
             setOptionsModules(dataOptions)
         }

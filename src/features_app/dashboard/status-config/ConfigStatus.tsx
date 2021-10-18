@@ -90,8 +90,8 @@ function ConfigStatus() {
      /* istanbul ignore next */
     const proceedToArray = (value : any) => {
         let arrayCapabilities = []
-        for(let i=0; i < value.length; i++) {
-            arrayCapabilities.push({ id : value[i].value, name: value[i].label })
+        for(let element of value) {
+            arrayCapabilities.push({ id : element.value, name: element.label })
         }
         return arrayCapabilities;
     }
@@ -128,20 +128,20 @@ function ConfigStatus() {
      /* istanbul ignore next */
     const proceedNextToArray = (data:any) => {
         let dataArray = []
-        for(let i=0; i < data.length; i++) {
-            dataArray.push({ value: data[i].id, label: data[i].name })
+        for(let value of data) {
+            dataArray.push({ value: value.id, label: value.name })
         }
         return dataArray;
     }
 
      /* istanbul ignore next */
     const clickUpdateConfigStatus = (row : any) => {
-        let status = {
+        let statusValue = {
             label: row.current,
             value: row.current
         }
         setValue("name", row.name);
-        setSelectedStatus(status)
+        setSelectedStatus(statusValue)
         setIdConfigStatus(row.id)
         setSelectedNext(proceedNextToArray(row.next))
         setTimeout(() => {
@@ -207,8 +207,8 @@ function ConfigStatus() {
             let initialData = status.data
             let dataOptions = []
             /* istanbul ignore next */
-            for(let i=0; i < initialData.length; i++) {
-                dataOptions.push({ value: initialData[i].id, label: initialData[i].name })
+            for(const value of initialData) {
+                dataOptions.push({ value: value.id, label: value.name })
             }
             setOptionsStatus(dataOptions)
         }

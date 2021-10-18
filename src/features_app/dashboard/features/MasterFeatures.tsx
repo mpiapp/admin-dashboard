@@ -32,6 +32,7 @@ import {
 import { 
     ISelectOption,
 } from '../globalTypes'
+import { onGetConfigStatus } from '../status-config/action/configStatusAction';
 
 const validationSchema = yup    
     .object({
@@ -43,9 +44,12 @@ const validationSchema = yup
 function MasterFeatures() {
       
     const dispatch = useDispatch()
-    const state = useSelector((state : RootState) => state.features)
-    const capabilities = useSelector((state : RootState) => state.capabilities)
-    const flag = useSelector((state : RootState) => state.flag)
+    const features = useSelector((state : RootState) => state.features)
+    const capabilities = useSelector((statecap : RootState) => statecap.capabilities)
+    const statusConfig = useSelector((statusconf : RootState) => statusconf.statusConfig)
+    const flag = useSelector((stateflag : RootState) => stateflag.flag)
+
+    console.log(statusConfig, 'statusss')
     
     const [open, setOpen] = useState(false);
     const [IdCapability, setIdCapability] = useState <any>(null);
@@ -92,8 +96,8 @@ function MasterFeatures() {
     /* istanbul ignore next */
     const proceedToArray = (value : any) => {
         let arrayCapabilities = []
-        for(let i=0; i < value.length; i++) {
-            arrayCapabilities.push(value[i].value)
+        for(let element of value) {
+            arrayCapabilities.push(element.value)
         }
         return arrayCapabilities;
     }
@@ -183,9 +187,10 @@ function MasterFeatures() {
         handleClose()
         onGetFeatures()
         onGetCapability()
+        onGetConfigStatus()
         dispatch(fetchFlag())
         // eslint-disable-next-line
-    },  [state.create, state.update, state.remove]);
+    },  [features.create, features.update, features.remove]);
 
     /* istanbul ignore next */
     useEffect(() => {
@@ -197,16 +202,24 @@ function MasterFeatures() {
     /* istanbul ignore next */
     useEffect(() => {
         const proceedOptions = () => {
-            let initialData = capabilities.data
-            let dataOptions = []
+            let initialDataCapabilities = capabilities.data
+            let initialDataConfigStatus = statusConfig.data
 
-            for(let i=0; i < initialData.length; i++) {
-                dataOptions.push({ value: initialData[i].id, label: initialData[i].name })
+            let dataOptionsCapabilities = []
+            let dataOptionsConfigStatus = []
+
+            for(let element of initialDataCapabilities) {
+                dataOptionsCapabilities.push({ value: element.id, label: element.name })
             }
-            setOptions(dataOptions)
+            
+            for(let valelement of initialDataConfigStatus) {
+                dataOptionsConfigStatus.push({ value: valelement.id, label: valelement.name })
+            }
+            let concatArray = [...dataOptionsCapabilities, ...dataOptionsConfigStatus]
+            setOptions(concatArray)
         }
         proceedOptions()
-    }, [capabilities]);
+    }, [capabilities, statusConfig]);
 
     return (
         <div>
@@ -231,8 +244,8 @@ function MasterFeatures() {
             <Box pt={4}>
                 <TableData 
                     columns={columns}
-                    data={state?.data}
-                    progressPending={state?.loading}
+                    data={features?.data}
+                    progressPending={features?.loading}
                 />
             </Box>
             <Dialog 

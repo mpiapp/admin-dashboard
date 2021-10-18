@@ -24,8 +24,8 @@ const initialState: IStateFlag = {
 
 const proceedToArray = (value : any) => {
     let arrayFlag = []
-    for(let i=0; i < value.length; i ++) {
-        arrayFlag.push({ value: value[i], label: value[i] })
+    for(let element of value) {
+        arrayFlag.push({ value: element, label:element })
     }
     return arrayFlag;
 }

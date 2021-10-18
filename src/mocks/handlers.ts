@@ -83,12 +83,12 @@ export const handlers = [
     // mock roles crud
     rest.get(`${process.env.REACT_APP_API_URL}roles`, (req, res, ctx) => {
         return res(ctx.json({
-            "id": "asdfah123sda",
+            "id": "asdfah123s",
             "name": "Admin",
             "flag": "VENDOR",
             "module_ids": [
               "mid1",
-              "mid2"
+              "mid2" 
             ]
           }))
     }),
@@ -120,7 +120,9 @@ export const handlers = [
     }),
     rest.delete(`${process.env.REACT_APP_API_URL}roles/1`, (req, res, ctx) => {
       return res(
-        ctx.json({})
+        ctx.json({
+          "id" : "delroles"
+        })
       )
     }),
 
@@ -163,7 +165,9 @@ export const handlers = [
     }),
     rest.delete(`${process.env.REACT_APP_API_URL}features/1`, (req, res, ctx) => {
       return res(
-        ctx.json({})
+        ctx.json({
+          "id" : "delfeature"
+        })
       )
     }),
 
@@ -195,7 +199,6 @@ export const handlers = [
     rest.delete(`${process.env.REACT_APP_API_URL}status/1`, (req, res, ctx) => {
       return res(
         ctx.json({
-          "name": "Status",
           "id": "ozavvbx"
       })
       )
@@ -249,14 +252,6 @@ export const handlers = [
     rest.delete(`${process.env.REACT_APP_API_URL}configstatus/1`, (req, res, ctx) => {
       return res(
         ctx.json({
-          "name": "Open to Status",
-          "current": "Open",
-          "next": [
-              {
-                  "id": "_byDibm",
-                  "name": "Submit"
-              }
-          ],
           "id": "sIkSRjK"
       })
       )
