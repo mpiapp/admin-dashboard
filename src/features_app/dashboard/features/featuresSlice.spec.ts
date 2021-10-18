@@ -5,7 +5,6 @@ import {
   removeFeatures, 
   updateFeatures,
 } from "./reducers/featuresReducers";
-import featuresSlice from './featuresSlice';
 
 import { ObjectFeatures, IStateFeatures} from './featuresTypes'
 import { store, RootState } from '../../../app/store'
@@ -104,7 +103,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateFeatures = await featuresSlice(
+    const nextState: IStateFeatures = await featuresReducer(
       state,
       fetchFeatures.rejected
     );
@@ -154,7 +153,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateFeatures = await featuresSlice(
+    const nextState: IStateFeatures = await featuresReducer(
       state,
       postFeatures.rejected
     );
@@ -177,31 +176,7 @@ describe('TEST REDUX SLICE', () => {
           "id1",
           "id2"
       ],
-      "id": "Yxdgpia"
-    }
-    const data = {
-      "name" : "test",
-      "id": "1"
-  }
-  
-    const res = await store.dispatch(updateFeatures(data))
-    expect(res.payload).toEqual(
-      expect.objectContaining(response)
-    );
-
-  });
-
-
-  it("should update state when update is successful", async () => {
-    // Arrange
-    const response = {
-      "name": "Purchase Order",
-      "flag": "BUYER",
-      "capability_ids": [
-          "id1",
-          "id2"
-      ],
-      "id": "Yxdgpia"
+      "id": "Yxdgpiaa"
     }
     const data = {
       "name" : "test",
@@ -231,7 +206,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateFeatures = await featuresSlice(
+    const nextState: IStateFeatures = await featuresReducer(
       state,
       updateFeatures.rejected
     );
@@ -275,7 +250,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateFeatures = await featuresSlice(
+    const nextState: IStateFeatures = await featuresReducer(
       state,
       removeFeatures.rejected
     );

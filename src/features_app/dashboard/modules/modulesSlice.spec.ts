@@ -5,7 +5,6 @@ import {
   removeModules, 
   updateModules,
 } from "./reducers/modulesReducers";
-import modulesSlice from './modulesSlice';
 
 import { ObjectModules, IStateModules } from './modulesType'
 import { store, RootState } from '../../../app/store'
@@ -103,7 +102,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateModules = await modulesSlice(
+    const nextState: IStateModules = await modulesReducer(
       state,
       fetchModules.rejected
     );
@@ -155,7 +154,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateModules = await modulesSlice(
+    const nextState: IStateModules = await modulesReducer(
       state,
       postModules.rejected
     );
@@ -212,7 +211,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateModules = await modulesSlice(
+    const nextState: IStateModules = await modulesReducer(
       state,
       updateModules.rejected
     );
@@ -259,7 +258,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateModules = await modulesSlice(
+    const nextState: IStateModules = await modulesReducer(
       state,
       removeModules.rejected
     );

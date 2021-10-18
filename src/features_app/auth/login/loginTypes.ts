@@ -23,7 +23,7 @@ export interface DataUser {
     password : string;
   }
  
-  export interface userFormSubmit {
+  export interface UserFormSubmit {
     email: string,
     password: string
   }

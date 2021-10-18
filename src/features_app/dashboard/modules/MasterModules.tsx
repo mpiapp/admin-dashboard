@@ -46,9 +46,9 @@ const validationSchema = yup
 function MasterModules() {
 
     const dispatch = useDispatch()
-    const state = useSelector((state : RootState) => state.modules)
-    const features = useSelector((state : RootState) => state.features)
-    const flag = useSelector((state : RootState) => state.flag)
+    const stateModules = useSelector((state : RootState) => state.modules)
+    const features = useSelector((statefeature : RootState) => statefeature.features)
+    const flag = useSelector((stateflag : RootState) => stateflag.flag)
 
     const {
         register,
@@ -210,7 +210,7 @@ function MasterModules() {
         onGetFeatures()
         dispatch(fetchFlag())
         // eslint-disable-next-line
-    },  [state.create, state.update, state.remove]);
+    },  [stateModules.create, stateModules.update, stateModules.remove]);
 
     /* istanbul ignore next */
     useEffect(() => {
@@ -256,8 +256,8 @@ function MasterModules() {
             <Box pt={4}>
                 <TableData 
                     columns={columns}
-                    data={state?.data}
-                    progressPending={state?.loading}
+                    data={stateModules?.data}
+                    progressPending={stateModules?.loading}
                 />
             </Box>
 
@@ -271,6 +271,7 @@ function MasterModules() {
                     <DialogTitle>Add New Modules</DialogTitle>
                     <div className="box-modal-modules">
                         <TextField
+                            /* istanbul ignore next */
                             error={!!errors.name}
                             /* istanbul ignore next */
                             helperText={errors.name && errors.name.message}
@@ -285,7 +286,9 @@ function MasterModules() {
                             autoFocus
                         />
                         <TextField
+                            /* istanbul ignore next */
                             error={!!errors.link}
+                            /* istanbul ignore next */
                             helperText={errors.link && errors.link.message}
                             {...register('link')}
                             margin="normal"
@@ -302,7 +305,7 @@ function MasterModules() {
                                 placeholder="Select Flag"
                                 value={selectedFlag}
                                 isSearchable={false}
-                                options={optionsFlagModules && optionsFlagModules}
+                                options={optionsFlagModules}
                                 onChange={handleChangeFlag}
                             />
                             
@@ -316,7 +319,7 @@ function MasterModules() {
                                 placeholder="Select Feature"   
                                 value={selectedFeatures}
                                 isMulti={true}
-                                options={optionsFeatures && optionsFeatures}
+                                options={optionsFeatures}
                                 onChange={handleChangeFeatures}
                             />
                             { 

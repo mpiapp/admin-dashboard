@@ -68,16 +68,10 @@ export const statusSlice = createSlice({
         state.loading_update = false
         state.update = true
         swal('Success', "Success updated Status", 'success')
-        window.location.reload()
     },
     [updateStatus.rejected.type] : (state, action) => {
         state.loading_update = false
         state.error_update = action.payload
-        swal('Error', `${action.payload}`, 'error')
-    },
-    [postStatus.rejected.type] : (state, action) => {
-        state.loading_create = false
-        state.error_create = action.payload
         swal('Error', `${action.payload}`, 'error')
     },
     [removeStatus.pending.type] : (state) => {

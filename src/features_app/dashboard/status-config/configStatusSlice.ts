@@ -74,11 +74,6 @@ export const configStatusSlice = createSlice({
         state.error_update = action.payload
         swal('Error', `${action.payload}`, 'error')
     },
-    [postConfigStatus.rejected.type] : (state, action) => {
-        state.loading_create = false
-        state.error_create = action.payload
-        swal('Error', `${action.payload}`, 'error')
-    },
     [removeConfigStatus.pending.type] : (state) => {
         state.loading_remove = true
     },

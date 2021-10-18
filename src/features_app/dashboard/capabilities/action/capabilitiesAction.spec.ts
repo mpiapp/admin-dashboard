@@ -5,7 +5,7 @@ test('getCapability test', async () => {
   let state = store.getState().capabilities;
   expect(state.data).toHaveLength(0);
 
-  await onGetCapability()
+  onGetCapability()
   state = await store.getState().capabilities;
   expect(state.data).toHaveLength(0);
 });
@@ -15,7 +15,7 @@ test('create capability test', async () => {
     let data = {
         name : "test"
     }
-    await onCreateCapability(data);
+    onCreateCapability(data);
 });
 
 test('update capability test', async () => {
@@ -23,12 +23,12 @@ test('update capability test', async () => {
         name : "test",
         id: "1"
     }
-    await onUpdateCapability(data);
+    onUpdateCapability(data);
 });
 
 test('remove capability test', async () => {
     let data = {
         id : "1"
     }
-    await onRemoveCapability(data);
+    onRemoveCapability(data);
 });

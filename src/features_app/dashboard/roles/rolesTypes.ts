@@ -6,7 +6,7 @@ export interface DataRow  {
   flag: string;
   selector? : any;
   module_ids?: any[]
-}; 
+}
 
 export interface RolesInput {
   name: string;

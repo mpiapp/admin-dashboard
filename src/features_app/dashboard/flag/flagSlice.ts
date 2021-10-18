@@ -10,8 +10,7 @@ export const fetchFlag = createAsyncThunk(
     async (_, { rejectWithValue }) => {
         let data = ["VENDOR", "BUYER"]
         try {
-            const response = await data
-            return response
+            return data
         } catch (error) {
             return rejectWithValue(error)
         }

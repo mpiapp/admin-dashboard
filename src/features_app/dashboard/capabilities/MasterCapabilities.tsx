@@ -30,7 +30,7 @@ const validationSchema = yup
     
 function MasterCapabilities() {
 
-    const state = useSelector((state : RootState) => state.capabilities)
+    const capabilities = useSelector((state : RootState) => state.capabilities)
 
     const [open, setOpen] = useState(false);
     const [IDRow, setIDRow] = useState <any>(null);
@@ -110,7 +110,7 @@ function MasterCapabilities() {
         handleClose()
         onGetCapability()
         // eslint-disable-next-line
-    },  [state.create, state.update, state.remove]);
+    },  [capabilities.create, capabilities.update, capabilities.remove]);
 
 
     return (
@@ -136,8 +136,8 @@ function MasterCapabilities() {
             <Box pt={4}>
                 <TableData 
                     columns={columns}
-                    data={state?.data}
-                    progressPending={state?.loading}
+                    data={capabilities?.data}
+                    progressPending={capabilities?.loading}
                 />
             </Box>
             <Dialog 

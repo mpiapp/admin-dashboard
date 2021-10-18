@@ -1,5 +1,4 @@
 import rolesReducer from './rolesSlice';
-import rolesSlice from './rolesSlice';
 import { 
   fetchRoles,
   postRoles, 
@@ -108,7 +107,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateRoles = await rolesSlice(
+    const nextState: IStateRoles = await rolesReducer(
       state,
       fetchRoles.rejected
     );
@@ -166,7 +165,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateRoles = await rolesSlice(
+    const nextState: IStateRoles = await rolesReducer(
       state,
       postRoles.rejected
     );
@@ -184,7 +183,7 @@ describe('TEST REDUX SLICE', () => {
   it("should update state when update is successful", async () => {
     // Arrange
     const response = {
-      "id": "asdfah123sda",
+      "id": "asdfah123sdaa",
       "name": "Admin",
       "flag": "VENDOR",
       "module_ids": [
@@ -227,7 +226,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateRoles = await rolesSlice(
+    const nextState: IStateRoles = await rolesReducer(
       state,
       updateRoles.rejected
     );
@@ -276,7 +275,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateRoles = await rolesSlice(
+    const nextState: IStateRoles = await rolesReducer(
       state,
       removeRoles.rejected
     );

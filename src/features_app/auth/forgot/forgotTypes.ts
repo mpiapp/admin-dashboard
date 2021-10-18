@@ -12,6 +12,6 @@ export interface ForgotState {
   }
   
 
-  export interface userFormSubmit {
+  export interface UserFormSubmit {
     email: string,
   }

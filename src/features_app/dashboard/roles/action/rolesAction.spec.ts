@@ -10,7 +10,7 @@ test('getRoles test', async () => {
   let state = store.getState().roles;
   expect(state.data).toHaveLength(0);
 
-  await onGetRoles()
+    onGetRoles()
   state = await store.getState().roles;
   expect(state.data).toHaveLength(0);
 });
@@ -20,7 +20,7 @@ test('create Roles test', async () => {
     let data = {
         name : "test"
     }
-    await onCreateRoles(data);
+    onCreateRoles(data);
 });
 
 test('update Roles test', async () => {
@@ -28,12 +28,12 @@ test('update Roles test', async () => {
         name : "test",
         id: "1"
     }
-    await onUpdateRoles(data);
+    onUpdateRoles(data);
 });
 
 test('remove Roles test', async () => {
     let data = {
         id : "1"
     }
-    await onRemoveRoles(data);
+    onRemoveRoles(data);
 });

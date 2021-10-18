@@ -1,6 +1,5 @@
 
 import configStatusReduer from './configStatusSlice';
-import configStatuslice from './configStatusSlice';
 import { 
   fetchConfigStatus,
   postConfigStatus, 
@@ -111,7 +110,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateConfigStatus = await configStatuslice(
+    const nextState: IStateConfigStatus = await configStatusReduer(
       state,
       fetchConfigStatus.rejected
     );
@@ -173,7 +172,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateConfigStatus = await configStatuslice(
+    const nextState: IStateConfigStatus = await configStatusReduer(
       state,
       postConfigStatus.rejected
     );
@@ -199,7 +198,7 @@ describe('TEST REDUX SLICE', () => {
               "name": "Submit"
           }
       ],
-      "id": "sIkSRjK"
+      "id": "sIkSRjKa"
     }
 
     const data = {
@@ -238,7 +237,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateConfigStatus = await configStatuslice(
+    const nextState: IStateConfigStatus = await configStatusReduer(
       state,
       updateConfigStatus.rejected
     );
@@ -289,7 +288,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateConfigStatus = await configStatuslice(
+    const nextState: IStateConfigStatus = await configStatusReduer(
       state,
       removeConfigStatus.rejected
     );

@@ -7,7 +7,7 @@ export interface DataRow {
     flag : string;
     feature_ids : any[];
     selector? : any
-}; 
+}
 
 export interface ObjectModules {
     name: string;

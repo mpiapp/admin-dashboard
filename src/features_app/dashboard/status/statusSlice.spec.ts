@@ -1,6 +1,5 @@
 
 import statusReducer from './statusSlice';
-import statusSlice from './statusSlice';
 import { 
   fetchStatus,
   postStatus, 
@@ -104,7 +103,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateStatus = await statusSlice(
+    const nextState: IStateStatus = await statusReducer(
       state,
       fetchStatus.rejected
     );
@@ -151,7 +150,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateStatus = await statusSlice(
+    const nextState: IStateStatus = await statusReducer(
       state,
       postStatus.rejected
     );
@@ -170,7 +169,7 @@ describe('TEST REDUX SLICE', () => {
     // Arrange
     const response = {
       "name": "Status",
-      "id": "ozavvbx"
+      "id": "ozavvbxa"
     }
 
     const data = {
@@ -202,7 +201,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateStatus = await statusSlice(
+    const nextState: IStateStatus = await statusReducer(
       state,
       updateStatus.rejected
     );
@@ -246,7 +245,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateStatus = await statusSlice(
+    const nextState: IStateStatus = await statusReducer(
       state,
       removeStatus.rejected
     );

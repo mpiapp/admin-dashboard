@@ -73,11 +73,6 @@ export const modulesSlice = createSlice({
         state.error_update = action.payload
         swal('Error', `${action.payload}`, 'error')
     },
-    [postModules.rejected.type] : (state, action) => {
-        state.loading_create = false
-        state.error_create = action.payload
-        swal('Error', `${action.payload}`, 'error')
-    },
     [removeModules.pending.type] : (state) => {
         state.loading_remove = true
     },

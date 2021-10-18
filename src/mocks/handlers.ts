@@ -20,7 +20,7 @@ export const handlers = [
     rest.put(`${process.env.REACT_APP_API_URL}capabilities/1`, (req, res, ctx) => {
       return res(
         ctx.json({
-          "name" : "test",
+          "name" : "testt",
           "id": "YiliWMj"
         })
       )
@@ -108,7 +108,7 @@ export const handlers = [
     rest.put(`${process.env.REACT_APP_API_URL}roles/1`, (req, res, ctx) => {
       return res(
         ctx.json({
-          "id": "asdfah123sda",
+          "id": "asdfah123sdaa",
           "name": "Admin",
           "flag": "VENDOR",
           "module_ids": [
@@ -157,7 +157,7 @@ export const handlers = [
               "id1",
               "id2"
           ],
-          "id": "Yxdgpia"
+          "id": "Yxdgpiaa"
       })
       )
     }),
@@ -188,7 +188,7 @@ export const handlers = [
       return res(
         ctx.json({
           "name": "Status",
-          "id": "ozavvbx"
+          "id": "ozavvbxa"
       })
       )
     }),
@@ -242,7 +242,7 @@ export const handlers = [
                   "name": "Submit"
               }
           ],
-          "id": "sIkSRjK"
+          "id": "sIkSRjKa"
       })
       )
     }),

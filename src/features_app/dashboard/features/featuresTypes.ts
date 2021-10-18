@@ -6,7 +6,7 @@ export interface DataRow {
     flag: string;
     capabilities?: any;
     selector? : any
-}; 
+}
 
 export interface FeaturesInput { 
     name: string;

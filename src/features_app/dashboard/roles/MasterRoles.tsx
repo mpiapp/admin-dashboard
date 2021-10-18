@@ -37,9 +37,9 @@ const validationSchema = yup
 function MasterRoles() {
 
     const dispatch = useDispatch()
-    const state = useSelector((state : RootState) => state.roles)
-    const modules = useSelector((state : RootState) => state.modules)
-    const flag = useSelector((state : RootState) => state.flag)
+    const stateroles = useSelector((state : RootState) => state.roles)
+    const modules = useSelector((statemod : RootState) => statemod.modules)
+    const flag = useSelector((stateflag : RootState) => stateflag.flag)
 
     const {
         register,
@@ -188,7 +188,7 @@ function MasterRoles() {
         onGetModules()
         dispatch(fetchFlag())
         // eslint-disable-next-line
-    },  [state.create, state.update, state.remove]);
+    },  [stateroles.create, stateroles.update, stateroles.remove]);
 
      /* istanbul ignore next */
     useEffect(() => {
@@ -234,8 +234,8 @@ function MasterRoles() {
             <Box pt={4}>
                 <TableData 
                     columns={columns}
-                    data={state?.data}
-                    progressPending={state?.loading}
+                    data={stateroles?.data}
+                    progressPending={stateroles?.loading}
                 />
             </Box>
 
@@ -249,6 +249,7 @@ function MasterRoles() {
                     <DialogTitle>Add New Role</DialogTitle>
                     <div className="box-modal-modules">
                         <TextField
+                            /* istanbul ignore next */
                             error={!!errors.name}
                             helperText={errors.name && errors.name.message}
                             {...register('name')}
@@ -266,20 +267,24 @@ function MasterRoles() {
                                 placeholder="Select Flag"
                                 value={selectedFlagRoles}
                                 isSearchable={false}
-                                options={optionsFlagRoles && optionsFlagRoles}
+                                options={optionsFlagRoles}
                                 onChange={handleChangeFlagRoles}
                             />
-                            { errorSelectFlagRoles ? <div className="error-p"><p>Flag is required</p></div> : null }
+                            { 
+                            /* istanbul ignore next */
+                            errorSelectFlagRoles ? <div className="error-p"><p>Flag is required</p></div> : null }
                         </Box>
                         <Box pt={2}>
                             <Select
                                 placeholder="Select Module"   
                                 value={selectedModules}
                                 isMulti={true}
-                                options={optionsModules && optionsModules}
+                                options={optionsModules}
                                 onChange={handleChangeModules}
                             />
-                            { errorSelectModules ? <div className="error-p"><p>Module is required</p></div> : null }
+                            { 
+                            /* istanbul ignore next */
+                            errorSelectModules ? <div className="error-p"><p>Module is required</p></div> : null }
                         </Box>
                         
                     </div>

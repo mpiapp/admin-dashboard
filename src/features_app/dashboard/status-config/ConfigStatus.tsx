@@ -42,8 +42,8 @@ const validationSchema = yup
 
 function ConfigStatus() {
       
-    const state = useSelector((state : RootState) => state.statusConfig)
-    const status = useSelector((state : RootState) => state.status)
+    const statusConfig = useSelector((state : RootState) => state.statusConfig)
+    const status = useSelector((statestatus : RootState) => statestatus.status)
     
     const {
         register,
@@ -200,7 +200,7 @@ function ConfigStatus() {
         onGetConfigStatus()
         onGetStatus()
         // eslint-disable-next-line
-    },  [state.create, state.update, state.remove]);
+    },  [statusConfig.create, statusConfig.update, statusConfig.remove]);
 
     useEffect(() => {
         const proceedOptions = () => {
@@ -237,8 +237,8 @@ function ConfigStatus() {
             <Box pt={4}>
                 <TableData 
                     columns={columns}
-                    data={state?.data}
-                    progressPending={state?.loading}
+                    data={statusConfig?.data}
+                    progressPending={statusConfig?.loading}
                 />
             </Box>
             <Dialog 
@@ -269,7 +269,7 @@ function ConfigStatus() {
                                 placeholder="Select Status"
                                 value={selectedStatus}
                                 isSearchable={false}
-                                options={optionsStatus && optionsStatus}
+                                options={optionsStatus}
                                 onChange={handleChangeStatus}
                             />
                             { 
@@ -281,7 +281,7 @@ function ConfigStatus() {
                                 placeholder="Select Status Next"
                                 value={selectedNext}
                                 isMulti={true}
-                                options={optionsStatus && optionsStatus}
+                                options={optionsStatus}
                                 onChange={handleChangeNext}
                             />
                             { 

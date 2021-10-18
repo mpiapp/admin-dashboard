@@ -40,10 +40,6 @@
       "id": "mCP8ZZF"
     },
     {
-      "name": "delete",
-      "id": "eOESDzS"
-    },
-    {
       "name": "Manage PR",
       "link": "/manage-pr",
       "flag": "BUYER",
@@ -98,6 +94,16 @@
         "mid1",
         "mid2"
       ]
+    },
+    {
+      "name": "Apalah",
+      "flag": "VENDOR",
+      "module_ids": [
+        "asdfadfa13asdsfa",
+        "gchMWP8",
+        "dgasfadfa13asdsfa"
+      ],
+      "id": "OXLkLX0"
     }
   ],
   "capabilities": [
@@ -120,6 +126,18 @@
     {
       "name": "apalah",
       "id": "LtUmlB0"
+    },
+    {
+      "name": "Satu",
+      "id": "EkdY1kC"
+    },
+    {
+      "name": "caoaaa",
+      "id": "Rpx3lwO"
+    },
+    {
+      "name": "loreppp",
+      "id": "9wh8Mkh"
     }
   ],
   "features": [
@@ -219,6 +237,10 @@
     {
       "name": "Status",
       "id": "ozavvbx"
+    },
+    {
+      "name": "testsss",
+      "id": "G1ln_ac"
     }
   ],
   "configstatus": [
@@ -258,6 +280,17 @@
         }
       ],
       "id": "sIkSRjK"
+    },
+    {
+      "name": "testtt",
+      "current": "Open",
+      "next": [
+        {
+          "id": "YiliWMj",
+          "name": "Open"
+        }
+      ],
+      "id": "Xw26J_Y"
     }
   ]
 }

@@ -75,11 +75,6 @@ export const featuresSlice = createSlice({
         state.error_update = action.payload
         swal('Error', `${action.payload}`, 'error')
     },
-    [postFeatures.rejected.type] : (state, action) => {
-        state.loading_create = false
-        state.error_create = action.payload
-        swal('Error', `${action.payload}`, 'error')
-    },
     [removeFeatures.pending.type] : (state) => {
         state.loading_remove = true
     },

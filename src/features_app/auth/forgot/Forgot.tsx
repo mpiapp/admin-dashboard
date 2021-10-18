@@ -18,7 +18,7 @@ import * as yup from "yup";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../app/store';
 import { sendEmail } from './forgotSlice';
-import { userFormSubmit } from './forgotTypes'
+import { UserFormSubmit } from './forgotTypes'
 
 const validationSchema = yup
   .object({
@@ -38,13 +38,13 @@ const Forgot = () => {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<userFormSubmit>({
+  } = useForm<UserFormSubmit>({
     mode: "onBlur",
     resolver: yupResolver(validationSchema)
   });
   
 
-  const onSubmit = (data: userFormSubmit): void => {
+  const onSubmit = (data: UserFormSubmit): void => {
     dispatch(sendEmail(data))
   }
 

@@ -34,7 +34,7 @@ const validationSchema = yup
     
 function MasterStatus() {
 
-    const state = useSelector((state : RootState) => state.status)
+    const status = useSelector((state : RootState) => state.status)
 
     const [open, setOpen] = useState(false);
     const [IdStatus, setIdStatus] = useState <any>(null);
@@ -114,7 +114,7 @@ function MasterStatus() {
         handleClose()
         onGetStatus()
         // eslint-disable-next-line
-    },  [state.create, state.update, state.remove]);
+    },  [status.create, status.update, status.remove]);
 
     // console.log(getValues(), 'get values')
 
@@ -141,8 +141,8 @@ function MasterStatus() {
             <Box pt={4}>
                 <TableData 
                     columns={columns}
-                    data={state?.data}
-                    progressPending={state?.loading}
+                    data={status?.data}
+                    progressPending={status?.loading}
                 />
             </Box>
             <Dialog 

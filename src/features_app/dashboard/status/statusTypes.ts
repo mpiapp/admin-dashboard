@@ -29,5 +29,5 @@ export interface DataRow {
     id: string;
     name: string;
     selector? : any
-}; 
+}
 

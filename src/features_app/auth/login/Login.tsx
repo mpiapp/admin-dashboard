@@ -19,7 +19,7 @@ import * as yup from "yup";
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../app/store';
 import { loginAction } from './loginSlice';
-import { userFormSubmit } from './loginTypes'
+import { UserFormSubmit } from './loginTypes'
 
 const validationSchema = yup
   .object({
@@ -41,12 +41,12 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<userFormSubmit>({
+  } = useForm<UserFormSubmit>({
     mode: "onBlur",
     resolver: yupResolver(validationSchema)
   });
   
-  const onSubmit = (data: userFormSubmit): void => {
+  const onSubmit = (data: UserFormSubmit): void => {
     dispatch(loginAction(data))
   }
 

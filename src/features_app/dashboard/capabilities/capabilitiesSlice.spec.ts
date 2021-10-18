@@ -1,5 +1,4 @@
 import capabilityReducer from './capabilitiesSlice';
-import capabilitySlice from './capabilitiesSlice';
 import { 
   fetchCapability,
   postCapability, 
@@ -101,7 +100,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateCapability = await capabilitySlice(
+    const nextState: IStateCapability = await capabilityReducer(
       state,
       fetchCapability.rejected
     );
@@ -144,7 +143,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateCapability = await capabilitySlice(
+    const nextState: IStateCapability = await capabilityReducer(
       state,
       postCapability.rejected
     );
@@ -161,7 +160,7 @@ describe('TEST REDUX SLICE', () => {
   it("should update state when update is successful", async () => {
     // Arrange
     const response = {
-      "name" : "test",
+      "name" : "testt",
       "id": "YiliWMj"
     }
     const data = {
@@ -192,7 +191,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateCapability = await capabilitySlice(
+    const nextState: IStateCapability = await capabilityReducer(
       state,
       updateCapability.rejected
     );
@@ -239,7 +238,7 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateCapability = await capabilitySlice(
+    const nextState: IStateCapability = await capabilityReducer(
       state,
       removeCapability.rejected
     );

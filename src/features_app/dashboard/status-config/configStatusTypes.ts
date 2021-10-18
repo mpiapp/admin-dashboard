@@ -6,7 +6,7 @@ export interface DataRow {
     current: string,
     next: any[];
     selector? : any
-}; 
+}
 
 export interface ConfigStatusInput { 
     id? : string;

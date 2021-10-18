@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 import { useState, useEffect } from 'react';
 import { Box } from '@mui/system';
 import Button from '@mui/material/Button';
@@ -60,10 +59,12 @@ function MasterFeatures() {
     const [errorSelectFlagFeatures, setErrorSelectFlagFeatures] = useState<boolean>(false);
     const [errorSelect, setErrorSelect] = useState<boolean>(false);
 
+    /* istanbul ignore next */
     const handleChange = (value: any) : void => {
         setSelectedOption(value)
     }
 
+    /* istanbul ignore next */
     const handleChangeFlagFeatures = (value: any) : void => {
         setSelectedFlagFeatures(value)
         setErrorSelectFlagFeatures(false)
@@ -88,6 +89,7 @@ function MasterFeatures() {
         resolver: yupResolver(validationSchema)
     });
 
+    /* istanbul ignore next */
     const proceedToArray = (value : any) => {
         let arrayCapabilities = []
         for(let i=0; i < value.length; i++) {
@@ -96,6 +98,7 @@ function MasterFeatures() {
         return arrayCapabilities;
     }
       
+    /* istanbul ignore next */
     const onSubmit = (data: FeaturesInput): void => {
         if(selectedFlagFeatures === undefined) {
             setErrorSelectFlagFeatures(true)
@@ -123,6 +126,7 @@ function MasterFeatures() {
         }
     }
 
+    /* istanbul ignore next */
     const columns: TableColumn<DataRow>[] = [
         {
             name: 'ID',
@@ -183,12 +187,14 @@ function MasterFeatures() {
         // eslint-disable-next-line
     },  [state.create, state.update, state.remove]);
 
+    /* istanbul ignore next */
     useEffect(() => {
         if(flag?.data) {
             setOptionsFlagFeatures(flag.data)
         }
     }, [flag]);
 
+    /* istanbul ignore next */
     useEffect(() => {
         const proceedOptions = () => {
             let initialData = capabilities.data
@@ -239,7 +245,9 @@ function MasterFeatures() {
                     <DialogTitle>Add New Feature</DialogTitle>
                     <div className="box-modal-create">
                         <TextField
+                            /* istanbul ignore next */
                             error={!!errors.name}
+                            /* istanbul ignore next */
                             helperText={errors.name && errors.name.message}
                             {...register('name')}
                             margin="normal"
@@ -249,7 +257,7 @@ function MasterFeatures() {
                             label="Name"
                             name="name"
                             autoComplete="name"
-                            autoFocus
+                            autoFocus 
                         />
                          <Box pt={2}>
                             <Select
@@ -259,17 +267,21 @@ function MasterFeatures() {
                                 options={optionsFlagFeatures}
                                 onChange={handleChangeFlagFeatures}
                             />
-                            { errorSelectFlagFeatures ? <div className="error-p"><p>Flag is required</p></div> : null }
+                            { 
+                            /* istanbul ignore next */
+                            errorSelectFlagFeatures ? <div className="error-p"><p>Flag is required</p></div> : null }
                         </Box>
                         <Box pt={2}>
                             <Select
                                 placeholder="Select capabilities"
                                 value={selectedOption}
                                 isMulti={true}
-                                options={options && options}
+                                options={options}
                                 onChange={handleChange}
                             />
-                            { errorSelect ? <div className="error-p"><p>Capability is required</p></div> : null }
+                            { 
+                            /* istanbul ignore next */
+                            errorSelect ? <div className="error-p"><p>Capability is required</p></div> : null }
                         </Box>
                     </div>
                     <DialogActions>
