@@ -251,9 +251,11 @@ function ConfigStatus() {
                     <DialogTitle>Add New Config</DialogTitle>
                     <div className="box-modal-create">
                         <TextField
-                        /* istanbul ignore next */
+                            /* istanbul ignore next */
                             error={!!errors.name}
+                            /* istanbul ignore next */
                             helperText={errors.name && errors.name.message}
+                            /* istanbul ignore next */
                             {...register('name')}
                             margin="normal"
                             fullWidth

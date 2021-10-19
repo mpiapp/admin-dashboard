@@ -257,4 +257,35 @@ export const handlers = [
       )
     }),
 
+    // mock paymentTerms crud
+    rest.get(`${process.env.REACT_APP_API_URL}payment-terms`, (req, res, ctx) => {
+      return res(ctx.json({
+          "name": "COD",
+          "id": "ab1"
+        }))
+    }),
+    rest.post(`${process.env.REACT_APP_API_URL}payment-terms`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "name": "COD",
+          "id": "ab12"
+      })
+      )
+    }),
+    rest.put(`${process.env.REACT_APP_API_URL}payment-terms/1`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "name": "COD",
+          "id": "ab123"
+      })
+      )
+    }),
+    rest.delete(`${process.env.REACT_APP_API_URL}payment-terms/1`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "id": "ab1234"
+      })
+      )
+    }),
+
 ]

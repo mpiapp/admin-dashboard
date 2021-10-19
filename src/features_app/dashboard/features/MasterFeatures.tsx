@@ -32,7 +32,7 @@ import {
 import { 
     ISelectOption,
 } from '../globalTypes'
-import { onGetConfigStatus } from '../status-config/action/configStatusAction';
+import { onGetConfigStatus } from '../status_config/action/configStatusAction';
 
 const validationSchema = yup    
     .object({
@@ -48,8 +48,6 @@ function MasterFeatures() {
     const capabilities = useSelector((statecap : RootState) => statecap.capabilities)
     const statusConfig = useSelector((statusconf : RootState) => statusconf.statusConfig)
     const flag = useSelector((stateflag : RootState) => stateflag.flag)
-
-    console.log(statusConfig, 'statusss')
     
     const [open, setOpen] = useState(false);
     const [IdCapability, setIdCapability] = useState <any>(null);
@@ -80,6 +78,7 @@ function MasterFeatures() {
 
     const handleClose = () : void => {
         setOpen(false);
+        setSelectedOption([])
     };
 
     const {
@@ -189,6 +188,7 @@ function MasterFeatures() {
         onGetCapability()
         onGetConfigStatus()
         dispatch(fetchFlag())
+        setSelectedOption([])
         // eslint-disable-next-line
     },  [features.create, features.update, features.remove]);
 

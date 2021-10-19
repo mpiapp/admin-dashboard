@@ -10,7 +10,8 @@ import SettingPage from '../features_app/dashboard/setting/SettingPage';
 import MasterCapabilities from '../features_app/dashboard/capabilities/MasterCapabilities';
 import MasterFeatures from '../features_app/dashboard/features/MasterFeatures';
 import MasterStatus from '../features_app/dashboard/status/MasterStatus';
-import ConfigStatus from '../features_app/dashboard/status-config/ConfigStatus';
+import ConfigStatus from '../features_app/dashboard/status_config/ConfigStatus';
+import PaymentTerms from '../features_app/dashboard/payment_terms/PaymentTerms';
 
 function AppRoute() {
   return (
@@ -26,6 +27,7 @@ function AppRoute() {
           <DashboardLayout exact path="/dashboard/features" component={MasterFeatures} />
           <DashboardLayout exact path="/dashboard/status" component={MasterStatus} />
           <DashboardLayout exact path="/dashboard/status-config" component={ConfigStatus} />
+          <DashboardLayout exact path="/dashboard/payment-terms" component={PaymentTerms} />
           <DashboardLayout exact path="/dashboard/setting" component={SettingPage} />
           <Route exact path="*" component={ErrorPage} />   
         </Switch>

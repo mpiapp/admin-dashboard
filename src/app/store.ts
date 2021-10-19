@@ -7,7 +7,8 @@ import capabilitiesReducer from '../features_app/dashboard/capabilities/capabili
 import featuresReducer from '../features_app/dashboard/features/featuresSlice';
 import flagReducer from '../features_app/dashboard/flag/flagSlice';
 import statusReducer from '../features_app/dashboard/status/statusSlice';
-import configStatusReducer from '../features_app/dashboard/status-config/configStatusSlice';
+import configStatusReducer from '../features_app/dashboard/status_config/configStatusSlice';
+import paymentTermsReducer from '../features_app/dashboard/payment_terms/paymentTermsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     features: featuresReducer,
     status: statusReducer,
     statusConfig: configStatusReducer,
+    paymentterms: paymentTermsReducer,
   },
 });
 
