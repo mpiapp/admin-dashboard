@@ -31,15 +31,6 @@
       "id": "gchMWP8"
     },
     {
-      "name": "apaa",
-      "link": "/jasdfa",
-      "flag": "VENDOR",
-      "feature_ids": [
-        "CDqan2G"
-      ],
-      "id": "mCP8ZZF"
-    },
-    {
       "name": "Manage PR",
       "link": "/manage-pr",
       "flag": "BUYER",
@@ -94,23 +85,9 @@
         "mid1",
         "mid2"
       ]
-    },
-    {
-      "name": "Apalah",
-      "flag": "VENDOR",
-      "module_ids": [
-        "asdfadfa13asdsfa",
-        "gchMWP8",
-        "dgasfadfa13asdsfa"
-      ],
-      "id": "OXLkLX0"
     }
   ],
   "capabilities": [
-    {
-      "name": "test2",
-      "id": "YiliWMj"
-    },
     {
       "name": "read",
       "id": "_byDibm"
@@ -124,31 +101,11 @@
       "id": "QCVJu0a"
     },
     {
-      "name": "apalah",
-      "id": "LtUmlB0"
-    },
-    {
-      "name": "Satu",
+      "name": "delete",
       "id": "EkdY1kC"
-    },
-    {
-      "name": "caoaaa",
-      "id": "Rpx3lwO"
-    },
-    {
-      "name": "loreppp",
-      "id": "9wh8Mkh"
     }
   ],
   "features": [
-    {
-      "name": "asdfadfa",
-      "flag": "VENDOR",
-      "capabilities": [
-        "YiliWMj"
-      ],
-      "id": "QCVJk0a"
-    },
     {
       "name": "Purchase Order",
       "flag": "BUYER",
@@ -203,14 +160,6 @@
         "_byDibm"
       ],
       "id": "oiGpj5l"
-    },
-    {
-      "name": "tes geatre",
-      "flag": "VENDOR",
-      "capabilities": [
-        "C2aetOd"
-      ],
-      "id": "_JfjS7a"
     }
   ],
   "status": [
@@ -239,36 +188,8 @@
       "id": "MVeSK7W"
     },
     {
-      "name": "aaaa",
-      "id": "3FznFLF"
-    },
-    {
       "name": "Status",
       "id": "ozavvbx"
-    },
-    {
-      "name": "testsss",
-      "id": "G1ln_ac"
-    },
-    {
-      "name": "baruuu ",
-      "id": "ZMqhSox"
-    },
-    {
-      "name": "zcxcvbxv",
-      "id": "o9QQe-q"
-    },
-    {
-      "name": "zxczcvz",
-      "id": "I5AEq6S"
-    },
-    {
-      "name": "gdgdgdgd",
-      "id": "7-Y2K6B"
-    },
-    {
-      "name": "adfadfadsf",
-      "id": "40mQkQ6"
     }
   ],
   "configstatus": [
@@ -323,48 +244,44 @@
   ],
   "payment-terms": [
     {
-      "name": "tes1",
+      "name": "1 Weeks",
       "id": 1
     },
     {
-      "name": "ytrdsv2",
+      "name": "2 Weeks",
       "id": 2
     },
     {
-      "name": "ges 3",
+      "name": "3 Weeks",
       "id": 3
     },
     {
-      "name": "gersg 5",
+      "name": "1 Month",
       "id": 4
     },
     {
-      "name": "tese 6",
+      "name": "3 Months",
       "id": 5
     },
     {
-      "name": "sdgsag 7",
-      "id": 6
-    },
-    {
-      "name": "tes s8",
-      "id": 7
-    },
-    {
-      "name": "asdga 8",
+      "name": "6 Months",
       "id": 8
     },
     {
-      "name": "yre 9",
+      "name": "COD",
       "id": 9
+    }
+  ],
+  "legal-document": [
+    {
+      "title": "Nomor Pokok Wajib Pajak",
+      "short_title": "npwp",
+      "id": "asdfadf"
     },
     {
-      "name": "yrt m20",
-      "id": 10
-    },
-    {
-      "name": "tes m 10",
-      "id": 11
+      "title": "Surat Ijin Usaha Perusahaan",
+      "short_title": "siup",
+      "id": "6Oux9qQ"
     }
   ]
 }

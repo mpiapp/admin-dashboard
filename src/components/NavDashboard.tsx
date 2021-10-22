@@ -129,6 +129,20 @@ const NavDashboard = (props: Props) => {
                     </li>
                 </ul>
             </NavLink>
+            <NavLink exact to="/dashboard/legal-document" activeClassName="active-link">
+                <ul>
+                    <li className="navbar-list">
+                        <span>Master Legal DOC</span>
+                    </li>
+                </ul>
+            </NavLink>
+            <NavLink exact to="/dashboard/type-company" activeClassName="active-link">
+                <ul>
+                    <li className="navbar-list">
+                        <span>Master Type Company</span>
+                    </li>
+                </ul>
+            </NavLink>
             <Divider />
             <NavLink exact to="/dashboard/setting" activeClassName="active-link">
                 <ul>

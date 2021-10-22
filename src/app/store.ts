@@ -9,6 +9,7 @@ import flagReducer from '../features_app/dashboard/flag/flagSlice';
 import statusReducer from '../features_app/dashboard/status/statusSlice';
 import configStatusReducer from '../features_app/dashboard/status_config/configStatusSlice';
 import paymentTermsReducer from '../features_app/dashboard/payment_terms/paymentTermsSlice';
+import legalDocumentReducer from '../features_app/dashboard/legal_document/legalDoccumentSlice';
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ export const store = configureStore({
     status: statusReducer,
     statusConfig: configStatusReducer,
     paymentterms: paymentTermsReducer,
+    legaldocument: legalDocumentReducer,
   },
 });
 

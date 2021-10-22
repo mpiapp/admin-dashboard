@@ -288,4 +288,38 @@ export const handlers = [
       )
     }),
 
+    // mock legal document crud
+    rest.get(`${process.env.REACT_APP_API_URL}legal-document`, (req, res, ctx) => {
+      return res(ctx.json({
+          "title": "Nomor Pokok Wajib Pajak",
+          "short_title" : "npwp",
+          "id": "asdfadf"
+        }))
+    }),
+    rest.post(`${process.env.REACT_APP_API_URL}legal-document`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "title": "Nomor Pokok Wajib",
+          "short_title" : "npwp",
+          "id": "legal3"
+      })
+      )
+    }),
+    rest.put(`${process.env.REACT_APP_API_URL}legal-document/2`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "title": "Nomor Pokok Pajak",
+          "short_title" : "npwp",
+          "id": "legal2"
+      })
+      )
+    }),
+    rest.delete(`${process.env.REACT_APP_API_URL}legal-document/12`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "id": "2"
+      })
+      )
+    }),
+
 ]
