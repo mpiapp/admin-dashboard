@@ -13,6 +13,7 @@ import MasterStatus from '../features_app/dashboard/status/MasterStatus';
 import ConfigStatus from '../features_app/dashboard/status_config/ConfigStatus';
 import PaymentTerms from '../features_app/dashboard/payment_terms/PaymentTerms';
 import LegalDocument from '../features_app/dashboard/legal_document/LegalDocument';
+import CompanyType from '../features_app/dashboard/company_type/CompanyType';
 
 function AppRoute() {
   return (
@@ -30,6 +31,7 @@ function AppRoute() {
           <DashboardLayout exact path="/dashboard/status-config" component={ConfigStatus} />
           <DashboardLayout exact path="/dashboard/payment-terms" component={PaymentTerms} />
           <DashboardLayout exact path="/dashboard/legal-document" component={LegalDocument} />
+          <DashboardLayout exact path="/dashboard/type-company" component={CompanyType} />
           <DashboardLayout exact path="/dashboard/setting" component={SettingPage} />
           <Route exact path="*" component={ErrorPage} />   
         </Switch>

@@ -322,4 +322,44 @@ export const handlers = [
       )
     }),
 
+    // mock company type crud
+    rest.get(`${process.env.REACT_APP_API_URL}company-type`, (req, res, ctx) => {
+      return res(ctx.json({
+          "name": "PT",
+          "legal_doc": [
+            "asdfadf"
+          ],
+          "id": "0s9s06R"
+        }))
+    }),
+    rest.post(`${process.env.REACT_APP_API_URL}company-type`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "name": "CV",
+          "legal_doc": [
+            "asdfadf"
+          ],
+          "id": "0s9s06R"
+      })
+      )
+    }),
+    rest.put(`${process.env.REACT_APP_API_URL}company-type/2`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "name": "UMKM",
+          "legal_doc": [
+            "asdfadf"
+          ],
+          "id": "0s9s06R"
+      })
+      )
+    }),
+    rest.delete(`${process.env.REACT_APP_API_URL}company-type/12`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "id": "2"
+      })
+      )
+    }),
+
 ]

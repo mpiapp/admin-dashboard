@@ -283,5 +283,29 @@
       "short_title": "siup",
       "id": "6Oux9qQ"
     }
+  ],
+  "company-type": [
+    {
+      "name": "CV",
+      "legal_doc": [
+        "6Oux9qQ",
+        "asdfadf"
+      ],
+      "id": "4DTFH-A"
+    },
+    {
+      "name": "Prima",
+      "legal_doc": [
+        "6Oux9qQ"
+      ],
+      "id": "fsb92u1"
+    },
+    {
+      "name": "PT",
+      "legal_doc": [
+        "asdfadf"
+      ],
+      "id": "0s9s06R"
+    }
   ]
 }
