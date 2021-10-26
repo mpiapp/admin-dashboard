@@ -151,6 +151,14 @@ const NavDashboard = (props: Props) => {
                 </ul>
             </NavLink>
             <Divider />
+            <NavLink exact to="/dashboard/vendor-category" activeClassName="active-link">
+                <ul>
+                    <li className="navbar-list">
+                        <span>Vendor Category</span>
+                    </li>
+                </ul>
+            </NavLink>
+            <Divider />
             <NavLink exact to="/dashboard/setting" activeClassName="active-link">
                 <ul>
                     <li className="navbar-list">

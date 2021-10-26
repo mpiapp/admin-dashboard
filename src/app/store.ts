@@ -12,6 +12,7 @@ import paymentTermsReducer from '../features_app/dashboard/payment_terms/payment
 import legalDocumentReducer from '../features_app/dashboard/legal_document/legalDoccumentSlice';
 import companyTypeReducer from '../features_app/dashboard/company_type/companyTypesSlice';
 import userSuperadminReducer from '../features_app/dashboard/user_superadmin/userSuperadminSlice';
+import vendorCategoryReducer from '../features_app/dashboard/vendor_category/vendorCategorySlice';
 
 export const store = configureStore({
   reducer: {
@@ -28,6 +29,7 @@ export const store = configureStore({
     legaldocument: legalDocumentReducer,
     companytype: companyTypeReducer,  
     usersuperadmin: userSuperadminReducer,  
+    vendorcategory: vendorCategoryReducer,  
   },
 });
 

@@ -410,4 +410,36 @@ export const handlers = [
       )
     }),
 
+
+    // mock vendor category crud
+    rest.get(`${process.env.REACT_APP_API_URL}vendor-category`, (req, res, ctx) => {
+      return res(ctx.json({
+        "name": "Hotel",
+        "id": "asdfadf1"
+        }))
+    }),
+    rest.post(`${process.env.REACT_APP_API_URL}vendor-category`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "name": "Restaurant",
+          "id": "asdfadf1"
+      })
+      )
+    }),
+    rest.put(`${process.env.REACT_APP_API_URL}vendor-category/1`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "name": "FnB",
+          "id": "1"
+      })
+      )
+    }),
+    rest.delete(`${process.env.REACT_APP_API_URL}vendor-category/2`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "id": "2"
+      })
+      )
+    }),
+
 ]
