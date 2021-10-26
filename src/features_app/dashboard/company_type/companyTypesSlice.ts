@@ -1,19 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 import swal from 'sweetalert';
-import {
-    IStateCapability
-} from './capabilitiesTypes'
+import { 
+    IStateCompanyType 
+} from './companyTypeTypes'
 
 import { 
-    fetchCapability,  
-    postCapability,
-    updateCapability,
-    removeCapability 
-} from './reducers/capabilityReducers'
+    fetchCompanyType,  
+    postCompanyType,
+    updateCompanyType,
+    removeCompanyType 
+} from './reducers/companyTypeReducers'
 
-/* istanbul ignore file */
 
-const initialState: IStateCapability = {
+const initialState: IStateCompanyType = {
   data: [],
   loading : false,
   error : null,
@@ -28,60 +27,60 @@ const initialState: IStateCapability = {
   remove : false
 };
 
-export const capabilitySlice = createSlice({
-  name: 'auth',
+export const companyTypeSlice = createSlice({
+  name: 'companytype',
   initialState,
   reducers: {},
   extraReducers: {
-    [fetchCapability.pending.type] : (state) => {
+    [fetchCompanyType.pending.type] : (state) => {
         state.loading = true
         state.create = false
         state.update = false
         state.remove = false
     },
-    [fetchCapability.fulfilled.type] : (state, action) => {
+    [fetchCompanyType.fulfilled.type] : (state, action) => {
         state.loading = false
         state.data = action.payload
     },
-    [fetchCapability.rejected.type] : (state, action) => {
+    [fetchCompanyType.rejected.type] : (state, action) => {
         state.loading = false
         state.error = action.payload
     },
-    [postCapability.pending.type] : (state) => {
+    [postCompanyType.pending.type] : (state) => {
         state.loading_create = true
     },
-    [postCapability.fulfilled.type] : (state) => {
+    [postCompanyType.fulfilled.type] : (state) => {
         state.loading_create = false
         state.create = true
-        swal('Success', "Success created Capability menu", 'success')
+        swal('Success', "Success created CompanyType menu", 'success')
     },
-    [postCapability.rejected.type] : (state, action) => {
+    [postCompanyType.rejected.type] : (state, action) => {
         state.loading_create = false
         state.error_create = action.payload
-        swal('Error',"Error created", 'error')
-    },
-    [updateCapability.pending.type] : (state) => {
-        state.loading_update = true
-    },
-    [updateCapability.fulfilled.type] : (state, action) => {
-        state.loading_update = false
-        state.update = true
-        swal('Success', "Success updated Capability", 'success')
-    },
-    [updateCapability.rejected.type] : (state, action) => {
-        state.loading_update = false
-        state.error_update = action.payload 
         swal('Error', `${action.payload}`, 'error')
     },
-    [removeCapability.pending.type] : (state) => {
+    [updateCompanyType.pending.type] : (state) => {
+        state.loading_update = true
+    },
+    [updateCompanyType.fulfilled.type] : (state, action) => {
+        state.loading_update = false
+        state.update = true
+        swal('Success', "Success updated CompanyType", 'success')
+    },
+    [updateCompanyType.rejected.type] : (state, action) => {
+        state.loading_update = false
+        state.error_update = action.payload
+        swal('Error', `${action.payload}`, 'error')
+    },
+    [removeCompanyType.pending.type] : (state) => {
         state.loading_remove = true
     },
-    [removeCapability.fulfilled.type] : (state) => {
+    [removeCompanyType.fulfilled.type] : (state) => {
         state.loading_remove = false
         state.remove = true
-        swal('Success', "Success removed Capability", 'success')
+        swal('Success', "Success removed CompanyType", 'success')
     },
-    [removeCapability.rejected.type] : (state, action) => {
+    [removeCompanyType.rejected.type] : (state, action) => {
         state.loading_remove = false
         state.error_remove = action.payload
         swal('Error', `${action.payload}`, 'error')
@@ -89,4 +88,4 @@ export const capabilitySlice = createSlice({
   }
 });
 
-export default capabilitySlice.reducer;
+export default companyTypeSlice.reducer;

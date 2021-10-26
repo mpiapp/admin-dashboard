@@ -322,4 +322,92 @@ export const handlers = [
       )
     }),
 
+    // mock company type crud
+    rest.get(`${process.env.REACT_APP_API_URL}company-type`, (req, res, ctx) => {
+      return res(ctx.json({
+          "name": "PT",
+          "legal_doc": [
+            "asdfadf"
+          ],
+          "id": "0s9s06R"
+        }))
+    }),
+    rest.post(`${process.env.REACT_APP_API_URL}company-type`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "name": "CV",
+          "legal_doc": [
+            "asdfadf"
+          ],
+          "id": "0s9s06R"
+      })
+      )
+    }),
+    rest.put(`${process.env.REACT_APP_API_URL}company-type/2`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "name": "UMKM",
+          "legal_doc": [
+            "asdfadf"
+          ],
+          "id": "0s9s06R"
+      })
+      )
+    }),
+    rest.delete(`${process.env.REACT_APP_API_URL}company-type/12`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "id": "2"
+      })
+      )
+    }),
+
+    // mock user superadmin crud
+    rest.get(`${process.env.REACT_APP_API_URL}user-superadmin`, (req, res, ctx) => {
+      return res(ctx.json({
+          "id": "jhadfad",
+          "name": "John Doe",
+          "email": "johndoe@gmail.com",
+          "flag": "BUYER",
+          "role": "superadmin",
+          "status": "Active",
+          "verified": false
+        }))
+    }),
+    rest.post(`${process.env.REACT_APP_API_URL}user-superadmin`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "id": "asdfag1",
+          "name": "John Doe",
+          "email": "johndoe@gmail.com",
+          "password" : "asdf121412412312$#",
+          "flag": "BUYER",
+          "role": "superadmin",
+          "status": "Active",
+          "verified": false
+      })
+      )
+    }),
+    rest.put(`${process.env.REACT_APP_API_URL}user-superadmin/12`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "id": "2",
+          "name": "John Doe",
+          "email": "johndoe@gmail.com",
+          "password" : "asdf1adf31@12412312$#",
+          "flag": "BUYER",
+          "role": "superadmin",
+          "status": "Active",
+          "verified": false
+      })
+      )
+    }),
+    rest.delete(`${process.env.REACT_APP_API_URL}user-superadmin/22`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "id": "2"
+      })
+      )
+    }),
+
 ]
