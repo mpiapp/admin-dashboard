@@ -21,14 +21,14 @@ test('create CompanyType test', async () => {
 test('update CompanyType test', async () => {
     let data = {
         name : "test",
-        id: "1"
+        id: "2"
     }
     onUpdateCompanyType(data)
 })
 
 test('remove CompanyType test', async () => {
     let data = {
-        id : "1"
+        id : "12"
     }
     onRemoveCompanyType(data)
 })

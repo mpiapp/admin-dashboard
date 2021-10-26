@@ -11,6 +11,7 @@ import configStatusReducer from '../features_app/dashboard/status_config/configS
 import paymentTermsReducer from '../features_app/dashboard/payment_terms/paymentTermsSlice';
 import legalDocumentReducer from '../features_app/dashboard/legal_document/legalDoccumentSlice';
 import companyTypeReducer from '../features_app/dashboard/company_type/companyTypesSlice';
+import userSuperadminReducer from '../features_app/dashboard/user_superadmin/userSuperadminSlice';
 
 export const store = configureStore({
   reducer: {
@@ -26,6 +27,7 @@ export const store = configureStore({
     paymentterms: paymentTermsReducer,
     legaldocument: legalDocumentReducer,
     companytype: companyTypeReducer,  
+    usersuperadmin: userSuperadminReducer,  
   },
 });
 

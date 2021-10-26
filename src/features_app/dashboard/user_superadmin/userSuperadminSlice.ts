@@ -1,19 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 import swal from 'sweetalert';
 import {
-    IStateCapability
-} from './capabilitiesTypes'
+    IStateUserSuperadmin
+} from './userSuperadminTypes'
 
 import { 
-    fetchCapability,  
-    postCapability,
-    updateCapability,
-    removeCapability 
-} from './reducers/capabilityReducers'
+    fetchUserSuperadmin,  
+    postUserSuperadmin,
+    updateUserSuperadmin,
+    removeUserSuperadmin 
+} from './reducers/userSuperadminReducers'
 
-/* istanbul ignore file */
-
-const initialState: IStateCapability = {
+const initialState: IStateUserSuperadmin = {
   data: [],
   loading : false,
   error : null,
@@ -28,60 +26,60 @@ const initialState: IStateCapability = {
   remove : false
 };
 
-export const capabilitySlice = createSlice({
-  name: 'auth',
+export const userSuperadminSlice = createSlice({
+  name: 'user-superadmin',
   initialState,
   reducers: {},
   extraReducers: {
-    [fetchCapability.pending.type] : (state) => {
+    [fetchUserSuperadmin.pending.type] : (state) => {
         state.loading = true
         state.create = false
         state.update = false
         state.remove = false
     },
-    [fetchCapability.fulfilled.type] : (state, action) => {
+    [fetchUserSuperadmin.fulfilled.type] : (state, action) => {
         state.loading = false
         state.data = action.payload
     },
-    [fetchCapability.rejected.type] : (state, action) => {
+    [fetchUserSuperadmin.rejected.type] : (state, action) => {
         state.loading = false
         state.error = action.payload
     },
-    [postCapability.pending.type] : (state) => {
+    [postUserSuperadmin.pending.type] : (state) => {
         state.loading_create = true
     },
-    [postCapability.fulfilled.type] : (state) => {
+    [postUserSuperadmin.fulfilled.type] : (state) => {
         state.loading_create = false
         state.create = true
-        swal('Success', "Success created Capability menu", 'success')
+        swal('Success', "Success created User Superadmin menu", 'success')
     },
-    [postCapability.rejected.type] : (state, action) => {
+    [postUserSuperadmin.rejected.type] : (state, action) => {
         state.loading_create = false
         state.error_create = action.payload
         swal('Error',"Error created", 'error')
     },
-    [updateCapability.pending.type] : (state) => {
+    [updateUserSuperadmin.pending.type] : (state) => {
         state.loading_update = true
     },
-    [updateCapability.fulfilled.type] : (state, action) => {
+    [updateUserSuperadmin.fulfilled.type] : (state, action) => {
         state.loading_update = false
         state.update = true
-        swal('Success', "Success updated Capability", 'success')
+        swal('Success', "Success updated User Superadmin", 'success')
     },
-    [updateCapability.rejected.type] : (state, action) => {
+    [updateUserSuperadmin.rejected.type] : (state, action) => {
         state.loading_update = false
         state.error_update = action.payload 
         swal('Error', `${action.payload}`, 'error')
     },
-    [removeCapability.pending.type] : (state) => {
+    [removeUserSuperadmin.pending.type] : (state) => {
         state.loading_remove = true
     },
-    [removeCapability.fulfilled.type] : (state) => {
+    [removeUserSuperadmin.fulfilled.type] : (state) => {
         state.loading_remove = false
         state.remove = true
-        swal('Success', "Success removed Capability", 'success')
+        swal('Success', "Success removed User Superadmin", 'success')
     },
-    [removeCapability.rejected.type] : (state, action) => {
+    [removeUserSuperadmin.rejected.type] : (state, action) => {
         state.loading_remove = false
         state.error_remove = action.payload
         swal('Error', `${action.payload}`, 'error')
@@ -89,4 +87,4 @@ export const capabilitySlice = createSlice({
   }
 });
 
-export default capabilitySlice.reducer;
+export default userSuperadminSlice.reducer;
