@@ -1,23 +1,23 @@
-import capabilityReducer from './capabilitiesSlice';
+import buyerCategoryReducer from './buyerCategorySlice';
 import { 
-  fetchCapability,
-  postCapability, 
-  removeCapability, 
-  updateCapability,
-} from "./reducers/capabilityReducers";
+  fetchBuyerCategory,
+  postBuyerCategory, 
+  removeBuyerCategory, 
+  updateBuyerCategory,
+} from "./reducers/buyerCategoryReducers";
 
 import {
-  ObjectCapability,
-  IStateCapability
-} from './capabilitiesTypes';
+  ObjectBuyerCategory,
+  IStateBuyerCategory
+} from './buyerCategoryTypes';
 import { store, RootState } from '../../../app/store'
 
 const appState = store.getState();
 
 describe('INITIAL STATE STORE Roles SLICE', () => {
     it('should handle initial state', () => {
-      expect(capabilityReducer(undefined, { type: 'unknown' })).toEqual({
-        data: [] as ObjectCapability[],
+      expect(buyerCategoryReducer(undefined, { type: 'unknown' })).toEqual({
+        data: [] as ObjectBuyerCategory[],
         loading : false,
         error : null,
         loading_create : false,
@@ -34,8 +34,8 @@ describe('INITIAL STATE STORE Roles SLICE', () => {
 })
 
 describe('TEST REDUX SLICE', () => {
-  const initialState : IStateCapability = {
-    data: [] as ObjectCapability[],
+  const initialState : IStateBuyerCategory = {
+    data: [] as ObjectBuyerCategory[],
     loading : false,
     error : null,
     loading_create : false,
@@ -49,11 +49,11 @@ describe('TEST REDUX SLICE', () => {
     remove : false
   }
   it("should update state when API call is pending", async () => {
-    const action = {type: fetchCapability.pending};
-    const stateReducer = capabilityReducer(initialState, action);
+    const action = {type: fetchBuyerCategory.pending};
+    const stateReducer = buyerCategoryReducer(initialState, action);
     expect(stateReducer).toEqual(
       {
-        data: [] as ObjectCapability[],
+        data: [] as ObjectBuyerCategory[],
         loading : true,
         error : null,
         loading_create : false,
@@ -73,11 +73,11 @@ describe('TEST REDUX SLICE', () => {
   it("should update state when API call is successful", async () => {
     // Arrange
     const response = {
-        "name": "delete",
-        "id": "YiliWMj"
+      "name": "Hotel Buyer",
+      "id": "asdfadf1"
     }
   
-    const res = await store.dispatch(fetchCapability())
+    const res = await store.dispatch(fetchBuyerCategory())
     expect(res.payload).toEqual(
       expect.objectContaining(response)
     );
@@ -87,7 +87,7 @@ describe('TEST REDUX SLICE', () => {
   it("should update state when API call is rejected", async () => {
    
     const state = {
-      data: [] as ObjectCapability[],
+      data: [] as ObjectBuyerCategory[],
       loading : true,
       error : null,
       loading_create : false,
@@ -100,9 +100,9 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateCapability = await capabilityReducer(
+    const nextState: IStateBuyerCategory = await buyerCategoryReducer(
       state,
-      fetchCapability.rejected
+      fetchBuyerCategory.rejected
     );
     // Assert
     const rootState: RootState = { ...appState, capabilities: nextState };
@@ -115,12 +115,15 @@ describe('TEST REDUX SLICE', () => {
 
   it("should update state when post is successful", async () => {
     // Arrange
-    const response = {"id": "LtUmlB0", "name": "apalah"}
+    const response = {
+      "name": "Restaurant Buyer",
+      "id": "asdfadf1"
+    }
     const data = {
-      "name": "delete"
+      "name": "New"
   }
   
-    const res = await store.dispatch(postCapability(data))
+    const res = await store.dispatch(postBuyerCategory(data))
     expect(res.payload).toEqual(
       expect.objectContaining(response)
     );
@@ -130,7 +133,7 @@ describe('TEST REDUX SLICE', () => {
   it("should update state when API post is rejected", async () => {
    
     const state = {
-      data: [] as ObjectCapability[],
+      data: [] as ObjectBuyerCategory[],
       loading : true,
       error : null,
       loading_create : false,
@@ -143,9 +146,9 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateCapability = await capabilityReducer(
+    const nextState: IStateBuyerCategory = await buyerCategoryReducer(
       state,
-      postCapability.rejected
+      postBuyerCategory.rejected
     );
     // Assert
     const rootState: RootState = { ...appState, capabilities: nextState };
@@ -160,15 +163,15 @@ describe('TEST REDUX SLICE', () => {
   it("should update state when update is successful", async () => {
     // Arrange
     const response = {
-      "name" : "testt",
-      "id": "YiliWMj"
+      "name": "FnB Buyer",
+      "id": "1"
     }
     const data = {
-      "name" : "test",
+      "name" : "Update",
       "id": "1"
   }
   
-    const res = await store.dispatch(updateCapability(data))
+    const res = await store.dispatch(updateBuyerCategory(data))
     expect(res.payload).toEqual(
       expect.objectContaining(response)
     );
@@ -178,7 +181,7 @@ describe('TEST REDUX SLICE', () => {
   it("should update state when API post is rejected", async () => {
    
     const state = {
-      data: [] as ObjectCapability[],
+      data: [] as ObjectBuyerCategory[],
       loading : true,
       error : null,
       loading_create : false,
@@ -191,9 +194,9 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateCapability = await capabilityReducer(
+    const nextState: IStateBuyerCategory = await buyerCategoryReducer(
       state,
-      updateCapability.rejected
+      updateBuyerCategory.rejected
     );
     // Assert
     const rootState: RootState = { ...appState, capabilities: nextState };
@@ -207,15 +210,14 @@ describe('TEST REDUX SLICE', () => {
   it("should update state when remove is successful", async () => {
     // Arrange
     const response = {
-      "name" : "test",
-      "id": "YiliWMj"
+      "id": "2"
     }
     const data = {
-      "name" : "test",
-      "id": "1"
+      "name" : "remove",
+      "id": "2"
   }
   
-    const res = await store.dispatch(removeCapability(data))
+    const res = await store.dispatch(removeBuyerCategory(data))
     expect(res.payload).toEqual(
       expect.objectContaining(response)
     );
@@ -225,7 +227,7 @@ describe('TEST REDUX SLICE', () => {
   it("should update state when API remove is rejected", async () => {
    
     const state = {
-      data: [] as ObjectCapability[],
+      data: [] as ObjectBuyerCategory[],
       loading : true,
       error : null,
       loading_create : false,
@@ -238,9 +240,9 @@ describe('TEST REDUX SLICE', () => {
       error_remove: null,
       remove : false
     }
-    const nextState: IStateCapability = await capabilityReducer(
+    const nextState: IStateBuyerCategory = await buyerCategoryReducer(
       state,
-      removeCapability.rejected
+      removeBuyerCategory.rejected
     );
     // Assert
     const rootState: RootState = { ...appState, capabilities: nextState };

@@ -442,4 +442,35 @@ export const handlers = [
       )
     }),
 
+    // mock buyer category crud
+    rest.get(`${process.env.REACT_APP_API_URL}buyer-category`, (req, res, ctx) => {
+      return res(ctx.json({
+        "name": "Hotel Buyer",
+        "id": "asdfadf1"
+        }))
+    }),
+    rest.post(`${process.env.REACT_APP_API_URL}buyer-category`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "name": "Restaurant Buyer",
+          "id": "asdfadf1"
+      })
+      )
+    }),
+    rest.put(`${process.env.REACT_APP_API_URL}buyer-category/1`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "name": "FnB Buyer",
+          "id": "1"
+      })
+      )
+    }),
+    rest.delete(`${process.env.REACT_APP_API_URL}buyer-category/2`, (req, res, ctx) => {
+      return res(
+        ctx.json({
+          "id": "2"
+      })
+      )
+    }),
+
 ]

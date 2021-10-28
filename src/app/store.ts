@@ -13,6 +13,7 @@ import legalDocumentReducer from '../features_app/dashboard/legal_document/legal
 import companyTypeReducer from '../features_app/dashboard/company_type/companyTypesSlice';
 import userSuperadminReducer from '../features_app/dashboard/user_superadmin/userSuperadminSlice';
 import vendorCategoryReducer from '../features_app/dashboard/vendor_category/vendorCategorySlice';
+import buyerCategoryReducer from '../features_app/dashboard/buyer_category/buyerCategorySlice';
 
 export const store = configureStore({
   reducer: {
@@ -30,6 +31,7 @@ export const store = configureStore({
     companytype: companyTypeReducer,  
     usersuperadmin: userSuperadminReducer,  
     vendorcategory: vendorCategoryReducer,  
+    buyercategory: buyerCategoryReducer,  
   },
 });
 

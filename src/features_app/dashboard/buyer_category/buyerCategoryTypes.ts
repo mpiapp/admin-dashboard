@@ -1,17 +1,17 @@
 /* istanbul ignore file */
  
-export interface ObjectCapability {
+export interface ObjectBuyerCategory {
     name: string;
     id: string;
 }
 
-export interface CapabilityInput {
+export interface BuyerCategoryInput {
     name: string;
     id? : string;
 }
 
-export interface IStateCapability {
-  data: ObjectCapability[];
+export interface IStateBuyerCategory {
+  data: ObjectBuyerCategory[];
   loading: boolean;
   error? : any,
   loading_create: boolean,

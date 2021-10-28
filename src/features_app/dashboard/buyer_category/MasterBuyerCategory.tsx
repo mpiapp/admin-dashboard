@@ -12,12 +12,12 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../app/store';
-import {  } from './capabilitiesSlice';
+import {  } from './buyerCategorySlice';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { DataRow, CapabilityInput } from './capabilitiesTypes'
-import { onGetCapability, onCreateCapability, onRemoveCapability, onUpdateCapability } from './action/capabilitiesAction';
+import { DataRow, BuyerCategoryInput } from './buyerCategoryTypes'
+import { onGetBuyerCategory, onCreateBuyerCategory, onRemoveBuyerCategory, onUpdateBuyerCategory } from './action/buyerCategoryAction';
 
 const validationSchema = yup    
     .object({
@@ -28,12 +28,12 @@ const validationSchema = yup
   
 
     
-function MasterCapabilities() {
+function MasterBuyerCategory() {
 
-    const capabilities = useSelector((state : RootState) => state.capabilities)
+    const buyercategory = useSelector((state : RootState) => state.buyercategory)
 
     const [open, setOpen] = useState(false);
-    const [IDRow, setIDRow] = useState <any>(null);
+    const [IdBuyerCat, setIdBuyerCat] = useState <any>(null);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -49,22 +49,22 @@ function MasterCapabilities() {
         setValue,
         reset,
         formState: { errors }
-      } = useForm<CapabilityInput>({
+      } = useForm<BuyerCategoryInput>({
         mode: "onBlur",
         resolver: yupResolver(validationSchema)
     });
       
     /* istanbul ignore next */
-    const onSubmit = (data: CapabilityInput): void => {
-        if(IDRow === null) {
-            onCreateCapability(data)
+    const onSubmit = (data: BuyerCategoryInput): void => {
+        if(IdBuyerCat === null) {
+            onCreateBuyerCategory(data)
             reset()
         } else {
             let updateData= {
                 name : data.name,
-                id: IDRow
+                id: IdBuyerCat
             }
-            onUpdateCapability(updateData)
+            onUpdateBuyerCategory(updateData)
             reset()
         }
     }
@@ -90,7 +90,7 @@ function MasterCapabilities() {
                         variant="outlined" color="primary" size="small"
                         onClick={() => {
                             setValue("name", row.name);
-                            setIDRow(row.id)
+                            setIdBuyerCat(row.id)
                             setTimeout(() => {
                                 handleClickOpen()
                             }, 100);
@@ -98,7 +98,7 @@ function MasterCapabilities() {
                     >
                         Update
                     </Button>
-                    <Button onClick={() => onRemoveCapability(row) } variant="outlined" color="error" size="small">
+                    <Button onClick={() => onRemoveBuyerCategory(row) } variant="outlined" color="error" size="small">
                         Delete
                     </Button>
                 </Stack>
@@ -108,21 +108,22 @@ function MasterCapabilities() {
     
     useEffect(() => {
         handleClose()
-        onGetCapability()
+        onGetBuyerCategory()
+        setIdBuyerCat(null)
         // eslint-disable-next-line
-    },  [capabilities.create, capabilities.update, capabilities.remove]);
+    },  [buyercategory.create, buyercategory.update, buyercategory.remove]);
 
 
     return (
         <div>
             <Box pb={2}>
                 <BreadCrumbs
-                    current="Capabilities"
+                    current="Buyer Category"
                     isPage={false}
                 />
             </Box>
             <Stack direction="row" justifyContent="space-between" spacing={2}>
-                <h2>Master Capabilities</h2>
+                <h2>Master Buyer Category</h2>
                 <Button 
                     variant="contained" color="primary" size="small" 
                     onClick={() => {
@@ -130,14 +131,14 @@ function MasterCapabilities() {
                         reset()
                     }}
                 >
-                    Create New Capabilities
+                    Create New Buyer Category
                 </Button>
             </Stack>
             <Box pt={4}>
                 <TableData 
                     columns={columns}
-                    data={capabilities?.data}
-                    progressPending={capabilities?.loading}
+                    data={buyercategory?.data}
+                    progressPending={buyercategory?.loading}
                 />
             </Box>
             <Dialog 
@@ -146,7 +147,7 @@ function MasterCapabilities() {
                 maxWidth="sm"
             >
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <DialogTitle>Add New Capability</DialogTitle>
+                    <DialogTitle>Add New Buyer Category</DialogTitle>
                     <DialogContent>
                         <TextField
                             error={!!errors.name}
@@ -171,4 +172,4 @@ function MasterCapabilities() {
     )   
 }
 
-export default MasterCapabilities
+export default MasterBuyerCategory

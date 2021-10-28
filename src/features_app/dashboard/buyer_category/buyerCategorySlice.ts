@@ -1,19 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 import swal from 'sweetalert';
 import {
-    IStateCapability
-} from './capabilitiesTypes'
+    IStateBuyerCategory
+} from './buyerCategoryTypes'
 
 import { 
-    fetchCapability,  
-    postCapability,
-    updateCapability,
-    removeCapability 
-} from './reducers/capabilityReducers'
+    fetchBuyerCategory,  
+    postBuyerCategory,
+    updateBuyerCategory,
+    removeBuyerCategory 
+} from './reducers/buyerCategoryReducers'
 
 /* istanbul ignore file */
 
-const initialState: IStateCapability = {
+const initialState: IStateBuyerCategory = {
   data: [],
   loading : false,
   error : null,
@@ -28,60 +28,60 @@ const initialState: IStateCapability = {
   remove : false
 };
 
-export const capabilitySlice = createSlice({
-  name: 'auth',
+export const buyerCategorySlice = createSlice({
+  name: 'buyercategory',
   initialState,
   reducers: {},
   extraReducers: {
-    [fetchCapability.pending.type] : (state) => {
+    [fetchBuyerCategory.pending.type] : (state) => {
         state.loading = true
         state.create = false
         state.update = false
         state.remove = false
     },
-    [fetchCapability.fulfilled.type] : (state, action) => {
+    [fetchBuyerCategory.fulfilled.type] : (state, action) => {
         state.loading = false
         state.data = action.payload
     },
-    [fetchCapability.rejected.type] : (state, action) => {
+    [fetchBuyerCategory.rejected.type] : (state, action) => {
         state.loading = false
         state.error = action.payload
     },
-    [postCapability.pending.type] : (state) => {
+    [postBuyerCategory.pending.type] : (state) => {
         state.loading_create = true
     },
-    [postCapability.fulfilled.type] : (state) => {
+    [postBuyerCategory.fulfilled.type] : (state) => {
         state.loading_create = false
         state.create = true
-        swal('Success', "Success created Capability menu", 'success')
+        swal('Success', "Success created Buyer Category menu", 'success')
     },
-    [postCapability.rejected.type] : (state, action) => {
+    [postBuyerCategory.rejected.type] : (state, action) => {
         state.loading_create = false
         state.error_create = action.payload
         swal('Error',"Error created", 'error')
     },
-    [updateCapability.pending.type] : (state) => {
+    [updateBuyerCategory.pending.type] : (state) => {
         state.loading_update = true
     },
-    [updateCapability.fulfilled.type] : (state, action) => {
+    [updateBuyerCategory.fulfilled.type] : (state, action) => {
         state.loading_update = false
         state.update = true
-        swal('Success', "Success updated Capability", 'success')
+        swal('Success', "Success updated Buyer Category", 'success')
     },
-    [updateCapability.rejected.type] : (state, action) => {
+    [updateBuyerCategory.rejected.type] : (state, action) => {
         state.loading_update = false
         state.error_update = action.payload 
         swal('Error', `${action.payload}`, 'error')
     },
-    [removeCapability.pending.type] : (state) => {
+    [removeBuyerCategory.pending.type] : (state) => {
         state.loading_remove = true
     },
-    [removeCapability.fulfilled.type] : (state) => {
+    [removeBuyerCategory.fulfilled.type] : (state) => {
         state.loading_remove = false
         state.remove = true
-        swal('Success', "Success removed Capability", 'success')
+        swal('Success', "Success removed Buyer Category", 'success')
     },
-    [removeCapability.rejected.type] : (state, action) => {
+    [removeBuyerCategory.rejected.type] : (state, action) => {
         state.loading_remove = false
         state.error_remove = action.payload
         swal('Error', `${action.payload}`, 'error')
@@ -89,4 +89,4 @@ export const capabilitySlice = createSlice({
   }
 });
 
-export default capabilitySlice.reducer;
+export default buyerCategorySlice.reducer;
