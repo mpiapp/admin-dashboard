@@ -2,12 +2,12 @@
  
 export interface ObjectCapability {
     name: string;
-    id: string;
+    _id: string;
 }
 
 export interface CapabilityInput {
     name: string;
-    id? : string;
+    _id? : string;
 }
 
 export interface IStateCapability {
@@ -26,7 +26,7 @@ export interface IStateCapability {
 }
 
 export interface DataRow {
-    id: string;
+    _id: string;
     name: string;
     selector? : any
 }

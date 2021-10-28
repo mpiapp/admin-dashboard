@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import swal from 'sweetalert';
 import { ForgotState, ValueEmail } from './forgotTypes'
+import Axios from 'axios'
 
 export function postEmail (value : ValueEmail) {
   return new Promise ((resolve) => {
@@ -11,8 +12,21 @@ export function postEmail (value : ValueEmail) {
 
 export const sendEmail = createAsyncThunk(
   "forgot/password",
-  async(value : ValueEmail ) => {
-    return postEmail(value)
+  async(value : ValueEmail, { rejectWithValue } ) => {
+    const body = {
+        email : value.email,
+    }
+    try {
+        const response : any = await Axios.post(`${process.env.REACT_APP_API_URL_STAGING}/admin/change-password`, body)
+        if(response) {
+          return response.data.message;
+        }
+      } catch (err : any) {
+        if (!err.response) {
+          throw err
+        }
+        return rejectWithValue(err.response.data)
+    }
   }
 )
 
@@ -33,7 +47,7 @@ export const forgotSlice = createSlice({
     [sendEmail.fulfilled.type] : (state, action) => {
       state.loading = false
       state.forgot = true
-      swal("Success", `If the email ${action.payload.email} are registered in our system, we will send a link to reset your password`, "success")
+      swal("Success", `${action.payload}`, "success")
     },
     [sendEmail.rejected.type] : (state, action) => {
       state.loading = false

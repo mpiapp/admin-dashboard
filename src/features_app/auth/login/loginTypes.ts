@@ -6,6 +6,7 @@ export interface DataUser {
     expires_in : number;
     email : string;
     fullname : string;
+    role: string;
     avatar : string;
     auth_id : string;
     login : boolean;

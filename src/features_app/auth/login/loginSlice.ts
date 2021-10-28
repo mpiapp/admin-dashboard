@@ -1,45 +1,12 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import swal from 'sweetalert'
-import crypto from 'crypto-js'; 
 import { userCredentials } from '../../../utilities/config'
 import {
   DataUser,
-  LoginState,
-  InputState
+  LoginState
 } from './loginTypes'
+import {loginAction} from './reducers/loginReducers'
 
-
-export const getData = (value : InputState ) => {
-  let data = {
-    access_token : 'accesstoken',
-    id_token : 'idtoken', 
-    expires_in : 9000,
-    email : "johndoe@gmail.com",
-    fullname : "John Doe",
-    avatar : "https://image.com",
-    auth_id : "authid",
-    login: true
-  }
-  if(value.email === "demo@admin.com" && value.password === process.env.REACT_APP_PASSWORD_TEST) {
-    return data;
-  } else {
-    return null
-  }
-};
-
-export const loginAction = createAsyncThunk(
-  'auth/login',
-  async (value : InputState , { rejectWithValue }) => {
-    const response = await getData(value)
-    if(response) {
-      const saveToLocalStorage = crypto.AES.encrypt(JSON.stringify(response), `${process.env.REACT_APP_CRYPTO_SECRET}`).toString();
-      localStorage.setItem('_?credentials', saveToLocalStorage)
-      return response;
-    } else {
-      return rejectWithValue("Wrong email or password!")
-    }
-  }
-);
 
 export const checkInitalLogin = (user : any) => {
   let login = false
@@ -49,9 +16,17 @@ export const checkInitalLogin = (user : any) => {
   return login;
 }
 
+export const checkDataUser = (user : any) => {
+  let data = {}
+  if(user !== null) {
+    data = user
+  } 
+  return data;
+}
+
 const initialState: LoginState = {
   login: checkInitalLogin(userCredentials), 
-  data : {} as DataUser,
+  data : checkDataUser(userCredentials) as DataUser,
   loading : false,
   error : null
 };
@@ -65,16 +40,17 @@ export const loginSlice = createSlice({
       .addCase(loginAction.pending, (state) => {
         state.loading = true;
       })
-      .addCase(loginAction.fulfilled, (state, action) => {
+      .addCase(loginAction.fulfilled, (state, action:any) => {
         state.loading = false;
         state.login = true;
         state.data = action.payload;
         swal("Succesfully Login", "Now redirecting to dashboard...", 'success')
+
       })
-      .addCase(loginAction.rejected, (state, action) => {
+      .addCase(loginAction.rejected, (state, action : any) => {
         state.loading = false;
         state.error = action.payload; 
-        swal("Error", `${action.payload}`, 'error')
+        swal("Error", `${action.payload.message}`, 'error')
       })
   },
 });

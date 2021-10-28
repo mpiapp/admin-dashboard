@@ -18,7 +18,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../app/store';
-import { loginAction } from './loginSlice';
+import { loginAction } from './reducers/loginReducers';
 import { UserFormSubmit } from './loginTypes'
 
 const validationSchema = yup

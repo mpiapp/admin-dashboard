@@ -62,7 +62,7 @@ function MasterCapabilities() {
         } else {
             let updateData= {
                 name : data.name,
-                id: IDRow
+                _id: IDRow
             }
             onUpdateCapability(updateData)
             reset()
@@ -73,7 +73,7 @@ function MasterCapabilities() {
     const columns: TableColumn<DataRow>[] = [
         {
             name: 'ID',
-            selector: row => row.id,
+            selector: row => row._id,
             width: '200px'
 
         },
@@ -90,7 +90,7 @@ function MasterCapabilities() {
                         variant="outlined" color="primary" size="small"
                         onClick={() => {
                             setValue("name", row.name);
-                            setIDRow(row.id)
+                            setIDRow(row._id)
                             setTimeout(() => {
                                 handleClickOpen()
                             }, 100);
@@ -109,6 +109,7 @@ function MasterCapabilities() {
     useEffect(() => {
         handleClose()
         onGetCapability()
+        setIDRow(null)
         // eslint-disable-next-line
     },  [capabilities.create, capabilities.update, capabilities.remove]);
 

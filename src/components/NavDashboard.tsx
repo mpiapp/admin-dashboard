@@ -16,6 +16,8 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useHistory } from 'react-router';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../app/store';
 
 
 const drawerWidth = 240;
@@ -25,7 +27,9 @@ interface Props {
   }
 
 const NavDashboard = (props: Props) => {
-        
+    const auth = useSelector((state : RootState) => state.login )
+    // console.log(auth, 'auth store')
+    
     const history = useHistory()
     const { window } = props
 
@@ -210,7 +214,7 @@ const NavDashboard = (props: Props) => {
                             onClick={handleClick}
                         >
                             <Box> <AccountCircleIcon/>  </Box>
-                            <Box pl={1}> John Doe</Box>
+                            <Box pl={1}> {auth?.data?.fullname}</Box>
                             <Box pl={1}> <ArrowDropDownIcon/></Box>
                         </div>
                         {/* Dropdown Menu */}

@@ -6,7 +6,7 @@ export const fetchCapability = createAsyncThunk(
     'capability/fetch', 
     async (_, { rejectWithValue }) => {
         try {
-            const response = await Axios.get(`${process.env.REACT_APP_API_URL}capabilities`)
+            const response = await Axios.get(`${process.env.REACT_APP_API_URL_STAGING_CMS}/capability`)
             return response.data
         } catch (error) {
             return rejectWithValue(error)
@@ -20,7 +20,7 @@ export const postCapability = createAsyncThunk(
             let body = {
                 name : value.name,
             }
-            const response = await Axios.post(`${process.env.REACT_APP_API_URL}capabilities`, body)
+            const response = await Axios.post(`${process.env.REACT_APP_API_URL_STAGING_CMS}/capability`, body)
             return response.data
         } catch (error) {
             return rejectWithValue(error)
@@ -34,7 +34,7 @@ export const updateCapability = createAsyncThunk(
           let body = {
               name : value.name,
           }
-          const response = await Axios.put(`${process.env.REACT_APP_API_URL}capabilities/${value.id}`, body)
+          const response = await Axios.put(`${process.env.REACT_APP_API_URL_STAGING_CMS}/capability/${value._id}`, body)
           return response.data
       } catch (error) {
           return rejectWithValue(error)
@@ -45,7 +45,7 @@ export const removeCapability = createAsyncThunk(
   'capability/delete', 
   async (value : CapabilityInput, { rejectWithValue }) => {
       try {
-          const response = await Axios.delete(`${process.env.REACT_APP_API_URL}capabilities/${value.id}`)
+          const response = await Axios.delete(`${process.env.REACT_APP_API_URL_STAGING_CMS}/capability/${value._id}`)
           return response.data
       } catch (error) {
           return rejectWithValue(error)

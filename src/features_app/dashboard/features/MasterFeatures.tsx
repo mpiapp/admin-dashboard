@@ -209,7 +209,7 @@ function MasterFeatures() {
             let dataOptionsConfigStatus = []
 
             for(let element of initialDataCapabilities) {
-                dataOptionsCapabilities.push({ value: element.id, label: element.name })
+                dataOptionsCapabilities.push({ value: element._id, label: element.name })
             }
             
             for(let valelement of initialDataConfigStatus) {
