@@ -318,5 +318,25 @@
       "status": "Active",
       "verified": false
     }
+  ],
+  "vendor-category": [
+    {
+      "name": "Hotel",
+      "id": "asdfadf1"
+    },
+    {
+      "name": "FnB",
+      "id": "hGVuV9B"
+    }
+  ],
+  "buyer-category": [
+    {
+      "name": "Hotel",
+      "id": "asdfadf1"
+    },
+    {
+      "name": "FnB",
+      "id": "hGVuV9B"
+    }
   ]
 }

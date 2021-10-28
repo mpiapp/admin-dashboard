@@ -15,6 +15,8 @@ import PaymentTerms from '../features_app/dashboard/payment_terms/PaymentTerms';
 import LegalDocument from '../features_app/dashboard/legal_document/LegalDocument';
 import CompanyType from '../features_app/dashboard/company_type/CompanyType';
 import MasterUserSuperadmin from '../features_app/dashboard/user_superadmin/MasterUserSuperadmin';
+import MasterVendorCategory from '../features_app/dashboard/vendor_category/MasterVendorCategory';
+import MasterBuyerCategory from '../features_app/dashboard/buyer_category/MasterBuyerCategory';
 
 function AppRoute() {
   return (
@@ -34,6 +36,8 @@ function AppRoute() {
           <DashboardLayout exact path="/dashboard/legal-document" component={LegalDocument} />
           <DashboardLayout exact path="/dashboard/type-company" component={CompanyType} />
           <DashboardLayout exact path="/dashboard/users-superadmin" component={MasterUserSuperadmin} />
+          <DashboardLayout exact path="/dashboard/vendor-category" component={MasterVendorCategory} />
+          <DashboardLayout exact path="/dashboard/buyer-category" component={MasterBuyerCategory} />
           <DashboardLayout exact path="/dashboard/setting" component={SettingPage} />
           <Route exact path="*" component={ErrorPage} />   
         </Switch>
