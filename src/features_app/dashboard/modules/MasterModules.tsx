@@ -226,7 +226,7 @@ function MasterModules() {
             let dataOptions = []
             /* istanbul ignore next */
             for(let value of initialData) {
-                dataOptions.push({ value: value.id, label: value.name })
+                dataOptions.push({ value: value._id, label: value.name })
             }
             setOptionsFeatures(dataOptions)
         }

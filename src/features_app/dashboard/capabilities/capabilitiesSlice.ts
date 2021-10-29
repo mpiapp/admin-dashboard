@@ -29,7 +29,7 @@ const initialState: IStateCapability = {
 };
 
 export const capabilitySlice = createSlice({
-  name: 'auth',
+  name: 'capabilities',
   initialState,
   reducers: {},
   extraReducers: {
@@ -46,6 +46,8 @@ export const capabilitySlice = createSlice({
     [fetchCapability.rejected.type] : (state, action) => {
         state.loading = false
         state.error = action.payload
+        swal('Error',`${action.payload}`, 'error')
+
     },
     [postCapability.pending.type] : (state) => {
         state.loading_create = true
@@ -58,7 +60,7 @@ export const capabilitySlice = createSlice({
     [postCapability.rejected.type] : (state, action) => {
         state.loading_create = false
         state.error_create = action.payload
-        swal('Error',"Error created", 'error')
+        swal('Error',`${action.payload}`, 'error')
     },
     [updateCapability.pending.type] : (state) => {
         state.loading_update = true

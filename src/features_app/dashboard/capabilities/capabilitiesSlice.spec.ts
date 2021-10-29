@@ -67,7 +67,7 @@ describe('TEST REDUX SLICE', () => {
         remove : false
       }
     )
-
+ 
   });
 
   it("should update state when API call is successful", async () => {
@@ -165,7 +165,7 @@ describe('TEST REDUX SLICE', () => {
     }
     const data = {
       "name" : "test",
-      "id": "1"
+      "_id": "1"
   }
   
     const res = await store.dispatch(updateCapability(data))
@@ -212,7 +212,7 @@ describe('TEST REDUX SLICE', () => {
     }
     const data = {
       "name" : "test",
-      "id": "1"
+      "_id": "1"
   }
   
     const res = await store.dispatch(removeCapability(data))

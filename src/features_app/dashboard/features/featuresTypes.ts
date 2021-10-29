@@ -2,7 +2,7 @@
 
 export interface DataRow {
     name: string;
-    id: string;
+    _id: string;
     flag: string;
     capabilities?: any;
     selector? : any
@@ -10,14 +10,14 @@ export interface DataRow {
 
 export interface FeaturesInput { 
     name: string;
-    id? : string;
+    _id? : string;
     flag?: string;
     capabilities?: any;
 }
 
 export interface ObjectFeatures {
     name: string;
-    id: string;
+    _id: string;
     flag: string;
     capabilities?: any;
 }

@@ -58,6 +58,7 @@ function MasterFeatures() {
     const [selectedFlagFeatures, setSelectedFlagFeatures] = useState<ISelectOption>();
     const [selectedOption, setSelectedOption] = useState<ISelectOption[]>([]);
 
+    console.log(selectedFlagFeatures, 'selectedFlagFeatures')
     const [errorSelectFlagFeatures, setErrorSelectFlagFeatures] = useState<boolean>(false);
     const [errorSelect, setErrorSelect] = useState<boolean>(false);
 
@@ -121,7 +122,7 @@ function MasterFeatures() {
                     name : data.name,
                     flag : selectedFlagFeatures.value,
                     capabilities: proceedToArray(selectedOption),
-                    id: IdCapability
+                    _id: IdCapability
                 }
                 onUpdateFeatures(updateData)
                 reset()
@@ -130,10 +131,19 @@ function MasterFeatures() {
     }
 
     /* istanbul ignore next */
+    const proceedOptionsUpdate = (options : any) => {
+        let arrayOptions = []
+        for(let element of options) {
+            arrayOptions.push({ value: element._id, label: element.name })
+        }
+        return arrayOptions;
+    }
+
+    /* istanbul ignore next */
     const columns: TableColumn<DataRow>[] = [
         {
             name: 'ID',
-            selector: row => row.id,
+            selector: row => row._id,
 
         },
         {
@@ -150,7 +160,7 @@ function MasterFeatures() {
                 <>
                     {
                         row.capabilities.map((value : any, index : any) => (
-                            <p key={index}>{value}, </p>
+                            <p key={index}>{value.name}, </p>
                         ))
                     }
                 </>
@@ -165,8 +175,9 @@ function MasterFeatures() {
                         variant="outlined" color="primary" size="small"
                         onClick={() => {
                             setValue("name", row.name);
-                            setIdCapability(row.id)
-                            setSelectedOption(row.capabilities)
+                            setIdCapability(row._id)
+                            setSelectedOption(proceedOptionsUpdate(row.capabilities))
+                            setSelectedFlagFeatures({ value: row.flag, label: row.flag })
                             setTimeout(() => {
                                 handleClickOpen()
                             }, 100);
@@ -270,7 +281,6 @@ function MasterFeatures() {
                             label="Name"
                             name="name"
                             autoComplete="name"
-                            autoFocus 
                         />
                          <Box pt={2}>
                             <Select

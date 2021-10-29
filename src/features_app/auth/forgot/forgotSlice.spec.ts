@@ -1,6 +1,5 @@
 import forgotReducer, {
     sendEmail,
-    ValueEmail,
     postEmail
   } from './forgotSlice';
 import { store } from '../../../app/store'
@@ -28,11 +27,11 @@ it('response success send email', async () => {
 
 
 it('dispatch forgot success action', async () => {
-  const data : ValueEmail = {
+  const data : any = {
     email : 'demo@admin.com'
   }
   const response = await store.dispatch(sendEmail(data))
-  expect(response.payload).toEqual(data)
+  expect(response.payload).toEqual("Link for password change sent to email")
 });
 
 

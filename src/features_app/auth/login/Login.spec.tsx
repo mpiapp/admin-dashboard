@@ -4,7 +4,7 @@ import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event'
 import { Provider } from 'react-redux'
 import { store } from '../../../app/store';
-import { loginAction } from './loginSlice'
+import { loginAction } from './reducers/loginReducers'
 import {
   DataUser,
   InputState
@@ -52,15 +52,9 @@ describe("Dispatch redux", () => {
         password: `${process.env.REACT_APP_PASSWORD_TEST}`
       }
 
-      const respondata : DataUser = {
-        access_token : 'accesstoken',
-        id_token : 'idtoken', 
-        expires_in : 9000,
-        email : "johndoe@gmail.com",
-        fullname : "John Doe",
-        avatar : "https://image.com",
-        auth_id : "authid",
-        login: true
+      const respondata : any = {
+        "message": "Unauthorized",
+        "statusCode": 401,
       }
 
       userEvent.click(getByRole("button"))

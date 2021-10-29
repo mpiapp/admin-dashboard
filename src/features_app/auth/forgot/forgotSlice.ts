@@ -22,9 +22,11 @@ export const sendEmail = createAsyncThunk(
           return response.data.message;
         }
       } catch (err : any) {
+        /* istanbul ignore next */
         if (!err.response) {
           throw err
         }
+        /* istanbul ignore file */
         return rejectWithValue(err.response.data)
     }
   }

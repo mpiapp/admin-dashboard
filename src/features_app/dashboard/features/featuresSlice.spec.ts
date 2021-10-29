@@ -180,7 +180,7 @@ describe('TEST REDUX SLICE', () => {
     }
     const data = {
       "name" : "test",
-      "id": "1"
+      "_id": "1"
   }
   
     const res = await store.dispatch(updateFeatures(data))
@@ -224,7 +224,7 @@ describe('TEST REDUX SLICE', () => {
     const response = {}
     const data = {
       "name" : "test",
-      "id": "1"
+      "_id": "1"
   }
   
     const res = await store.dispatch(removeFeatures(data))

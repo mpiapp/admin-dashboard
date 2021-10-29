@@ -21,6 +21,7 @@ export const checkDataUser = (user : any) => {
   if(user !== null) {
     data = user
   } 
+  /* istanbul ignore file */
   return data;
 }
 

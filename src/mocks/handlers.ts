@@ -1,15 +1,50 @@
-import { rest } from 'msw'
+import { rest } from 'msw' 
 
 export const handlers = [
 
+    // mock login response
+    rest.post(`${process.env.REACT_APP_API_URL_STAGING}/admin/login`, (req, res, ctx) => {
+      return res(ctx.json({
+          access_token : 'accesstoken',
+          id_token : 'idtoken', 
+          role: "superuser",
+          expires_in : 9000,
+          email : "johndoe@gmail.com",
+          fullname : "John Doe",
+          avatar : "https://image.com",
+          auth_id : "authid",
+          login: true
+        }))
+    }),
+    // rest.post(`${process.env.REACT_APP_API_URL_STAGING}/admin/user-access`, (req, res, ctx) => {
+    //   return res(ctx.json({
+    //       access_token : 'accesstoken',
+    //       id_token : 'idtoken', 
+    //       role: "superuser",
+    //       expires_in : 9000,
+    //       email : "johndoe@gmail.com",
+    //       fullname : "John Doe",
+    //       avatar : "https://image.com",
+    //       auth_id : "authid",
+    //       login: true
+    //     }))
+    // }),
+
+    // mock forgot response
+    rest.post(`${process.env.REACT_APP_API_URL_STAGING}/admin/change-password`, (req, res, ctx) => {
+      return res(ctx.json({
+        message: "Link for password change sent to email"
+      }))
+    }),
+
     // mock capabilities crud
-    rest.get(`${process.env.REACT_APP_API_URL}capabilities`, (req, res, ctx) => {
+    rest.get(`${process.env.REACT_APP_API_URL_STAGING_CMS}/capability`, (req, res, ctx) => {
         return res(ctx.json({
             "name": "delete",
             "id": "YiliWMj"
           }))
     }),
-    rest.post(`${process.env.REACT_APP_API_URL}capabilities`, (req, res, ctx) => {
+    rest.post(`${process.env.REACT_APP_API_URL_STAGING_CMS}/capability`, (req, res, ctx) => {
       return res(
         ctx.json({
           "name": "apalah",
@@ -17,7 +52,7 @@ export const handlers = [
         })
       )
     }),
-    rest.put(`${process.env.REACT_APP_API_URL}capabilities/1`, (req, res, ctx) => {
+    rest.put(`${process.env.REACT_APP_API_URL_STAGING_CMS}/capability/1`, (req, res, ctx) => {
       return res(
         ctx.json({
           "name" : "testt",
@@ -25,7 +60,7 @@ export const handlers = [
         })
       )
     }),
-    rest.delete(`${process.env.REACT_APP_API_URL}capabilities/1`, (req, res, ctx) => {
+    rest.delete(`${process.env.REACT_APP_API_URL_STAGING_CMS}/capability/1`, (req, res, ctx) => {
       return res(
         ctx.json({
           "name" : "test",
@@ -127,7 +162,7 @@ export const handlers = [
     }),
 
     // mock features crud
-    rest.get(`${process.env.REACT_APP_API_URL}features`, (req, res, ctx) => {
+    rest.patch(`${process.env.REACT_APP_API_URL_STAGING_CMS}/feature/capabilities`, (req, res, ctx) => {
         return res(ctx.json( {
             "name": "asdfadfa",
             "flag": "VENDOR",
@@ -137,7 +172,7 @@ export const handlers = [
             "id": "QCVJk0a"
           }))
     }),
-    rest.post(`${process.env.REACT_APP_API_URL}features`, (req, res, ctx) => {
+    rest.post(`${process.env.REACT_APP_API_URL_STAGING_CMS}/feature`, (req, res, ctx) => {
       return res(
         ctx.json({
           "name": "Purchase Order",
@@ -150,7 +185,7 @@ export const handlers = [
       })
       )
     }),
-    rest.put(`${process.env.REACT_APP_API_URL}features/1`, (req, res, ctx) => {
+    rest.put(`${process.env.REACT_APP_API_URL_STAGING_CMS}/feature/1`, (req, res, ctx) => {
       return res(
         ctx.json({
           "name": "Purchase Order",
@@ -163,7 +198,7 @@ export const handlers = [
       })
       )
     }),
-    rest.delete(`${process.env.REACT_APP_API_URL}features/1`, (req, res, ctx) => {
+    rest.delete(`${process.env.REACT_APP_API_URL_STAGING_CMS}/feature/1`, (req, res, ctx) => {
       return res(
         ctx.json({
           "id" : "delfeature"

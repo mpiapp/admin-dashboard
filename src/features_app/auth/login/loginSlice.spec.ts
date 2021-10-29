@@ -52,20 +52,13 @@ describe('REDUX ASYNTHUNK', () => {
 
   it('dispatch login success action', async () => {
     const value : InputState = {
-      email : 'demo@admin.com',
+      email : 'demo@gmail.com',
       password : `${process.env.REACT_APP_PASSWORD_TEST}`
     }
 
-    const data : DataUser = {
-      access_token : 'accesstoken',
-      id_token : 'idtoken', 
-      expires_in : 9000,
-      email : "johndoe@gmail.com",
-      fullname : "John Doe",
-      role: "SUPERUSER",
-      avatar : "https://image.com",
-      auth_id : "authid",
-      login: true
+    const data : any = {
+      "message": "Unauthorized",
+      "statusCode": 401,
     }
 
     const response = await store.dispatch(loginAction(value))
@@ -77,10 +70,10 @@ describe('REDUX ASYNTHUNK', () => {
       email : 'dem@admin.com',
       password : `${process.env.REACT_APP_PASSWORD_TEST}`
     }
- 
+    const respon : any = {"message": "Unauthorized", "statusCode": 401}
     const response = await store.dispatch(loginAction(value))
-    expect(response.payload).toBe("Wrong email or password!")
-  });
+    expect(response.payload).toEqual(respon)
+  }); 
 
   it('check initial login true', async () => {
     let data = {

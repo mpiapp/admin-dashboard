@@ -51,7 +51,7 @@ describe("Dispatch redux", () => {
       }
       userEvent.click(getByRole("button"))
       const response = await store.dispatch(sendEmail(data))
-      expect(response.payload).toEqual(data)
+      expect(response.payload).toEqual("Link for password change sent to email")
     })
 
   })
